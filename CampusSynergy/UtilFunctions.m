@@ -67,8 +67,7 @@
     // , "location":"...",longDescription":"...", "publisher":"..."
     //,"room":"...", "timeStart":"...", "title":"..."
     
-    NSMutableString *json_result = [NSMutableString stringWithString:@"{\"result\": ["];
-    
+
     PFQuery *query = [PFQuery queryWithClassName:@"campus_synergy"];
     //NSArray *parse_result = [NSArray alloc];
     
@@ -82,66 +81,75 @@
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
             
+            NSMutableString *json_result = [[NSMutableString alloc] initWithString: @"{\"result\": ["];
             
             for(int i = 0; i < [objects count]; i++){
                 PFObject *myObject = [objects objectAtIndex:i];
                 
                 //NSMutableString *single_result = [NSString stringWithFormat:@"%@", @"{"];
                 NSMutableString *single_result = [[NSMutableString alloc] initWithString: @"{"];
-
-                [single_result appendString:@"Hello"];
                 
-                NSLog(@"%@", single_result);
-                
-                
-                NSString *bld_name = [self createJSONString:@"bldName" withValue: (NSString *)[myObject objectForKey:@"bldName"] withComma:NO];
-                
+                [single_result appendString:[self createJSONString:@"bldName" withValue: (NSString *)[myObject objectForKey:@"bldName"] withComma:YES]];
                
-                
-                
+                [single_result appendString: [self createJSONString:@"date" withValue:[dateFormatter stringFromDate:[myObject objectForKey:@"date"]] withComma:YES]];
+               
+                [single_result appendString:[self createJSONString:@"duration" withValue: (NSString *)[myObject objectForKey:@"duration"] withComma:YES]];
                 /*
-                 [single_result stringByAppendingString: [self createJSONString:@"date" withValue:(NSString *)[dateFormatter dateFromString:[myObject objectForKey:@"date"]] withComma:NO]];
-                 */
-                /*
-                [single_result stringByAppendingString: [self createJSONString:@"location" withValue:[myObject objectForKey:@"location"] withComma:NO]];
-                 */
+                [single_result appendString: [self createJSONString:@"location" withValue:[myObject objectForKey:@"location"] withComma:NO]];
+                */
+                [single_result appendString: [self createJSONString:@"longDescription" withValue:(NSString *)[myObject objectForKey:@"longDescription"] withComma:YES]];
                 
-                 [single_result stringByAppendingString: [self createJSONString:@"longDescription" withValue:(NSString *)[myObject objectForKey:@"longDescription"] withComma:NO]];
+                [single_result appendString: [self createJSONString:@"publisher" withValue:(NSString *)[myObject objectForKey:@"publisher"] withComma:YES]];
                 
+                [single_result appendString: [self createJSONString:@"room" withValue:(NSString *)[myObject objectForKey:@"room"] withComma:YES]];
+                
+                [single_result appendString: [self createJSONString:@"timeStart" withValue:(NSString *)[myObject objectForKey:@"timeStart"] withComma:YES]];
+                
+                [single_result appendString: [self createJSONString:@"title" withValue:(NSString *)[myObject objectForKey:@"title"] withComma:NO]];
                
                 if(i == [objects count] - 1){
                     //Don't add comma
-                    [single_result stringByAppendingString:@"}"];
-                    
+                    [single_result appendString:@"}"];
                 }
                 else{
-                    [single_result stringByAppendingString:@"},"];
+                    [single_result appendString:@"},"];
                 }
               
-               // NSLog(@"%@", single_result);
+               NSLog(@"%@", single_result);
+                
+               [json_result appendString:single_result];
+                
             }
+            
+            [json_result appendString:@"]}"];
+            
+            NSLog(@"JSON result: %@", json_result);
+            
+            NSString *result = @"";
+            //return result;
         }
     }];
     
-    //[json_result stringByAppendingString:@"]}"];
-    
-   // NSLog(@"JSON String from parsed: %@", json_result);
+   
     
     //NSString *result = [NSString stringWithString:json_result];
-    NSString *result = @"";
     
+    //NSLog(@"%@", result);
+    
+    NSString *result = @"";
     return result;
+     
 }
 
 + (NSString *) createJSONString: (NSString *)keyName withValue: (NSString *)myValue withComma: (BOOL) yesOrNo{
    
     if (yesOrNo){
         //NSLog(@"%@",[NSString stringWithFormat:@"{\"%@\":\"%@\"},", keyName, myValue]);
-        return [NSString stringWithFormat:@"{\"%@\":\"%@\"},", keyName, myValue];
+        return [NSString stringWithFormat:@"\"%@\":\"%@\",", keyName, myValue];
     }
     else{
         //NSLog(@"%@", [NSString stringWithFormat:@"{\"%@\":\"%@\"},", keyName, myValue]);
-        return [NSString stringWithFormat:@"{\"%@\":\"%@\"}", keyName, myValue];
+        return [NSString stringWithFormat:@"\"%@\":\"%@\"", keyName, myValue];
     }
 }
 
