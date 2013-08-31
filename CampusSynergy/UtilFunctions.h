@@ -12,5 +12,5 @@
 @interface UtilFunctions : NSObject
 
 //static method to get 
-+ (NSArray *)getEventsFromParseASJSON;
++ (NSString *)getEventsFromParseASJSON;
 @end

@@ -11,7 +11,8 @@
 @implementation UtilFunctions
 
 //Use the Parse API
-+ (NSArray *)getEventsFromParseASJSON{
++ (NSString *)getEventsFromParseASJSON{
+    
     NSString *result = @"";
     
     //Add Code here to Connect to the Parse API and form a JSON String
