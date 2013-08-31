@@ -1,0 +1,7 @@
+To run this in xcode you need to create
+an api_key.config file and go to the mobi account for parsed and 
+get the api key and client key.
+
+Then type in the api_key.config file:
+
+{"parse_application_id":"{api_key}", "client_key":"{client_key}"}
