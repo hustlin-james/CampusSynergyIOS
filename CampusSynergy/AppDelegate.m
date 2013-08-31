@@ -12,6 +12,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    //Parse API
+    //Load the api_key.config file and Set the applicationID and clientKeys
+    //Read plist file in here
+    
+    //Add parse setup code here
+    
     // Override point for customization after application launch.
     return YES;
 }

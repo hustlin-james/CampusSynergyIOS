@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "UtilFunctions.h"
+#import "AddEventViewController.h"
+#import "LogInViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <MKMapViewDelegate>
+
+- (IBAction)addEventPressed:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 
 @end
