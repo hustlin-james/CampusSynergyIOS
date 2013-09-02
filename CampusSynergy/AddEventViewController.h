@@ -11,5 +11,4 @@
 @interface AddEventViewController : UIViewController
 @property(copy, nonatomic) NSString * JSONVALUE;
 
-
 @end
