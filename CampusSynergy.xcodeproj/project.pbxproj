@@ -18,12 +18,12 @@
 		D3629EE317D0FCA700DBF27A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */; };
 		D3629EE617D0FCA700DBF27A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE417D0FCA700DBF27A /* MainStoryboard.storyboard */; };
 		D3629EE917D0FCA700DBF27A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EE817D0FCA700DBF27A /* ViewController.m */; };
+		D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */; };
 		D39A091817D0FF700015DA8F /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091717D0FF700015DA8F /* AddEventViewController.m */; };
 		D39A091B17D0FF7F0015DA8F /* AllEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091A17D0FF7F0015DA8F /* AllEventsViewController.m */; };
 		D39A091E17D10E210015DA8F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091D17D10E210015DA8F /* LogInViewController.m */; };
 		D39A092117D1110C0015DA8F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A092017D1110C0015DA8F /* EventDetailsViewController.m */; };
 		D39A092317D14ABE0015DA8F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A092217D14ABE0015DA8F /* MapKit.framework */; };
-		D39A092617D14D190015DA8F /* UtilFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A092517D14D190015DA8F /* UtilFunctions.m */; };
 		D39A092817D169440015DA8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A092717D169440015DA8F /* Parse.framework */; };
 		D39A092A17D169CE0015DA8F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A092917D169CE0015DA8F /* AudioToolbox.framework */; };
 		D39A092C17D169D50015DA8F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A092B17D169D50015DA8F /* CFNetwork.framework */; };
@@ -57,6 +57,8 @@
 		D3629EE517D0FCA700DBF27A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D3629EE717D0FCA700DBF27A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D3629EE817D0FCA700DBF27A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D38B29C117D468BF00A17168 /* AddEventTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventTimesViewController.h; sourceTree = "<group>"; };
+		D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventTimesViewController.m; sourceTree = "<group>"; };
 		D39A091617D0FF700015DA8F /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
 		D39A091717D0FF700015DA8F /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
 		D39A091917D0FF7F0015DA8F /* AllEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEventsViewController.h; sourceTree = "<group>"; };
@@ -66,8 +68,6 @@
 		D39A091F17D1110C0015DA8F /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		D39A092017D1110C0015DA8F /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		D39A092217D14ABE0015DA8F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		D39A092417D14D190015DA8F /* UtilFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFunctions.h; sourceTree = "<group>"; };
-		D39A092517D14D190015DA8F /* UtilFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFunctions.m; sourceTree = "<group>"; };
 		D39A092717D169440015DA8F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D39A092917D169CE0015DA8F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D39A092B17D169D50015DA8F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -157,8 +157,6 @@
 				D3629EDB17D0FCA700DBF27A /* AppDelegate.h */,
 				D3629EDC17D0FCA700DBF27A /* AppDelegate.m */,
 				D3629EE417D0FCA700DBF27A /* MainStoryboard.storyboard */,
-				D39A092417D14D190015DA8F /* UtilFunctions.h */,
-				D39A092517D14D190015DA8F /* UtilFunctions.m */,
 				D39A091F17D1110C0015DA8F /* EventDetailsViewController.h */,
 				D39A092017D1110C0015DA8F /* EventDetailsViewController.m */,
 				D39A091C17D10E210015DA8F /* LogInViewController.h */,
@@ -167,6 +165,8 @@
 				D39A091A17D0FF7F0015DA8F /* AllEventsViewController.m */,
 				D39A091617D0FF700015DA8F /* AddEventViewController.h */,
 				D39A091717D0FF700015DA8F /* AddEventViewController.m */,
+				D38B29C117D468BF00A17168 /* AddEventTimesViewController.h */,
+				D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */,
 				D3D1A88D17D419BA005D6A2E /* XMLElement.h */,
 				D3D1A88E17D419BB005D6A2E /* XMLElement.m */,
 				D3629EE717D0FCA700DBF27A /* ViewController.h */,
@@ -267,9 +267,9 @@
 				D39A091B17D0FF7F0015DA8F /* AllEventsViewController.m in Sources */,
 				D39A091E17D10E210015DA8F /* LogInViewController.m in Sources */,
 				D39A092117D1110C0015DA8F /* EventDetailsViewController.m in Sources */,
-				D39A092617D14D190015DA8F /* UtilFunctions.m in Sources */,
 				D3D1A88F17D419BB005D6A2E /* XMLElement.m in Sources */,
 				D3D1A89217D43423005D6A2E /* EventsData.m in Sources */,
+				D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

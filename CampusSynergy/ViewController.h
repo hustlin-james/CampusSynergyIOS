@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "UtilFunctions.h"
 #import "AddEventViewController.h"
 #import "LogInViewController.h"
 #import "XMLElement.h"

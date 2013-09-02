@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddEventViewController.h"
 
-@interface LogInViewController : UIViewController
+@interface LogInViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 

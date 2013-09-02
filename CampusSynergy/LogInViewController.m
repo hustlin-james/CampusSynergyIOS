@@ -14,6 +14,24 @@
 
 @implementation LogInViewController
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    //username
+    if(textField.tag == self.usernameField.tag){
+        [self.usernameField resignFirstResponder];
+        return YES;
+    }
+    //password
+    else if(textField.tag == self.passwordField.tag){
+        [self.passwordField resignFirstResponder];
+        return YES;
+    }
+    else{
+        return YES;
+    }
+    
+}
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -42,6 +60,8 @@
 	// Do any additional setup after loading the view.
     
     //self.title = @"Login";
+    self.usernameField.delegate = self;
+    self.passwordField.delegate = self;
     
     NSLog(@"LoginVC APP ID: %@", self.app_id);
     NSLog(@"LoginVC Rest ID: %@", self.rest_id);
