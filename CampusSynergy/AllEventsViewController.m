@@ -36,16 +36,30 @@
     self.tableView.delegate = self;
     
     
-    //Temp Array of Events
+   // NSLog(@"All Events JSON in AllEventsViewController: %@", [self allEventsAsJSON]);
     
-    self.eventsArray = [[ NSArray alloc] initWithObjects:
-                     @"Event 1",
-                     @"Event 2",
-                     @"Event 3",
-                     @"Event 4",
-                     @"Event 5",
-                     @"Event 6",
-                        nil];
+    //Create an NSArray with each event name
+    NSError *error = nil;
+    
+    //NSJONReadingAllowFragments: Allows the deserialization of JSON data whose root top-level object is not an array or a dictionary
+    
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:[self allEventsAsJSON] options:NSJSONReadingAllowFragments error:&error];
+    
+    NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
+    //NSLog(@"JSON DICT: %@", [deserializedDictionary objectForKey:@"results"]);
+    
+    NSArray *myResults = [[NSArray alloc] initWithArray:[deserializedDictionary objectForKey:@"results"]];
+    
+    NSLog(@"Array: %@", myResults);
+    
+    NSMutableArray *myEventsTitleArray = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *result in myResults){
+        //NSLog(@"Event Title: %@", [result objectForKey:@"title"]);
+        [myEventsTitleArray addObject: [result objectForKey:@"title"]];
+    }
+        
+    self.eventsArray = [[ NSArray alloc] initWithArray:myEventsTitleArray];
     
     if (self.eventsArray != nil && [self.eventsArray count] > 0){
         NSLog(@"Events Array Created");
@@ -85,7 +99,7 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AllEventsVC"];
+    EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
     
         //Set properties of the EventDetailsViewController Object
     [self.navigationController pushViewController:eventDetailsVC animated:YES];

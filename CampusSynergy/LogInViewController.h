@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddEventViewController.h"
 
 @interface LogInViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+
+@property (copy, nonatomic) NSString *app_id;
+@property (copy, nonatomic) NSString *rest_id;
 
 - (IBAction)loginSubmitButton:(id)sender;
 

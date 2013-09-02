@@ -7,9 +7,9 @@
         <!--All Events View Controller - All Events-->
         <scene sceneID="nhN-Eg-TGZ">
             <objects>
-                <viewController id="QgC-TB-FoJ" customClass="AllEventsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllEventsVC" title="All Events" id="QgC-TB-FoJ" customClass="AllEventsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ykx-Ga-rIH">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="d2G-NC-hLu">
@@ -50,12 +50,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DuS-xS-HfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="491"/>
+            <point key="canvasLocation" x="598" y="399"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="MFw-Fb-0BB">
             <objects>
-                <viewController storyboardIdentifier="AllEventsVC" id="aoO-9s-B3k" customClass="EventDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventDetailVC" id="aoO-9s-B3k" customClass="EventDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8DL-uf-Cga">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -177,7 +177,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Brj-bz-Gnu"/>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yyn-UV-M01"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yyn-UV-M01"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -192,7 +192,7 @@
                     <navigationItem key="navigationItem" title="Home" id="s05-c1-iI3">
                         <barButtonItem key="leftBarButtonItem" title="All Events" id="vHk-y9-iQ5" userLabel="allEventNavButton">
                             <connections>
-                                <segue destination="QgC-TB-FoJ" kind="push" id="Ok2-dU-joW"/>
+                                <action selector="allEventsPressed:" destination="2" id="FNI-l8-T2x"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="1" title="AddEvent" id="eDW-e6-EsR" userLabel="addEventNavButton">
@@ -208,7 +208,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="58" y="451"/>
+            <point key="canvasLocation" x="196" y="399"/>
         </scene>
         <!--Log In View Controller - Login-->
         <scene sceneID="oRb-5e-sht">
@@ -268,10 +268,14 @@
                             <constraint firstItem="dt7-z3-Le2" firstAttribute="top" secondItem="KCX-q4-VE0" secondAttribute="top" constant="86" id="wTW-Qz-C1s"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="passwordField" destination="Nb3-21-cvO" id="akj-0D-fzh"/>
+                        <outlet property="usernameField" destination="m64-AQ-0sJ" id="54n-2j-1EA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSj-SG-tJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="-233"/>
+            <point key="canvasLocation" x="249" y="-271"/>
         </scene>
         <!--Add Event View Controller - Add Event-->
         <scene sceneID="fCS-AY-3kw">
@@ -285,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PeF-uI-JrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="-355"/>
+            <point key="canvasLocation" x="678" y="-277"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rwy-kv-6rZ">
@@ -303,7 +307,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NxP-xh-sIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-302" y="-68"/>
+            <point key="canvasLocation" x="-342" y="58"/>
         </scene>
     </scenes>
     <classes>
@@ -323,6 +327,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LogInViewController.h"/>
             <relationships>
                 <relationship kind="action" name="loginSubmitButton:"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -332,6 +338,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addEventPressed:"/>
+                <relationship kind="action" name="allEventsPressed:"/>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
             </relationships>

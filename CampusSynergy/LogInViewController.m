@@ -43,9 +43,9 @@
     
     //self.title = @"Login";
     
+    NSLog(@"LoginVC APP ID: %@", self.app_id);
+    NSLog(@"LoginVC Rest ID: %@", self.rest_id);
 
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +56,7 @@
 
 - (IBAction)loginSubmitButton:(id)sender {
     
-    NSLog(@"Submit button has been pushed.  Validating input.");
+    //NSLog(@"Submit button has been pushed.  Validating input.");
     
     //Check the user username and password input
     //and that they are valid
@@ -64,12 +64,65 @@
     
     //Then go to the parse API and retrieve the
     //information and make sure the user exists
-    
-    
     //If the everything is good then write the information to
     //a plist file and set the
     
     //userLoggedIn
+    
+    if ([[self.usernameField text] isEqualToString: @""] || [[self.passwordField text] isEqualToString: @""]){
+       
+        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"Please Correctly Input the Username and Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [error show];
+    }
+    else{
+        //Connect to API and check
+        //Send a parse login request
+        
+        NSString *parse_url = @"https://api.parse.com/1/login";
+        
+        parse_url = [parse_url stringByAppendingFormat:@"?username=%@",self.usernameField.text];
+        parse_url = [parse_url stringByAppendingFormat:@"&password=%@", self.passwordField.text];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
+        
+        [request setHTTPMethod:@"GET"];
+        [request setValue:[self app_id] forHTTPHeaderField:@"X-Parse-Application-Id"];
+        [request setValue:[self rest_id] forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *responseCode = nil;
+        
+        NSData *loginResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+        
+        NSString *dataAsString = [[NSString alloc] initWithData: loginResponseData encoding:NSUTF8StringEncoding];
+        NSLog(@"Login Data Retrieved UTF8: %@", dataAsString);
+        
+        //Parse the data that was retrieved
+        NSError *json_error;
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:loginResponseData options:NSJSONReadingAllowFragments error:&json_error];
+        
+        NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
+        NSString *name_string = (NSString *)[deserializedDictionary objectForKey:@"name"];
+        
+        if(name_string == nil){
+            NSLog(@"Invalid Login");
+            
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Couldn't find Username and Password" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil, nil];
+            
+            [error show];
+        }
+        else{
+            NSLog(@"Name: %@", name_string);
+            
+             //Write the login information into a plist file
+             //for persistence
+            
+            AddEventViewController *addEventVc =
+            [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
+            [self.navigationController pushViewController:addEventVc animated:YES];
+            
+        }
+    }
     
 }
 @end

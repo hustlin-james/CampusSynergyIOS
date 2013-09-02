@@ -19,11 +19,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "399782402.91827"
+         timestampString = "399789095.382801"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "-addEventPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -32,12 +32,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "399782402.91827"
+         timestampString = "399789095.382801"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
+         landmarkName = "-startGetEventsAndPolygonConstruction"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CampusSynergy/LogInViewController.m"
+         timestampString = "399790884.311817"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
+         landmarkName = "-loginSubmitButton:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -9,8 +9,11 @@
 #import "ViewController.h"
 
 
-@interface ViewController ()
-
+@interface ViewController (){
+    EventsData *myEventsData;
+    NSString *myAppId;
+    NSString *myRestId;
+}
 @end
 
 @implementation ViewController
@@ -33,8 +36,27 @@
     [self.mapView setRegion:region animated:YES];
     [self.mapView setDelegate:self];
     
-    //Construct the Polygons/Events objects
     
+    //Start the Process to get Events Data
+    myAppId = @"QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB";
+    myRestId = @"inV9LL0B01842cQsvjSr06fVAbse9T2CBRHa0yde";
+    
+    [self.activityIndicator startAnimating];
+    myEventsData = [[EventsData alloc] initWithAppId:myAppId andRestID:myRestId];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self performSelectorOnMainThread:@selector(startGetEventsAndPolygonConstruction) withObject:nil
+                            waitUntilDone:YES];
+    });
+}
+
+- (void)startGetEventsAndPolygonConstruction{
+   self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
+    
+    //NSLog(@"JSON Events Retrieved: %@", self.allJSONEvents);
+    
+    //Construct the Polygons/Events objects
     NSArray *myArray = [self createPolygonCoordinateList:@"buildings"];
     
     if(myArray != nil){
@@ -46,6 +68,8 @@
         
         [error show];
     }
+    
+    [self.activityIndicator stopAnimating];
 }
 
 
@@ -68,6 +92,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)allEventsPressed:(id)sender {
+    
+    if([self allJSONEvents] == nil){
+        
+        //Create Error Alert view that there are no events
+        //TODO
+        
+    }
+    else{
+        AllEventsViewController *allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AllEventsVC"];
+        
+        //allEventsVC.allEventsAsJSON = [NSString stringWithString:[self allJSONEvents]];
+        
+        allEventsVC.allEventsAsJSON = [self allJSONEvents];
+        
+        [self.navigationController pushViewController:allEventsVC animated:YES];
+    }
+}
+
 //The is the Add Event Button in the Main View Navigation Bar
 - (IBAction)addEventPressed:(id)sender {
     
@@ -75,15 +119,13 @@
     
     NSLog(@"AddEvent Button was pressed, checking to see if user loggedin");
     
-    BOOL userLoggedIn = YES;
+    BOOL userLoggedIn = NO;
     
     if (userLoggedIn){
         NSLog(@"User is logged in, creating the addeventVC");
         //AddEventViewController *addEventVC = [[AddEventViewController alloc] init];
         AddEventViewController *addEventVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
-        
-        addEventVC.JSONVALUE = @"{event_name: \"Test Event\"}";
         
         [self.navigationController pushViewController:addEventVC animated:YES];
     }
@@ -92,6 +134,10 @@
         //LogInViewController *loginVC = [[LogInViewController alloc] init];
         LogInViewController *loginVC = 
         [self.storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
+                
+        loginVC.app_id = myAppId;
+        loginVC.rest_id = myRestId;
+        
         [self.navigationController pushViewController:loginVC animated:YES];
     }
 }
@@ -99,6 +145,7 @@
 //filePath is the xml file where the coordinates to draw the polygons are located
 //Just gona leave this in the main
 //Returns in array of MKPolygon coordinates
+
 - (NSArray *)createPolygonCoordinateList: (NSString *)filePath{
     
     //Load the file and parse the xml

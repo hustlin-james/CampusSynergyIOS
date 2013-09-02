@@ -27,6 +27,7 @@
     if (filePath) {
             NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        
            // NSLog(@"ApplicationID: %@", json[@"parse_application_id"]);
            // NSLog(@"Client_Key: %@", json[@"client_key"]);
             [Parse setApplicationId:@"QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB"

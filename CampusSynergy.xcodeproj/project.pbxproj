@@ -37,6 +37,7 @@
 		D39A093C17D193990015DA8F /* api_key.config in Resources */ = {isa = PBXBuildFile; fileRef = D39A093B17D193990015DA8F /* api_key.config */; };
 		D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3BC1CAD17D2923F0063FE35 /* buildings.xml */; };
 		D3D1A88F17D419BB005D6A2E /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D1A88E17D419BB005D6A2E /* XMLElement.m */; };
+		D3D1A89217D43423005D6A2E /* EventsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D1A89117D43423005D6A2E /* EventsData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,8 @@
 		D3BC1CAD17D2923F0063FE35 /* buildings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = buildings.xml; sourceTree = "<group>"; };
 		D3D1A88D17D419BA005D6A2E /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLElement.h; sourceTree = "<group>"; };
 		D3D1A88E17D419BB005D6A2E /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
+		D3D1A89017D43423005D6A2E /* EventsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsData.h; path = ../EventsData.h; sourceTree = "<group>"; };
+		D3D1A89117D43423005D6A2E /* EventsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsData.m; path = ../EventsData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 		D3629ED217D0FCA700DBF27A /* CampusSynergy */ = {
 			isa = PBXGroup;
 			children = (
+				D3D1A89017D43423005D6A2E /* EventsData.h */,
+				D3D1A89117D43423005D6A2E /* EventsData.m */,
 				D3629EDB17D0FCA700DBF27A /* AppDelegate.h */,
 				D3629EDC17D0FCA700DBF27A /* AppDelegate.m */,
 				D3629EE417D0FCA700DBF27A /* MainStoryboard.storyboard */,
@@ -264,6 +269,7 @@
 				D39A092117D1110C0015DA8F /* EventDetailsViewController.m in Sources */,
 				D39A092617D14D190015DA8F /* UtilFunctions.m in Sources */,
 				D3D1A88F17D419BB005D6A2E /* XMLElement.m in Sources */,
+				D3D1A89217D43423005D6A2E /* EventsData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

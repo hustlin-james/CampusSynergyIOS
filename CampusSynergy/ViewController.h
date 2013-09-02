@@ -12,11 +12,17 @@
 #import "AddEventViewController.h"
 #import "LogInViewController.h"
 #import "XMLElement.h"
+#import "EventsData.h"
+#import "AllEventsViewController.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate, NSXMLParserDelegate>
 
+//Events Methods
+- (IBAction)allEventsPressed:(id)sender;
 - (IBAction)addEventPressed:(id)sender;
 
+
+//Object Variables
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -25,6 +31,8 @@
 
 @property(nonatomic, strong) XMLElement *rootElement;
 @property(nonatomic, strong) XMLElement *currentElementPointer;
+
+@property(nonatomic, strong) NSData *allJSONEvents;
 
 
 @end
