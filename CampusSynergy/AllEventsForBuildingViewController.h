@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventsData.h"
 
 @interface AllEventsForBuildingViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UILabel *buildingName;
+@property (copy, nonatomic) NSString *buildingNameString;
+
+
+@property (copy, nonatomic) NSString *myAppId;
+@property (copy, nonatomic) NSString *myRestId;
 
 @end

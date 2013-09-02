@@ -103,6 +103,7 @@
         
         parse_url = [parse_url stringByAppendingFormat:@"?username=%@",self.usernameField.text];
         parse_url = [parse_url stringByAppendingFormat:@"&password=%@", self.passwordField.text];
+        
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
         
         [request setHTTPMethod:@"GET"];

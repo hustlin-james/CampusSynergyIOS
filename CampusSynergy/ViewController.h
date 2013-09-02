@@ -13,6 +13,7 @@
 #import "XMLElement.h"
 #import "EventsData.h"
 #import "AllEventsViewController.h"
+#import "AllEventsForBuildingViewController.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate, NSXMLParserDelegate>
 

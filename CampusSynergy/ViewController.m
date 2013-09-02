@@ -293,6 +293,19 @@
                 //If it hits this part then it is in one of the overlays in the map
                 NSLog(@"In an Overlay");
                 NSLog(@"Overlay Info: %@", [overlay title]);
+                
+                AllEventsForBuildingViewController *allEventsForBuildingVC
+                = [self.storyboard instantiateViewControllerWithIdentifier:@"EventsForBuildingVC"];
+                
+                NSString *myString
+                = [[NSString alloc] initWithFormat:@"%@",[overlay title] ];
+                
+                allEventsForBuildingVC.buildingNameString = myString;
+                allEventsForBuildingVC.myAppId = myAppId;
+                allEventsForBuildingVC.myRestId = myRestId;
+                
+                [self.navigationController pushViewController:allEventsForBuildingVC animated:YES];
+                
                 break;
             }
         }

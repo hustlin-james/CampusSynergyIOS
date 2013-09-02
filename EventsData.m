@@ -40,6 +40,35 @@
     else{
         return [self useParseRESTAPI];
     }
+}
+- (NSData *) getEventsForBuilding: (NSString *)myBuilding{
+    
+    NSString *parse_url = @"https://api.parse.com:443/1/classes/campus_synergy";
+    NSString *jsonStringCondition = [[NSString alloc] initWithFormat:@"{\"bldName\":\"%@\"}",
+       myBuilding];
+    
+    NSLog(@"Constraint: %@", jsonStringCondition);
+    
+    parse_url = [parse_url stringByAppendingFormat:@"?where=%@",jsonStringCondition];
+    
+    NSLog(@"URL: %@", parse_url);
+    
+     
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
+    
+    [request setHTTPMethod:@"GET"];
+    [request setValue:app_id forHTTPHeaderField:@"X-Parse-Application-Id"];
+    [request setValue:rest_id forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+    
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *responseCode = nil;
+    
+    NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    //NSLog(@"oResponseData: %@", oResponseData);
+    //String representating of the response data
+    //return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+    return oResponseData;
     
 }
 

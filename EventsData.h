@@ -13,5 +13,6 @@
 - (id) initWithAppId: (NSString *)myAppId andRestID: (NSString *)restID;
 - (void)printMyIDs;
 - (NSData *) getEventsAndReturnJSON;
+- (NSData *) getEventsForBuilding: (NSString *)myBuilding;
 
 @end
