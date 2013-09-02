@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddEventTimesViewController : UIViewController
+@interface AddEventTimesViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property(copy, nonatomic) NSString *eventTitle;
 @property(copy, nonatomic) NSString *eventDescription;

@@ -440,20 +440,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="195" id="1An-rD-v0o"/>
                             <constraint firstItem="z0a-l6-Tzg" firstAttribute="centerX" secondItem="fe6-6R-xgB" secondAttribute="centerX" type="default" id="2og-qO-C7p"/>
+                            <constraint firstItem="pgd-lD-H5U" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="221" id="46E-hE-ymZ"/>
                             <constraint firstAttribute="trailing" secondItem="pgd-lD-H5U" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="4Si-bD-8og"/>
                             <constraint firstItem="fe6-6R-xgB" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="67d-hu-sBg"/>
-                            <constraint firstItem="6jX-og-DeX" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="117" id="6wR-fD-jmk"/>
                             <constraint firstItem="Wfh-v8-rUs" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="99H-xR-mdN"/>
-                            <constraint firstItem="pgd-lD-H5U" firstAttribute="top" secondItem="HPj-D7-5Ac" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="MZg-xa-lg3"/>
+                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="189" id="Tby-LW-edR"/>
                             <constraint firstItem="msp-qp-AWq" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="33" id="VOZ-2E-fws"/>
                             <constraint firstAttribute="trailing" secondItem="fe6-6R-xgB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YUQ-VU-7YV"/>
                             <constraint firstAttribute="trailing" secondItem="Wfh-v8-rUs" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dJi-Yl-med"/>
                             <constraint firstItem="HPj-D7-5Ac" firstAttribute="centerX" secondItem="msp-qp-AWq" secondAttribute="centerX" type="default" id="e3l-bb-pLS"/>
-                            <constraint firstItem="fe6-6R-xgB" firstAttribute="top" secondItem="6jX-og-DeX" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="iWk-Vw-54W"/>
                             <constraint firstItem="msp-qp-AWq" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="kDw-eM-xM2"/>
+                            <constraint firstItem="fe6-6R-xgB" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="140" id="kHY-KS-fQN"/>
                             <constraint firstAttribute="bottom" secondItem="z0a-l6-Tzg" secondAttribute="bottom" constant="9" id="qf3-IW-zC5"/>
+                            <constraint firstItem="6jX-og-DeX" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="110" id="vZQ-9a-QN1"/>
                             <constraint firstItem="6jX-og-DeX" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="x62-vE-pYr"/>
                             <constraint firstItem="Wfh-v8-rUs" firstAttribute="top" secondItem="msp-qp-AWq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="yx3-ZT-n08"/>
                         </constraints>
@@ -487,55 +487,6 @@
             <point key="canvasLocation" x="-342" y="58"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="AddEventTimesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventTimesViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="durationField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="startingTime" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AddEventViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="inputTimeNextButton:"/>
-                <relationship kind="outlet" name="buildingTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="eventDescriptionTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="eventTitleTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="roomNumberTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AllEventsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllEventsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="EventDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EventDetailsViewController.h"/>
-        </class>
-        <class className="LogInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LogInViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginSubmitButton:"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addEventPressed:"/>
-                <relationship kind="action" name="allEventsPressed:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

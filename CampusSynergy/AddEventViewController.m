@@ -70,7 +70,7 @@
     //Creating the building picker
     buildingPickerValues = [[NSArray alloc] initWithObjects:@"ERB", @"AL", @"NH", nil];
     
-    buildingPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 480)];
+    buildingPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 300)];
     buildingPickerView.delegate = self;
     buildingPickerView.dataSource = self;
     
@@ -97,13 +97,13 @@
     
     [buildingToolbar setItems:barItems animated:YES];
     
-    self.buildingTextField.inputAccessoryView = buildingToolbar;
+    //self.buildingTextField.inputAccessoryView = buildingToolbar;
     
     
     //creating
     roomPickerValues = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
-    
-    roomPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 480)];
+
+    roomPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 400)];
     roomPickerView.delegate = self;
     roomPickerView.dataSource = self;
     
