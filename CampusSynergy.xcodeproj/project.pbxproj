@@ -16,9 +16,10 @@
 		D3629EDF17D0FCA700DBF27A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EDE17D0FCA700DBF27A /* Default.png */; };
 		D3629EE117D0FCA700DBF27A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE017D0FCA700DBF27A /* Default@2x.png */; };
 		D3629EE317D0FCA700DBF27A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */; };
-		D3629EE617D0FCA700DBF27A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE417D0FCA700DBF27A /* MainStoryboard.storyboard */; };
 		D3629EE917D0FCA700DBF27A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EE817D0FCA700DBF27A /* ViewController.m */; };
 		D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */; };
+		D39858AC17D4BD3E00CF7D21 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D39858AA17D4BD3E00CF7D21 /* MainStoryboard.storyboard */; };
+		D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */; };
 		D39A091817D0FF700015DA8F /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091717D0FF700015DA8F /* AddEventViewController.m */; };
 		D39A091B17D0FF7F0015DA8F /* AllEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091A17D0FF7F0015DA8F /* AllEventsViewController.m */; };
 		D39A091E17D10E210015DA8F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091D17D10E210015DA8F /* LogInViewController.m */; };
@@ -54,11 +55,13 @@
 		D3629EDE17D0FCA700DBF27A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D3629EE017D0FCA700DBF27A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D3629EE517D0FCA700DBF27A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D3629EE717D0FCA700DBF27A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D3629EE817D0FCA700DBF27A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D38B29C117D468BF00A17168 /* AddEventTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventTimesViewController.h; sourceTree = "<group>"; };
 		D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventTimesViewController.m; sourceTree = "<group>"; };
+		D39858AB17D4BD3E00CF7D21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = CampusSynergy/en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEventsForBuildingViewController.h; sourceTree = "<group>"; };
+		D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllEventsForBuildingViewController.m; sourceTree = "<group>"; };
 		D39A091617D0FF700015DA8F /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
 		D39A091717D0FF700015DA8F /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
 		D39A091917D0FF7F0015DA8F /* AllEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEventsViewController.h; sourceTree = "<group>"; };
@@ -152,11 +155,13 @@
 		D3629ED217D0FCA700DBF27A /* CampusSynergy */ = {
 			isa = PBXGroup;
 			children = (
+				D39858AA17D4BD3E00CF7D21 /* MainStoryboard.storyboard */,
+				D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */,
+				D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */,
 				D3D1A89017D43423005D6A2E /* EventsData.h */,
 				D3D1A89117D43423005D6A2E /* EventsData.m */,
 				D3629EDB17D0FCA700DBF27A /* AppDelegate.h */,
 				D3629EDC17D0FCA700DBF27A /* AppDelegate.m */,
-				D3629EE417D0FCA700DBF27A /* MainStoryboard.storyboard */,
 				D39A091F17D1110C0015DA8F /* EventDetailsViewController.h */,
 				D39A092017D1110C0015DA8F /* EventDetailsViewController.m */,
 				D39A091C17D10E210015DA8F /* LogInViewController.h */,
@@ -247,9 +252,9 @@
 				D3629EDF17D0FCA700DBF27A /* Default.png in Resources */,
 				D3629EE117D0FCA700DBF27A /* Default@2x.png in Resources */,
 				D3629EE317D0FCA700DBF27A /* Default-568h@2x.png in Resources */,
-				D3629EE617D0FCA700DBF27A /* MainStoryboard.storyboard in Resources */,
 				D39A093C17D193990015DA8F /* api_key.config in Resources */,
 				D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */,
+				D39858AC17D4BD3E00CF7D21 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +275,7 @@
 				D3D1A88F17D419BB005D6A2E /* XMLElement.m in Sources */,
 				D3D1A89217D43423005D6A2E /* EventsData.m in Sources */,
 				D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */,
+				D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,12 +290,13 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		D3629EE417D0FCA700DBF27A /* MainStoryboard.storyboard */ = {
+		D39858AA17D4BD3E00CF7D21 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D3629EE517D0FCA700DBF27A /* en */,
+				D39858AB17D4BD3E00CF7D21 /* en */,
 			);
 			name = MainStoryboard.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

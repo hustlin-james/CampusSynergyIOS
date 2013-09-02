@@ -17,8 +17,10 @@
 
 //Text Fields
 @property (weak, nonatomic) IBOutlet UITextField *startingTime;
-
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *durationField;
+
+//Button
+- (IBAction)submitButton:(id)sender;
 
 @end

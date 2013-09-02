@@ -13,8 +13,6 @@
     NSArray *durationPickerValues;
     UIPickerView *durationPickerView;
     UIToolbar *durationToolbar;
-    
-    
 }
 
 @end
@@ -33,10 +31,65 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     
+    //Date picker
+    [self createDatePicker];
+  
     //create the duration picker
     [self createPickerForDuration];
+}
+
+- (void)createDatePicker{
+    
+    UIToolbar *dateToolbar;
+    
+    UIDatePicker* datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    self.dateField.inputView = datePicker;
+    
+    dateToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
+    dateToolbar.barStyle = UIBarStyleBlackOpaque;
+    [dateToolbar sizeToFit];
+    
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    [barItems addObject:flexSpace];
+    
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dateDoneButtonClicked)];
+    
+    [barItems addObject:doneBtn];
+    
+    [dateToolbar setItems:barItems animated:YES];
+    
+    self.dateField.inputAccessoryView = dateToolbar;
+}
+
+-(void)dateDoneButtonClicked{
+    NSLog(@"Date Done Button was clicked.");
+    
+    //Set the textfield to the inputted date
+    
+    [self.dateField resignFirstResponder];
+    
+}
+-(void)datePickerChanged:(UIDatePicker*)datePicker{
+    NSLog(@"Hit datepicker changed");
+    
+    //NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    //[df1 setDateFormat:@"yyyy-d-mm hh:mm:ss ZZZZ"];
+    //NSDate *newDate = [df1 dateFromString:currentSring];
+    NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
+    [df2 setDateFormat:@"yyyy-d-mm"];
+    NSString *dateString = [df2 stringFromDate:[datePicker date]];
+    NSLog(@"date is: %@",dateString);
+    self.dateField.text = dateString;
+    //NSDate *formattedDate = [df2 dateFromString:dateString];
+    //NSLog(@"%@", [datePicker date]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +97,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)createPickerForDuration{
     durationPickerValues = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
@@ -134,4 +186,17 @@
     }
 }
 
+- (IBAction)submitButton:(id)sender {
+    //When user cliecks the submit button
+    //check data and then send the data to parse
+    //then redirect to the events details page
+    BOOL validateInput = YES;
+    
+    if (validateInput){
+        //Send data to parse
+    }
+    else{
+        //UIAlertview for invalid input
+    }
+}
 @end

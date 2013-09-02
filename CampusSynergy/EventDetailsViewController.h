@@ -10,9 +10,12 @@
 
 @interface EventDetailsViewController : UIViewController
 
-
-//@property String JSONVALUE
-//@properrty Events Name
-//...
+@property(copy, nonatomic) NSString *eventTitle;
+@property(copy, nonatomic) NSString *eventDescription;
+@property(copy, nonatomic) NSString *buildingString;
+@property(copy, nonatomic) NSString *roomString;
+@property(copy, nonatomic) NSString *startingTime;
+@property(copy, nonatomic) NSString *dateField;
+@property(copy, nonatomic) NSString *durationField;
 
 @end

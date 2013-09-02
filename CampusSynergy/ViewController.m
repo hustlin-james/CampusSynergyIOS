@@ -209,6 +209,7 @@
         }
     
         MKPolygon* coordinates = [MKPolygon polygonWithCoordinates:points count:numberOfPoints];
+        [coordinates setTitle:[aBuilding.attributes objectForKey:@"name"]];
         [mutableOverlaysArray addObject:coordinates];
     }
     
@@ -254,6 +255,50 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
     self.currentElementPointer = nil;
+}
+
+//Algorithm from: http://stackoverflow.com/questions/14524718/is-cgpoint-in-mkpolygonview
+//With appropiate modifications
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    CGPoint pt = [[touches anyObject] locationInView:self.mapView];
+    CLLocationCoordinate2D latLong = [self.mapView convertPoint:pt toCoordinateFromView:self.mapView];
+    //NSLog(@"%@", latLong);
+    
+   // NSLog(@"Latitude: %f", latLong.latitude);
+    //NSLog(@"Longitude: %f", latLong.longitude);
+    //NSLog(@"%@", self.mapView.overlays);
+    
+    MKMapView *mapView = (MKMapView *)self.mapView;
+    
+    MKPolygonView *tappedOverlay = nil;
+    int i = 0;
+    for (id<MKOverlay> overlay in mapView.overlays)
+    {
+        MKPolygonView *view = (MKPolygonView *)[self.mapView viewForOverlay:overlay];
+        
+        if (view){
+            CGPoint touchPoint = [[touches anyObject] locationInView:self.mapView];
+            CLLocationCoordinate2D touchMapCoordinate =
+            [mapView convertPoint:touchPoint toCoordinateFromView:mapView];
+            
+            MKMapPoint mapPoint = MKMapPointForCoordinate(touchMapCoordinate);
+            
+            CGPoint polygonViewPoint = [view pointForMapPoint:mapPoint];
+            if(CGPathContainsPoint(view.path, NULL, polygonViewPoint, NO)){
+                tappedOverlay = view;
+                tappedOverlay.tag = i;
+                
+                //If it hits this part then it is in one of the overlays in the map
+                NSLog(@"In an Overlay");
+                NSLog(@"Overlay Info: %@", [overlay title]);
+                break;
+            }
+        }
+        i++;
+    }
+    
 }
 
 @end
