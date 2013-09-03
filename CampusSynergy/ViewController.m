@@ -24,6 +24,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [self startMapConstruction];
+ 
+}
+
+- (void)startMapConstruction{
+    
     //AddEventViewController *addEvent = [[AddEventViewController alloc] init];
     //[self.navigationController pushViewController:addEvent animated:YES];
     
@@ -50,6 +56,7 @@
         [self performSelectorOnMainThread:@selector(startGetEventsAndPolygonConstruction) withObject:nil
                             waitUntilDone:YES];
     });
+    
 }
 
 - (void)startGetEventsAndPolygonConstruction{
@@ -303,9 +310,10 @@
                 allEventsForBuildingVC.buildingNameString = myString;
                 allEventsForBuildingVC.myAppId = myAppId;
                 allEventsForBuildingVC.myRestId = myRestId;
+                allEventsForBuildingVC.allEvents = [self allJSONEvents];
                 
                 [self.navigationController pushViewController:allEventsForBuildingVC animated:YES];
-                
+            
                 break;
             }
         }

@@ -39,6 +39,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.title = @"Add Event";
+    
     //Starting time picker
     [self createStarttimePicker];
     
@@ -84,6 +87,7 @@
 
 - (void)startPickerChanged:(UIDatePicker*)datePicker{
     NSLog(@"Start Time picker was changed.");
+    self.startingTime.textColor = [UIColor blackColor];
     
     NSLog(@"%@", [datePicker date]);
     
@@ -146,6 +150,7 @@
 -(void)datePickerChanged:(UIDatePicker*)datePicker{
     NSLog(@"Hit datepicker changed");
     
+    self.dateField.textColor = [UIColor blackColor];
     //NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
     //[df1 setDateFormat:@"yyyy-d-mm hh:mm:ss ZZZZ"];
     //NSDate *newDate = [df1 dateFromString:currentSring];
@@ -215,29 +220,13 @@
     }
 }
 
+//Only affects the duration picker
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    if( [pickerView tag] == 0){
-        //return [buildingPickerValues count];
-    }
-    else if ([pickerView tag] == 1){
-        //return [roomPickerValues count];
-    }
-    else{
-        return [durationPickerValues count];
-    }
+    return [durationPickerValues count];
 }
-
+//Only affects the duration picker
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    if([pickerView tag] == 0){
-        //return [buildingPickerValues objectAtIndex:row];
-    }
-    else if ([pickerView tag] == 1){
-        //return [roomPickerValues objectAtIndex:row];
-    }
-    else{
-        return [durationPickerValues objectAtIndex:row];
-    }
+    return [durationPickerValues objectAtIndex:row];
 }
 
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -249,6 +238,7 @@
         //self.roomNumberTextField.text = [roomPickerValues objectAtIndex:row];
     }
     else{
+        self.durationField.textColor = [UIColor blackColor];
         self.durationField.text = [durationPickerValues objectAtIndex:row];
     }
 }
@@ -303,25 +293,48 @@
         
         EventsData *myPOSTEvent =[[EventsData alloc] initWithAppId:[self app_id] andRestID:[self rest_id]];
         
+        //uncomment after testing
+        /*
         NSData *response = [myPOSTEvent uploadDataToParseWithREST:myJsonString];
-        //NSLog(@"%@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
+         */
         
         //Check the response was successfull
         //{"createdAt":"2013-09-03T02:49:38.520Z","objectId":"pr0qXj16gf"}
+        
+        //uncomment after testing
+        /*
         NSError *json_error;
         id jsonObject = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&json_error];
         
         NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
         NSString *createdAt = (NSString *)[deserializedDictionary objectForKey:@"createdAt"];
+         */
         
-        if (createdAt == nil || [createdAt isEqualToString:@""]){
-            //UIAlert View saying error occured
+        BOOL addToDBSuccessful = YES;
+        
+        //implement this after testing
+        //Check for whether or not data was added to parse successfully
+        //if (createdAt == nil || [createdAt isEqualToString:@""])
+        
+        if (addToDBSuccessful) {
+            EventDetailsViewController *eventDetailsVC
+            = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
+            
+            //Set the fields for the eventdetails object
+            eventDetailsVC.eventTitleText = [self eventTitle];
+            eventDetailsVC.eventDescriptionText = [self eventDescription];
+            eventDetailsVC.eventRoomText = [self roomString];
+            eventDetailsVC.eventBuildingText = [self buildingString];
+            eventDetailsVC.publisherText = [self publisher];
+            
+                
+            [self.navigationController pushViewController:eventDetailsVC animated:YES];
+            //NSLog(@"End of AddEventTimesVC");
         }
         else{
-            //Redirected to a successful events page
+            
+            //UIAlertView
         }
-        
-        
     }
     else{
         //UIAlertview for invalid input

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EventsData.h"
+#import "EventDetailsViewController.h"
 
 @interface AddEventTimesViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 

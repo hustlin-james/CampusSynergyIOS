@@ -63,6 +63,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.title = @"Add Event";
+    
     self.eventTitleTextField.delegate= self;
     self.eventDescriptionTextField.delegate = self;
     
@@ -188,9 +190,11 @@
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if ([pickerView tag] == 0){
+        self.buildingTextField.textColor = [UIColor blackColor];
         self.buildingTextField.text = [buildingPickerValues objectAtIndex:row];
     }
     else{
+        self.roomNumberTextField.textColor = [UIColor blackColor];
         self.roomNumberTextField.text = [roomPickerValues objectAtIndex:row];
     }
 }

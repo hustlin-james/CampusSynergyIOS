@@ -19,11 +19,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "399795467.39255"
+         timestampString = "399901002.588432"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "128"
-         endingLineNumber = "128"
+         startingLineNumber = "135"
+         endingLineNumber = "135"
          landmarkName = "-addEventPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -32,11 +32,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "399795467.39255"
+         timestampString = "399901002.588432"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
          landmarkName = "-startGetEventsAndPolygonConstruction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -58,12 +58,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "399824390.486538"
+         timestampString = "399932612.416173"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "305"
-         endingLineNumber = "305"
+         startingLineNumber = "312"
+         endingLineNumber = "312"
          landmarkName = "-touchesBegan:withEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CampusSynergy/EventDetailsViewController.m"
+         timestampString = "399931842.912749"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -7,15 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
 @interface EventDetailsViewController : UIViewController
 
-@property(copy, nonatomic) NSString *eventTitle;
-@property(copy, nonatomic) NSString *eventDescription;
-@property(copy, nonatomic) NSString *buildingString;
-@property(copy, nonatomic) NSString *roomString;
-@property(copy, nonatomic) NSString *startingTime;
-@property(copy, nonatomic) NSString *dateField;
-@property(copy, nonatomic) NSString *durationField;
+@property(copy, nonatomic) NSString* eventTitleText;
+@property(copy, nonatomic) NSString* eventDescriptionText;
+@property(copy, nonatomic) NSString* eventBuildingText;
+@property(copy, nonatomic) NSString* eventRoomText;
+@property(copy, nonatomic) NSString* publisherText;
+
+@property (weak, nonatomic) IBOutlet UILabel *publisherLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buildingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *eventDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
+
+- (IBAction)mainMapButton:(id)sender;
 
 @end

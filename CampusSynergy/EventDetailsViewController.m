@@ -29,12 +29,31 @@
 	// Do any additional setup after loading the view.
     
     self.title = @"Event Details";
+    
+    //Set the view text to variables here
+    self.eventDescriptionLabel.text = [self eventDescriptionText];
+    self.eventTitleLabel.text = [self eventTitleText];
+    self.publisherLabel.text = [self publisherText];
+    self.buildingLabel.text = [self eventBuildingText];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+   
 }
 
+- (IBAction)mainMapButton:(id)sender {
+        NSLog(@"Home button pressed");
+        /*
+        ViewController *mmVC
+        = [self.storyboard instantiateViewControllerWithIdentifier:@"MainMapView"];
+         [self.navigationController pushViewController:mmVC animated:YES];
+         */
+        
+        //Goes back to the main map view controller
+        [self.navigationController popToRootViewControllerAnimated:NO];
+}
 @end

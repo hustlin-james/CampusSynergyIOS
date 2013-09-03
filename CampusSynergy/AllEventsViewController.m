@@ -56,10 +56,11 @@
     
     for (NSDictionary *result in myResults){
         //NSLog(@"Event Title: %@", [result objectForKey:@"title"]);
-        [myEventsTitleArray addObject: [result objectForKey:@"title"]];
+        //[myEventsTitleArray addObject: [result objectForKey:@"title"]];
+        [myEventsTitleArray addObject: result];
     }
         
-    self.eventsArray = [[ NSArray alloc] initWithArray:myEventsTitleArray];
+    self.eventsArray = [[NSArray alloc] initWithArray:myEventsTitleArray];
     
     if (self.eventsArray != nil && [self.eventsArray count] > 0){
         NSLog(@"Events Array Created");
@@ -88,9 +89,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    NSString *eventString = [self.eventsArray objectAtIndex:indexPath.row];
+    NSString *eventString =
+    [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
+    NSString *subLabel =
+    [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"bldName"];
     
     [cell.textLabel setText:eventString];
+    [cell.detailTextLabel setText: subLabel];
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
