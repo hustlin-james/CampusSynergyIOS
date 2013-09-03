@@ -101,8 +101,13 @@
         
         NSString *parse_url = @"https://api.parse.com/1/login";
         
-        parse_url = [parse_url stringByAppendingFormat:@"?username=%@",self.usernameField.text];
-        parse_url = [parse_url stringByAppendingFormat:@"&password=%@", self.passwordField.text];
+        NSString *usernameStringTrimmed =[self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+        NSString *passwordStringTrimmed =
+        [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        parse_url = [parse_url stringByAppendingFormat:@"?username=%@",usernameStringTrimmed];
+        parse_url = [parse_url stringByAppendingFormat:@"&password=%@",passwordStringTrimmed];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
         
@@ -134,9 +139,10 @@
         }
         else{
             NSLog(@"Name: %@", name_string);
-            
              //Write the login information into a plist file
              //for persistence
+            
+            [self writeLoginInfoToPlistFile];
             
             AddEventViewController *addEventVc =
             [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
@@ -148,6 +154,44 @@
             [self.navigationController pushViewController:addEventVc animated:YES];
             
         }
+    }
+    
+}
+
+- (void)writeLoginInfoToPlistFile{
+    
+    NSString *usernameStringTrimmed =[self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *passwordStringTrimmed =
+    [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [sysPaths objectAtIndex:0];
+    NSString *filePath =  [documentsDirectory stringByAppendingPathComponent:@"parse_user.plist"];
+    
+    NSLog(@"Login Wrote File Path: %@", filePath);
+    
+    NSMutableDictionary *plistDict = plistDict = [[NSMutableDictionary alloc] init]; // needs to be mutable
+    
+    /*
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    } else {
+        // Doesn't exist, start with an empty dictionary
+        plistDict = [[NSMutableDictionary alloc] init];
+    }
+     */
+    
+    [plistDict setValue:usernameStringTrimmed forKey:@"username"];
+    [plistDict setValue:passwordStringTrimmed forKey:@"password"];
+    
+    BOOL didWriteToFile = [plistDict writeToFile:filePath atomically:YES];
+
+    if (didWriteToFile) {
+        NSLog(@"Loging Wrote to file.");
+        NSLog(@"plist: %@", [plistDict description]);
+    } else {
+        NSLog(@"Error login failed to write to file");
     }
     
 }

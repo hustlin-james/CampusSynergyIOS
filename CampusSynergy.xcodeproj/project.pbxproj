@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */ = {isa = PBXBuildFile; fileRef = D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */; };
 		D3629ECD17D0FCA700DBF27A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECC17D0FCA700DBF27A /* UIKit.framework */; };
 		D3629ECF17D0FCA700DBF27A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECE17D0FCA700DBF27A /* Foundation.framework */; };
 		D3629ED117D0FCA700DBF27A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ED017D0FCA700DBF27A /* CoreGraphics.framework */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app_doc_dir.txt; path = ../app_doc_dir.txt; sourceTree = "<group>"; };
 		D3629EC917D0FCA700DBF27A /* CampusSynergy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusSynergy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3629ECC17D0FCA700DBF27A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3629ECE17D0FCA700DBF27A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,6 +186,7 @@
 		D3629ED317D0FCA700DBF27A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */,
 				D3BC1CAD17D2923F0063FE35 /* buildings.xml */,
 				D39A093B17D193990015DA8F /* api_key.config */,
 				D3629ED417D0FCA700DBF27A /* CampusSynergy-Info.plist */,
@@ -255,6 +258,7 @@
 				D39A093C17D193990015DA8F /* api_key.config in Resources */,
 				D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */,
 				D39858AC17D4BD3E00CF7D21 /* MainStoryboard.storyboard in Resources */,
+				D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

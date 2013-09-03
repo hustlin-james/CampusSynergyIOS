@@ -13,6 +13,7 @@
     EventsData *myEventsData;
     NSString *myAppId;
     NSString *myRestId;
+    NSString *username;
 }
 @end
 
@@ -22,14 +23,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
+    //Check if the parse_user.plist file is in the Documents directory
+    //And that the username,password contains values
+    //userLoggedIn = YES;
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [sysPaths objectAtIndex:0];
+    NSString *filePath =  [documentsDirectory
+                           stringByAppendingPathComponent:@"parse_user.plist"];
+    
+    NSLog(@"File Path: %@", filePath);
+    
+    NSMutableDictionary *plistDict; // needs to be mutable
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSLog(@"Initiating username: ...");
+        plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+        NSLog(@"plist exists. Value: %@", [plistDict description]);
+        username = [plistDict objectForKey:@"username"];
+        NSLog(@"Username is: %@", username);
+        
+    } else {
+        NSLog(@"parse_user.plist does not exist");
+        // Doesn't exist, start with an empty dictionary
+        plistDict = [[NSMutableDictionary alloc] init];
+    }
+    //Add the username to the username property
+    
+    
+    if(username != nil){
+        NSLog(@"user logged in");
+    }
+    else{
+        NSLog(@"user not logged in");
+    }
+    
+	// Do any additional setup after loading the view, typically from a nib.
     [self startMapConstruction];
- 
 }
 
 - (void)startMapConstruction{
-    
     //AddEventViewController *addEvent = [[AddEventViewController alloc] init];
     //[self.navigationController pushViewController:addEvent animated:YES];
     
@@ -127,14 +159,13 @@
     
     NSLog(@"AddEvent Button was pressed, checking to see if user loggedin");
     
-    BOOL userLoggedIn = NO;
+    //BOOL userLoggedIn = NO;
     
-    if (userLoggedIn){
+    if (username != nil){
         NSLog(@"User is logged in, creating the addeventVC");
         //AddEventViewController *addEventVC = [[AddEventViewController alloc] init];
         AddEventViewController *addEventVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
-        
         [self.navigationController pushViewController:addEventVC animated:YES];
     }
     else{
@@ -142,10 +173,8 @@
         //LogInViewController *loginVC = [[LogInViewController alloc] init];
         LogInViewController *loginVC = 
         [self.storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-                
         loginVC.app_id = myAppId;
         loginVC.rest_id = myRestId;
-        
         [self.navigationController pushViewController:loginVC animated:YES];
     }
 }

@@ -14,7 +14,6 @@
     UIPickerView *durationPickerView;
     UIToolbar *durationToolbar;
     
-    
     //Starting time with seconds
     NSString *startingTimeWithSeconds;
     
@@ -293,6 +292,7 @@
         
         EventsData *myPOSTEvent =[[EventsData alloc] initWithAppId:[self app_id] andRestID:[self rest_id]];
         
+        //These couple lines below adds stuff to the parse database comment out for testing purposes
         //uncomment after testing
         /*
         NSData *response = [myPOSTEvent uploadDataToParseWithREST:myJsonString];
