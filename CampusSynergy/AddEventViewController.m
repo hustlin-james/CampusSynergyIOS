@@ -97,7 +97,7 @@
     
     [buildingToolbar setItems:barItems animated:YES];
     
-    //self.buildingTextField.inputAccessoryView = buildingToolbar;
+    self.buildingTextField.inputAccessoryView = buildingToolbar;
     
     
     //creating
@@ -203,6 +203,15 @@
     if (inputValid) {
         AddEventTimesViewController *addEventTimesVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventTimesVC"];
+        
+        addEventTimesVC.app_id = [self app_id];
+        addEventTimesVC.rest_id = [self rest_id];
+        
+        addEventTimesVC.eventTitle = [[self eventTitleTextField] text];
+        addEventTimesVC.eventDescription = [[self eventDescriptionTextField] text];
+        addEventTimesVC.buildingString = [[self buildingTextField] text];
+        addEventTimesVC.roomString = [[self roomNumberTextField] text];
+        addEventTimesVC.publisher = [self publisher];
         
         [self.navigationController pushViewController:addEventTimesVC animated:YES];
     }

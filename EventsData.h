@@ -14,5 +14,6 @@
 - (void)printMyIDs;
 - (NSData *) getEventsAndReturnJSON;
 - (NSData *) getEventsForBuilding: (NSString *)myBuilding;
+- (NSData *)uploadDataToParseWithREST: (NSString *)jsonString;
 
 @end

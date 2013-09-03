@@ -13,6 +13,13 @@
     NSArray *durationPickerValues;
     UIPickerView *durationPickerView;
     UIToolbar *durationToolbar;
+    
+    
+    //Starting time with seconds
+    NSString *startingTimeWithSeconds;
+    
+    //Start time with dot
+    NSString *startingTimeWithDot;
 }
 
 @end
@@ -31,16 +38,75 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 	// Do any additional setup after loading the view.
+    //Starting time picker
+    [self createStarttimePicker];
     
     //Date picker
     [self createDatePicker];
-  
+    
     //create the duration picker
     [self createPickerForDuration];
 }
 
+//Hours and mintues, PM, AM
+- (void)createStarttimePicker{
+    
+    UIToolbar *starttimeToolbar;
+    UIDatePicker* starttimePicker = [[UIDatePicker alloc] init];
+    starttimePicker.datePickerMode = UIDatePickerModeTime;
+    [starttimePicker addTarget:self action:@selector(startPickerChanged:) forControlEvents:UIControlEventValueChanged];
+    self.startingTime.inputView = starttimePicker;
+    
+    starttimeToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
+    starttimeToolbar.barStyle = UIBarStyleBlackOpaque;
+    [starttimeToolbar sizeToFit];
+    
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    [barItems addObject:flexSpace];
+    
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(startTimeDoneButtonClicked)];
+    
+    [barItems addObject:doneBtn];
+    
+    [starttimeToolbar setItems:barItems animated:YES];
+    
+    self.startingTime.inputAccessoryView = starttimeToolbar;
+    
+}
+- (void)startTimeDoneButtonClicked{
+    NSLog(@"Start Time picker done button was clicked.");
+    [self.startingTime resignFirstResponder];
+}
+
+- (void)startPickerChanged:(UIDatePicker*)datePicker{
+    NSLog(@"Start Time picker was changed.");
+    
+    NSLog(@"%@", [datePicker date]);
+    
+    NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
+    [df2 setDateFormat:@"hh:mm"];
+    NSString *dateString = [df2 stringFromDate:[datePicker date]];
+    self.starttimeAsString = dateString;
+    NSLog(@"starting time is: %@",[self starttimeAsString]);
+    self.startingTime.text = dateString;
+    
+    
+    //Start Time with dot
+     NSDateFormatter *startTimeWithDotFormmater = [[NSDateFormatter alloc] init];
+     [startTimeWithDotFormmater setDateFormat:@"h.mm"];
+     startingTimeWithDot = [startTimeWithDotFormmater stringFromDate:[datePicker date]];
+
+    
+    //another form of starting time
+    NSDateFormatter *df3 = [[NSDateFormatter alloc]init];
+    [df3 setDateFormat:@"hh:mm:ss"];
+    startingTimeWithSeconds = [df3 stringFromDate:[datePicker date]];
+
+}
 - (void)createDatePicker{
     
     UIToolbar *dateToolbar;
@@ -84,7 +150,8 @@
     //[df1 setDateFormat:@"yyyy-d-mm hh:mm:ss ZZZZ"];
     //NSDate *newDate = [df1 dateFromString:currentSring];
     NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
-    [df2 setDateFormat:@"yyyy-d-mm"];
+    //[df2 setDateFormat:@"MMM dd, yyyy"];
+    [df2 setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [df2 stringFromDate:[datePicker date]];
     NSLog(@"date is: %@",dateString);
     self.dateField.text = dateString;
@@ -194,6 +261,67 @@
     
     if (validateInput){
         //Send data to parse
+        NSLog(@"Input is valid");
+        
+        //Create the jsonString
+        
+        NSString *iso_string = [[NSString alloc] initWithFormat:@"%@T%@",[[self dateField] text],
+                                           startingTimeWithSeconds];
+        
+        NSLog(@"iso_string: %@", iso_string);
+        
+        
+        /*
+         curl -X POST \
+         -H "X-Parse-Application-Id: QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB" \
+         -H "X-Parse-REST-API-Key: inV9LL0B01842cQsvjSr06fVAbse9T2CBRHa0yde" \
+         -H "Content-Type: application/json" \
+         -d '{"bldName":"AL", "date":{"__type": "Date","iso": "2013-09-03T09:38:30"}, "duration":2, "longDescription":"this is an event","publisher":"James Fielder", "room":2, "timeStart":09.38,"title":"test event"}' \
+         https://api.parse.com/1/classes/campus_synergy
+         */
+        
+        //{"__type": "Date","iso": "2011-08-21T18:02:52"}
+        NSString *date_json = [[NSString alloc] initWithFormat:@"{\"__type\": \"Date\",\"iso\": \"%@\"}",iso_string];
+        
+        NSString * myJsonString = [[NSString alloc]
+        initWithFormat:
+        @"{\"bldName\":\"%@\", \"date\":%@, \"duration\":%@, \"longDescription\":\"%@\",",
+                                   [self buildingString], date_json,
+                                   [[self durationField] text],
+                                   [self eventDescription]];
+        
+        myJsonString = [myJsonString stringByAppendingString:
+        [NSString stringWithFormat:@"\"publisher\":\"%@\", \"room\":%@, \"timeStart\":%@,",
+                         [self publisher], [self roomString], startingTimeWithDot]];
+        
+        myJsonString = [myJsonString stringByAppendingString:
+        [NSString stringWithFormat:@"\"title\":\"%@\"", [self eventTitle]]];
+                        
+        myJsonString = [myJsonString stringByAppendingString:@"}"];
+        
+        NSLog(@"POST JSON: %@", myJsonString);
+        
+        EventsData *myPOSTEvent =[[EventsData alloc] initWithAppId:[self app_id] andRestID:[self rest_id]];
+        
+        NSData *response = [myPOSTEvent uploadDataToParseWithREST:myJsonString];
+        //NSLog(@"%@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
+        
+        //Check the response was successfull
+        //{"createdAt":"2013-09-03T02:49:38.520Z","objectId":"pr0qXj16gf"}
+        NSError *json_error;
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&json_error];
+        
+        NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
+        NSString *createdAt = (NSString *)[deserializedDictionary objectForKey:@"createdAt"];
+        
+        if (createdAt == nil || [createdAt isEqualToString:@""]){
+            //UIAlert View saying error occured
+        }
+        else{
+            //Redirected to a successful events page
+        }
+        
+        
     }
     else{
         //UIAlertview for invalid input

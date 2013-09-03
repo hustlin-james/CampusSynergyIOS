@@ -89,6 +89,29 @@
     return oResponseData;
 }
 
+- (NSData *)uploadDataToParseWithREST: (NSString *)jsonString{
+    NSString *parse_url = @"https://api.parse.com:443/1/classes/campus_synergy";
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //[request setValue: forHTTPHeaderField:];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:app_id forHTTPHeaderField:@"X-Parse-Application-Id"];
+    [request setValue:rest_id forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+    [request setHTTPBody:jsonData];
+    
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *responseCode = nil;
+    
+    NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    //return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+    return oResponseData;
+}
+
 - (void)printMyIDs{
     NSLog(@"appID: %@, restID: %@", app_id, rest_id);
 }

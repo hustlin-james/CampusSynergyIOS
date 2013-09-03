@@ -140,6 +140,11 @@
             
             AddEventViewController *addEventVc =
             [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
+            
+            addEventVc.publisher = name_string;
+            addEventVc.app_id = [self app_id];
+            addEventVc.rest_id = [self rest_id];
+            
             [self.navigationController pushViewController:addEventVc animated:YES];
             
         }
