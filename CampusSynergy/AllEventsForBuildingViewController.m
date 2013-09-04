@@ -26,7 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	// Do any additional setup after loading the view
+    
 
     self.buildingEventsTable.dataSource = self;
     self.buildingEventsTable.delegate = self;
@@ -65,6 +66,8 @@
         NSLog(@"Events Array Created");
     }
     //[self retrieveAllEventsForBuildingFromParse];
+    
+    //[self.buildingEventsTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,8 +101,6 @@
     
     [cell.textLabel setText:eventString];
     [cell.detailTextLabel setText: subTitle];
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -122,6 +123,14 @@
     
     NSLog(@"%@ Building Events: %@",
           [self buildingNameString], dataAsString);
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
+    
+    //Set properties of the EventDetailsViewController Object
+    //TODO
+    [self.navigationController pushViewController:eventDetailsVC animated:YES];
 }
 
 @end

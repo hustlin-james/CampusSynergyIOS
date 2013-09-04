@@ -17,7 +17,6 @@
     UIPickerView *buildingPickerView;
     UIToolbar *buildingToolbar;
     
-    
     NSArray *roomPickerValues;
     UIPickerView *roomPickerView;
     UIToolbar *roomToolbar;
@@ -40,11 +39,12 @@
 - (id)init {
     self = [super init];
     if (self) {
+        /*
         // Initialize self.
         self.view.backgroundColor = [UIColor whiteColor];
         //self.navigationController.navigationItem.title = @"Add Event";
         self.title = @"Add Event";
-        
+        */
     }
     return self;
 }
@@ -57,16 +57,30 @@
     }
     return self;
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(textField.tag == self.buildingTextField.tag){
+        self.buildingTextField.textColor = [UIColor blackColor];
+        self.buildingTextField.text = buildingPickerValues[0];
+    }
+    else if(textField.tag == self.roomNumberTextField.tag){
+        self.roomNumberTextField.textColor = [UIColor blackColor];
+        self.roomNumberTextField.text = roomPickerValues[0];
+    }
+    else{
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"Add Event";
     
     self.eventTitleTextField.delegate= self;
     self.eventDescriptionTextField.delegate = self;
+    self.buildingTextField.delegate = self;
+    self.roomNumberTextField.delegate = self;
     
     
     //Creating the building picker
@@ -89,6 +103,13 @@
     
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
     
+    UIBarButtonItem *barTitle = [[UIBarButtonItem alloc] initWithTitle:@"Building"
+                style:UIBarButtonItemStylePlain
+                target:nil action:nil];
+    
+    [barItems addObject:barTitle];
+    
+    
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
     [barItems addObject:flexSpace];
@@ -102,7 +123,7 @@
     self.buildingTextField.inputAccessoryView = buildingToolbar;
     
     
-    //creating
+    //creating room picker
     roomPickerValues = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
 
     roomPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 400)];
@@ -121,6 +142,12 @@
     [roomToolbar sizeToFit];
     
     NSMutableArray *roomBarItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *roomBarTitle = [[UIBarButtonItem alloc] initWithTitle:@"Room"
+                                       style:UIBarButtonItemStylePlain
+                                        target:nil action:nil];
+    
+    [roomBarItems addObject:roomBarTitle];
     
     UIBarButtonItem *roomFlexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
@@ -143,15 +170,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+//Room picker
 - (void)roomPickerDoneClicked{
     [self.roomNumberTextField resignFirstResponder];
 }
 
+//building picker
 - (void)pickerDoneClicked{
     
     NSLog(@"Building picker Done clicked");
-    
     [self.buildingTextField resignFirstResponder];
     
    // buildingToolbar.hidden = YES;
@@ -190,11 +217,9 @@
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if ([pickerView tag] == 0){
-        self.buildingTextField.textColor = [UIColor blackColor];
         self.buildingTextField.text = [buildingPickerValues objectAtIndex:row];
     }
     else{
-        self.roomNumberTextField.textColor = [UIColor blackColor];
         self.roomNumberTextField.text = [roomPickerValues objectAtIndex:row];
     }
 }
@@ -217,6 +242,7 @@
         addEventTimesVC.roomString = [[self roomNumberTextField] text];
         addEventTimesVC.publisher = [self publisher];
         
+       
         [self.navigationController pushViewController:addEventTimesVC animated:YES];
     }
     else{

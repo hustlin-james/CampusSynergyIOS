@@ -97,17 +97,16 @@
     
     [cell.textLabel setText:eventString];
     [cell.detailTextLabel setText: subLabel];
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
     
-        //Set properties of the EventDetailsViewController Object
+    //eventDetailsVC.navigationItem.hidesBackButton = YES;
+    //Set properties of the EventDetailsViewController Object
     [self.navigationController pushViewController:eventDetailsVC animated:YES];
 }
 

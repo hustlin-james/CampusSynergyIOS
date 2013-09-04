@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qtk-i5-JDE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="627"/>
+            <point key="canvasLocation" x="-408" y="619"/>
         </scene>
         <!--View Controller - Home-->
         <scene sceneID="5">
@@ -218,47 +218,14 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yyn-UV-M01">
                                 <color key="color" red="0.20734237351439788" green="0.35075231984747179" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyV-GJ-XVc">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="0C5-eJ-NLe"/>
-                                    <constraint firstAttribute="height" constant="29" id="15Y-ea-U32"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="MOBI">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltr-3W-Xco">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="5cT-uB-C8y"/>
-                                    <constraint firstAttribute="width" constant="74" id="iAE-be-a90"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Feedback">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Brj-bz-Gnu" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="0tg-kk-I9P"/>
-                            <constraint firstAttribute="bottom" secondItem="Ltr-3W-Xco" secondAttribute="bottom" constant="14" id="9be-qG-D60"/>
-                            <constraint firstAttribute="trailing" secondItem="Ltr-3W-Xco" secondAttribute="trailing" constant="8" id="G6d-o5-Nn7"/>
                             <constraint firstItem="Brj-bz-Gnu" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="IFp-b4-77Z"/>
-                            <constraint firstItem="Ltr-3W-Xco" firstAttribute="baseline" secondItem="WyV-GJ-XVc" secondAttribute="baseline" type="default" id="Orp-Cm-zRz"/>
-                            <constraint firstAttribute="bottom" secondItem="WyV-GJ-XVc" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="PQP-Ui-JV0"/>
                             <constraint firstItem="yyn-UV-M01" firstAttribute="centerX" secondItem="Brj-bz-Gnu" secondAttribute="centerX" type="default" id="fPo-7D-Jde"/>
                             <constraint firstItem="yyn-UV-M01" firstAttribute="top" secondItem="3" secondAttribute="top" constant="43" id="ggi-36-pyX"/>
                             <constraint firstItem="Brj-bz-Gnu" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="jXf-pM-m7r"/>
-                            <constraint firstItem="WyV-GJ-XVc" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="6" id="oql-TO-l46"/>
                             <constraint firstItem="Brj-bz-Gnu" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="t3x-Ft-tCZ"/>
                         </constraints>
                     </view>
@@ -410,14 +377,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ie-qA-hDR">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="282" id="2aP-Zu-4DN"/>
-                                    <constraint firstAttribute="height" constant="30" id="RF0-X0-yV3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Njk-lK-Rtu">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Input Times">
@@ -431,35 +390,43 @@
                                     <action selector="inputTimeNextButton:" destination="7y4-HN-XyM" eventType="touchUpInside" id="If7-u6-GIR"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U9Y-c6-lW4">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="iXG-e2-eUa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iSL-ac-IPB" firstAttribute="leading" secondItem="uZO-Pg-KLo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3FS-BU-F2R"/>
-                            <constraint firstItem="F1Q-7R-Ubp" firstAttribute="top" secondItem="a9K-MJ-acO" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="4gD-f6-asO"/>
-                            <constraint firstItem="iSL-ac-IPB" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="43" id="ArX-0E-KsG"/>
+                            <constraint firstItem="F1Q-7R-Ubp" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="207" id="8bj-vV-wEi"/>
                             <constraint firstItem="a9K-MJ-acO" firstAttribute="leading" secondItem="SYI-V1-hd1" secondAttribute="leading" type="default" id="Ced-St-ezj"/>
-                            <constraint firstItem="9ie-qA-hDR" firstAttribute="top" secondItem="Ozh-mv-kU2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Fq3-Fw-Oip"/>
+                            <constraint firstItem="mLB-qe-XD7" firstAttribute="leading" secondItem="uZO-Pg-KLo" secondAttribute="leading" constant="18" id="HIL-k3-wwV"/>
                             <constraint firstItem="8yt-p9-5ia" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="20" symbolic="YES" type="default" id="I8S-Yl-3BP"/>
-                            <constraint firstItem="a9K-MJ-acO" firstAttribute="top" secondItem="mLB-qe-XD7" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NjB-tb-4SL"/>
-                            <constraint firstItem="mLB-qe-XD7" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="153" id="Opt-n9-ZPb"/>
+                            <constraint firstItem="U9Y-c6-lW4" firstAttribute="leading" secondItem="uZO-Pg-KLo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LzN-FS-PSQ"/>
                             <constraint firstItem="F1Q-7R-Ubp" firstAttribute="leading" secondItem="uZO-Pg-KLo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Pod-Si-K2m"/>
-                            <constraint firstAttribute="trailing" secondItem="9ie-qA-hDR" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Rav-oS-keV"/>
                             <constraint firstItem="Njk-lK-Rtu" firstAttribute="centerX" secondItem="SYI-V1-hd1" secondAttribute="centerX" type="default" id="Yhk-mY-lFn"/>
+                            <constraint firstItem="a9K-MJ-acO" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="172" id="Z8p-fr-pgj"/>
                             <constraint firstAttribute="trailing" secondItem="iSL-ac-IPB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dep-S5-LRB"/>
                             <constraint firstItem="8yt-p9-5ia" firstAttribute="leading" secondItem="uZO-Pg-KLo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="doW-OI-19f"/>
                             <constraint firstItem="Ozh-mv-kU2" firstAttribute="top" secondItem="iSL-ac-IPB" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="kaM-Ct-18O"/>
-                            <constraint firstItem="mLB-qe-XD7" firstAttribute="leading" secondItem="9ie-qA-hDR" secondAttribute="leading" type="default" id="n20-dT-bC5"/>
-                            <constraint firstItem="SYI-V1-hd1" firstAttribute="top" secondItem="F1Q-7R-Ubp" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sEw-nV-KZu"/>
+                            <constraint firstItem="mLB-qe-XD7" firstAttribute="top" secondItem="U9Y-c6-lW4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="owI-Or-USF"/>
+                            <constraint firstItem="Ozh-mv-kU2" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="81" id="pFc-pF-9l3"/>
+                            <constraint firstAttribute="trailing" secondItem="U9Y-c6-lW4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="qmg-8p-g2c"/>
+                            <constraint firstItem="U9Y-c6-lW4" firstAttribute="top" secondItem="Ozh-mv-kU2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sEA-el-ltN"/>
                             <constraint firstAttribute="bottom" secondItem="Njk-lK-Rtu" secondAttribute="bottom" constant="13" id="sMS-Ld-MWp"/>
                             <constraint firstItem="a9K-MJ-acO" firstAttribute="trailing" secondItem="SYI-V1-hd1" secondAttribute="trailing" type="default" id="sqe-Jw-2aT"/>
                             <constraint firstItem="a9K-MJ-acO" firstAttribute="leading" secondItem="mLB-qe-XD7" secondAttribute="leading" type="default" id="uMm-r2-fBT"/>
+                            <constraint firstItem="SYI-V1-hd1" firstAttribute="top" secondItem="uZO-Pg-KLo" secondAttribute="top" constant="231" id="xma-9V-K13"/>
                             <constraint firstItem="Ozh-mv-kU2" firstAttribute="leading" secondItem="uZO-Pg-KLo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="yW5-gE-Z3u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rhm-N9-j3O"/>
                     <connections>
                         <outlet property="buildingTextField" destination="a9K-MJ-acO" id="LSh-oe-MZa"/>
-                        <outlet property="eventDescriptionTextField" destination="9ie-qA-hDR" id="OEY-uZ-bqh"/>
+                        <outlet property="eventDescriptionTextField" destination="U9Y-c6-lW4" id="WOH-hW-kKQ"/>
                         <outlet property="eventTitleTextField" destination="iSL-ac-IPB" id="5jA-a8-zE9"/>
                         <outlet property="roomNumberTextField" destination="SYI-V1-hd1" id="FML-h4-QcJ"/>
                     </connections>
@@ -485,14 +452,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9k5-9e-pOg"/>
                                 </constraints>
-                                <color key="textColor" white="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.50233179209183676" green="0.50233179209183676" blue="0.50233179209183676" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-6R-xgB">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose a date..." borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-6R-xgB">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="P8K-MY-F1x"/>
                                 </constraints>
+                                <color key="textColor" red="0.4942801339285714" green="0.4942801339285714" blue="0.4942801339285714" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -501,11 +469,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pgd-lD-H5U">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose duration..." borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pgd-lD-H5U">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="281" id="qT2-1J-teE"/>
                                     <constraint firstAttribute="height" constant="30" id="y8f-rB-G2S"/>
                                 </constraints>
+                                <color key="textColor" red="0.49430006377551017" green="0.49430006377551017" blue="0.49430006377551017" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -573,6 +542,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="o96-pR-Eij">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="2" kind="relationship" relationship="rootViewController" id="PFx-4s-gP4"/>
                     </connections>
@@ -582,6 +555,70 @@
             <point key="canvasLocation" x="-420" y="-66"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddEventTimesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventTimesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="submitButton:"/>
+                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="durationField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="startingTime" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AddEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="inputTimeNextButton:"/>
+                <relationship kind="outlet" name="buildingTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="eventDescriptionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="eventTitleTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="roomNumberTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AllEventsForBuildingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllEventsForBuildingViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buildingEventsTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="buildingName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AllEventsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllEventsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="EventDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EventDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mainMapButton:"/>
+                <relationship kind="outlet" name="buildingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="publisherLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="LogInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LogInViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginSubmitButton:"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addEventPressed:"/>
+                <relationship kind="action" name="allEventsPressed:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

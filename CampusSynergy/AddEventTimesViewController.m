@@ -40,15 +40,43 @@
 	// Do any additional setup after loading the view.
     
     self.title = @"Add Event";
+    self.startingTime.delegate = self;
+    self.dateField.delegate = self;
+    self.durationField.delegate=self;
     
     //Starting time picker
     [self createStarttimePicker];
-    
     //Date picker
     [self createDatePicker];
-    
     //create the duration picker
     [self createPickerForDuration];
+}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    
+    NSDateFormatter *timeFieldsOutputFormat =[[NSDateFormatter alloc] init];
+    if(textField.tag == self.startingTime.tag){
+        NSLog(@"Started Editing starting Time field");
+        self.startingTime.textColor = [UIColor blackColor];
+        //[DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+        //NSLog(@"%@",[DateFormatter stringFromDate:[NSDate date]])
+        [timeFieldsOutputFormat setDateFormat:@"hh:mm a"];
+        self.startingTime.text = [timeFieldsOutputFormat stringFromDate:[NSDate date]];
+    }
+    else if(textField.tag == self.dateField.tag){
+        NSLog(@"Started Editing starting Time field");
+        self.dateField.textColor = [UIColor blackColor];
+        //[DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+        //NSLog(@"%@",[DateFormatter stringFromDate:[NSDate date]])
+        [timeFieldsOutputFormat setDateFormat:@"yyyy-MM-dd"];
+        self.dateField.text = [timeFieldsOutputFormat stringFromDate:[NSDate date]];
+    }
+    else if(textField.tag == self.durationField.tag){
+        NSLog(@"Started editing duration field.");
+        self.durationField.textColor = [UIColor blackColor];
+        self.durationField.text = @"1";
+    }
 }
 
 //Hours and mintues, PM, AM
@@ -65,7 +93,12 @@
     [starttimeToolbar sizeToFit];
     
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
+   
+    UIBarButtonItem *barTitle = [[UIBarButtonItem alloc] initWithTitle:@"Start Time"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:nil action:nil];
     
+    [barItems addObject:barTitle];
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
     [barItems addObject:flexSpace];
@@ -86,12 +119,11 @@
 
 - (void)startPickerChanged:(UIDatePicker*)datePicker{
     NSLog(@"Start Time picker was changed.");
-    self.startingTime.textColor = [UIColor blackColor];
     
     NSLog(@"%@", [datePicker date]);
     
     NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
-    [df2 setDateFormat:@"hh:mm"];
+    [df2 setDateFormat:@"hh:mm a"];
     NSString *dateString = [df2 stringFromDate:[datePicker date]];
     self.starttimeAsString = dateString;
     NSLog(@"starting time is: %@",[self starttimeAsString]);
@@ -99,9 +131,9 @@
     
     
     //Start Time with dot
-     NSDateFormatter *startTimeWithDotFormmater = [[NSDateFormatter alloc] init];
-     [startTimeWithDotFormmater setDateFormat:@"h.mm"];
-     startingTimeWithDot = [startTimeWithDotFormmater stringFromDate:[datePicker date]];
+    NSDateFormatter *startTimeWithDotFormmater = [[NSDateFormatter alloc] init];
+    [startTimeWithDotFormmater setDateFormat:@"h.mm"];
+    startingTimeWithDot = [startTimeWithDotFormmater stringFromDate:[datePicker date]];
 
     
     //another form of starting time
@@ -125,6 +157,12 @@
     
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
     
+    UIBarButtonItem *barTitle = [[UIBarButtonItem alloc] initWithTitle:@"Date"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:nil action:nil];
+    
+    [barItems addObject:barTitle];
+    
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
     [barItems addObject:flexSpace];
@@ -142,14 +180,12 @@
     NSLog(@"Date Done Button was clicked.");
     
     //Set the textfield to the inputted date
-    
     [self.dateField resignFirstResponder];
     
 }
 -(void)datePickerChanged:(UIDatePicker*)datePicker{
     NSLog(@"Hit datepicker changed");
     
-    self.dateField.textColor = [UIColor blackColor];
     //NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
     //[df1 setDateFormat:@"yyyy-d-mm hh:mm:ss ZZZZ"];
     //NSDate *newDate = [df1 dateFromString:currentSring];
@@ -188,6 +224,12 @@
     [durationToolbar sizeToFit];
     
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *barTitle = [[UIBarButtonItem alloc] initWithTitle:@"Duration"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:nil action:nil];
+    
+    [barItems addObject:barTitle];
     
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
@@ -319,15 +361,13 @@
         if (addToDBSuccessful) {
             EventDetailsViewController *eventDetailsVC
             = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
-            
+            eventDetailsVC.navigationItem.hidesBackButton = YES;
             //Set the fields for the eventdetails object
             eventDetailsVC.eventTitleText = [self eventTitle];
             eventDetailsVC.eventDescriptionText = [self eventDescription];
             eventDetailsVC.eventRoomText = [self roomString];
             eventDetailsVC.eventBuildingText = [self buildingString];
             eventDetailsVC.publisherText = [self publisher];
-            
-                
             [self.navigationController pushViewController:eventDetailsVC animated:YES];
             //NSLog(@"End of AddEventTimesVC");
         }

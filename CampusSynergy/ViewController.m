@@ -19,7 +19,9 @@
 
 @implementation ViewController
 
-
+- (void) viewWillAppear:(BOOL)animated{
+    NSLog(@"Main Map View just appeared.");
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -322,6 +324,7 @@
             MKMapPoint mapPoint = MKMapPointForCoordinate(touchMapCoordinate);
             
             CGPoint polygonViewPoint = [view pointForMapPoint:mapPoint];
+            
             if(CGPathContainsPoint(view.path, NULL, polygonViewPoint, NO)){
                 tappedOverlay = view;
                 tappedOverlay.tag = i;

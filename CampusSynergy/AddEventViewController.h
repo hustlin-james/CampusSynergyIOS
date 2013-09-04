@@ -19,7 +19,9 @@
 - (IBAction)inputTimeNextButton:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *eventDescriptionTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *buildingTextField;
 @property (weak, nonatomic) IBOutlet UITextField *roomNumberTextField;
 

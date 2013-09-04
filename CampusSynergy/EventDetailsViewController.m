@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    //self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"Event Details";
     
     //Set the view text to variables here
@@ -36,13 +36,14 @@
     self.publisherLabel.text = [self publisherText];
     self.buildingLabel.text = [self eventBuildingText];
     
+    //self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationItem.hidesBackButton = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-   
 }
 
 - (IBAction)mainMapButton:(id)sender {
@@ -54,6 +55,8 @@
          */
         
         //Goes back to the main map view controller
+        self.navigationController.navigationBarHidden = NO;
         [self.navigationController popToRootViewControllerAnimated:NO];
+    
 }
 @end
