@@ -55,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DuS-xS-HfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="414"/>
+            <point key="canvasLocation" x="545" y="540"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="MFw-Fb-0BB">
@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qtk-i5-JDE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-408" y="619"/>
+            <point key="canvasLocation" x="-390" y="605"/>
         </scene>
         <!--View Controller - Home-->
         <scene sceneID="5">
@@ -233,6 +233,7 @@
                         <barButtonItem key="leftBarButtonItem" title="All Events" id="vHk-y9-iQ5" userLabel="allEventNavButton">
                             <connections>
                                 <action selector="allEventsPressed:" destination="2" id="FNI-l8-T2x"/>
+                                <segue destination="QgC-TB-FoJ" kind="custom" identifier="AllEventsSegueId" customClass="AllEventsSegue" id="3u6-LG-Jap"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="1" title="AddEvent" id="eDW-e6-EsR" userLabel="addEventNavButton">
@@ -248,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="91" y="414"/>
+            <point key="canvasLocation" x="101" y="430"/>
         </scene>
         <!--Log In View Controller - Login-->
         <scene sceneID="oRb-5e-sht">

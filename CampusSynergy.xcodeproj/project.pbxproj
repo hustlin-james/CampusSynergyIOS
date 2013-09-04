@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */ = {isa = PBXBuildFile; fileRef = D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */; };
 		D355F60017D6D71C00C0FA94 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355F5FF17D6D71B00C0FA94 /* MainStoryboard.storyboard */; };
+		D355F63B17D7CCF000C0FA94 /* AllEventsSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */; };
 		D3629ECD17D0FCA700DBF27A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECC17D0FCA700DBF27A /* UIKit.framework */; };
 		D3629ECF17D0FCA700DBF27A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECE17D0FCA700DBF27A /* Foundation.framework */; };
 		D3629ED117D0FCA700DBF27A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ED017D0FCA700DBF27A /* CoreGraphics.framework */; };
@@ -45,6 +46,8 @@
 /* Begin PBXFileReference section */
 		D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app_doc_dir.txt; path = ../app_doc_dir.txt; sourceTree = "<group>"; };
 		D355F5FF17D6D71B00C0FA94 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllEventsSegue.h; path = ../AllEventsSegue.h; sourceTree = "<group>"; };
+		D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllEventsSegue.m; path = ../AllEventsSegue.m; sourceTree = "<group>"; };
 		D3629EC917D0FCA700DBF27A /* CampusSynergy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusSynergy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3629ECC17D0FCA700DBF27A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3629ECE17D0FCA700DBF27A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,6 +160,8 @@
 		D3629ED217D0FCA700DBF27A /* CampusSynergy */ = {
 			isa = PBXGroup;
 			children = (
+				D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */,
+				D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */,
 				D355F5FF17D6D71B00C0FA94 /* MainStoryboard.storyboard */,
 				D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */,
 				D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */,
@@ -280,6 +285,7 @@
 				D3D1A89217D43423005D6A2E /* EventsData.m in Sources */,
 				D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */,
 				D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */,
+				D355F63B17D7CCF000C0FA94 /* AllEventsSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

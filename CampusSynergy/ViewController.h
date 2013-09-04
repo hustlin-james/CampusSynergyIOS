@@ -14,6 +14,7 @@
 #import "EventsData.h"
 #import "AllEventsViewController.h"
 #import "AllEventsForBuildingViewController.h"
+#import "AllEventsSegue.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate, NSXMLParserDelegate>
 

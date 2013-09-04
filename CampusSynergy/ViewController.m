@@ -134,6 +134,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([[segue identifier] isEqualToString:@"AllEventsSegueId"]) {
+        
+        NSLog(@"This is the AllEventsButton in prepareForSegue");
+        
+        /*
+        AllEventsViewController *allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AllEventsVC"];
+        
+        //allEventsVC.allEventsAsJSON = [NSString stringWithString:[self allJSONEvents]];
+        
+        allEventsVC.allEventsAsJSON = [self allJSONEvents];
+         */
+        ((AllEventsSegue *)segue).allJSONEvents = [self allJSONEvents];
+    }
+}
 
 - (IBAction)allEventsPressed:(id)sender {
     
@@ -152,6 +168,7 @@
         
         [self.navigationController pushViewController:allEventsVC animated:YES];
     }
+     
 }
 
 //The is the Add Event Button in the Main View Navigation Bar
