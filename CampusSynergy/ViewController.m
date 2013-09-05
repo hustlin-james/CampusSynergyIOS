@@ -136,40 +136,33 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
+    //Custom Segue for All Events button
     if ([[segue identifier] isEqualToString:@"AllEventsSegueId"]) {
-        
         NSLog(@"This is the AllEventsButton in prepareForSegue");
-        
-        /*
-        AllEventsViewController *allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AllEventsVC"];
-        
-        //allEventsVC.allEventsAsJSON = [NSString stringWithString:[self allJSONEvents]];
-        
-        allEventsVC.allEventsAsJSON = [self allJSONEvents];
-         */
         ((AllEventsSegue *)segue).allJSONEvents = [self allJSONEvents];
+          ((AllEventsSegue *)segue).username = username;
     }
 }
 
+/*
 - (IBAction)allEventsPressed:(id)sender {
     
     if([self allJSONEvents] == nil){
-        
         //Create Error Alert view that there are no events
         //TODO
         
     }
     else{
         AllEventsViewController *allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AllEventsVC"];
-        
         //allEventsVC.allEventsAsJSON = [NSString stringWithString:[self allJSONEvents]];
         
         allEventsVC.allEventsAsJSON = [self allJSONEvents];
-        
+        allEventsVC.username = username;
         [self.navigationController pushViewController:allEventsVC animated:YES];
     }
      
 }
+ */
 
 //The is the Add Event Button in the Main View Navigation Bar
 - (IBAction)addEventPressed:(id)sender {
@@ -177,7 +170,6 @@
     //Check for a plist file for the user
     
     NSLog(@"AddEvent Button was pressed, checking to see if user loggedin");
-    
     //BOOL userLoggedIn = NO;
     
     if (username != nil){
@@ -185,6 +177,7 @@
         //AddEventViewController *addEventVC = [[AddEventViewController alloc] init];
         AddEventViewController *addEventVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
+        addEventVC.publisher = username;
         [self.navigationController pushViewController:addEventVC animated:YES];
     }
     else{
@@ -201,7 +194,6 @@
 //filePath is the xml file where the coordinates to draw the polygons are located
 //Just gona leave this in the main
 //Returns in array of MKPolygon coordinates
-
 - (NSArray *)createPolygonCoordinateList: (NSString *)filePath{
     
     //Load the file and parse the xml
@@ -356,6 +348,7 @@
                 NSString *myString
                 = [[NSString alloc] initWithFormat:@"%@",[overlay title] ];
                 
+                allEventsForBuildingVC.username = username;
                 allEventsForBuildingVC.buildingNameString = myString;
                 allEventsForBuildingVC.myAppId = myAppId;
                 allEventsForBuildingVC.myRestId = myRestId;

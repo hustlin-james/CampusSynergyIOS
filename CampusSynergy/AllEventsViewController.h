@@ -18,4 +18,6 @@
 
 @property(strong, nonatomic) NSData *allEventsAsJSON;
 
+@property(strong, nonatomic) NSString *username;
+
 @end

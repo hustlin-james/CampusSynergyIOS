@@ -128,8 +128,51 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
     
-    //Set properties of the EventDetailsViewController Object
-    //TODO
+    NSLog(@"%@", [self.eventsArray objectAtIndex:indexPath.row]);
+    
+    //Set the all event properties
+    eventDetailsVC.navigationItem.hidesBackButton = NO;
+    //Set the fields for the eventdetails object
+    NSString *eventsTitle = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    eventDetailsVC.eventTitleText = eventsTitle;
+    NSString *eventDescript = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
+    eventDetailsVC.eventDescriptionText = eventDescript;
+    NSString *roomString = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"room"];
+    eventDetailsVC.eventRoomText = roomString;
+    NSString *buildingString = [[self.eventsArray objectAtIndex:indexPath.row]
+                                objectForKey:@"bldName"];
+    eventDetailsVC.eventBuildingText = buildingString;
+    eventDetailsVC.publisherText = [self username];
+    NSString *iso_date = [[[self.eventsArray objectAtIndex:indexPath.row]
+                           objectForKey:@"date"] objectForKey:@"iso"];
+    NSLog(@"ISO Date: %@", iso_date);
+    
+    //THIS IS CORRECCT
+    NSDateFormatter *rawDateFormatter = [ [NSDateFormatter alloc] init];
+    [rawDateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSZ"];
+    NSDate *myRawDate = [rawDateFormatter dateFromString:iso_date];
+    NSLog(@"Raw Date: %@", myRawDate.description);
+    
+    //rawDateFormatter.timeZone = [NSTimeZone systemTimeZone];
+
+    [rawDateFormatter setDateFormat:@"hh:mm a"];
+    NSString *myTime = [rawDateFormatter stringFromDate:myRawDate];
+    NSLog(@"myTime: %@", myTime);
+    
+    [rawDateFormatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *myDate = [rawDateFormatter stringFromDate:myRawDate];
+    NSLog(@"myDate: %@", myDate);
+    
+    NSString *duration = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"duration"];
+    
+    /*
+     This event starts at 04:07 PM 09/06/2013 and it takes 11.0 hours
+     to finish.
+     */
+    
+    NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", myTime, myDate, duration];
+    eventDetailsVC.startTimeDescriptionText = startTimeText;
+    
     [self.navigationController pushViewController:eventDetailsVC animated:YES];
 }
 

@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *buildingEventsTable;
 
+@property (copy, nonatomic) NSString *username;
 @property (weak, nonatomic) IBOutlet UILabel *buildingName;
 @property (copy, nonatomic) NSString *buildingNameString;
 

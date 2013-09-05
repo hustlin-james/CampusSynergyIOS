@@ -15,5 +15,6 @@
 //Use this to transfer data from the source view to the destination view
 //i.e. from ViewController to the AllEventsViewController
 @property(nonatomic, strong) NSData *allJSONEvents;
+@property(nonatomic, strong) NSString *username;
 
 @end

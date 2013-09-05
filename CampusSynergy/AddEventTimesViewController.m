@@ -114,6 +114,7 @@
 }
 - (void)startTimeDoneButtonClicked{
     NSLog(@"Start Time picker done button was clicked.");
+    
     [self.startingTime resignFirstResponder];
 }
 
@@ -124,21 +125,25 @@
     
     NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
     [df2 setDateFormat:@"hh:mm a"];
+    
     NSString *dateString = [df2 stringFromDate:[datePicker date]];
     self.starttimeAsString = dateString;
+    
+    
     NSLog(@"starting time is: %@",[self starttimeAsString]);
     self.startingTime.text = dateString;
     
     
-    //Start Time with dot
+    //Start Time with dot, for the timeStart field
     NSDateFormatter *startTimeWithDotFormmater = [[NSDateFormatter alloc] init];
     [startTimeWithDotFormmater setDateFormat:@"h.mm"];
     startingTimeWithDot = [startTimeWithDotFormmater stringFromDate:[datePicker date]];
 
     
-    //another form of starting time
+    //another form of starting time fro the iso date to send in the json
     NSDateFormatter *df3 = [[NSDateFormatter alloc]init];
-    [df3 setDateFormat:@"hh:mm:ss"];
+    //HH is 24 hour time
+    [df3 setDateFormat:@"HH:mm:ss"];
     startingTimeWithSeconds = [df3 stringFromDate:[datePicker date]];
 
 }
@@ -296,11 +301,61 @@
         
         //Create the jsonString
         
-        NSString *iso_string = [[NSString alloc] initWithFormat:@"%@T%@",[[self dateField] text],
-                                           startingTimeWithSeconds];
+        
+        //yyyy-MM-ddTHH:mm:ss
+        
+        NSString *iso_string = [[NSString alloc] initWithFormat:@"%@T%@",[[self dateField] text], startingTimeWithSeconds];
+        
+        NSDateFormatter *isoStringFormatter = [[NSDateFormatter alloc] init];
+        [isoStringFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+        NSDate *convertedDate = [isoStringFormatter dateFromString: iso_string];
+        
+        /*
+        NSString *myFirstString = [isoStringFormatter stringFromDate:convertedDate];
+        NSLog(@"myFirstString: %@", myFirstString);
+         */
+        //NSString *aDate = [NSString :(NSString *)convertedDate];
+        //NSLog(@"aDate: %@", aDate);
+        
+        /*
+        NSDateFormatter *aFormat = [[NSDateFormatter alloc]init];
+        [aFormat setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+        NSString *myString = [aFormat stringFromDate:convertedDate];
+        NSLog(@"myString: %@", myString);
+        */
+        /*
+        
+        NSDate *
+        dateFromString = [isoStringFormatter dateFromString:(NSString *)convertedDate];
+        
+        isoStringFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSString *newDateString = [isoStringFormatter stringFromDate:dateFromString];
+        NSLog(@"newDateString: %@", newDateString);
+        */
+        
+        //NSString *result = [aDate substringToIndex:20];
+        //NSLog(@"%@", result);
+        //NSArray *results = [aDate componentsSeparatedByCharactersInSet:"@+"];
+       // NSLog(@"%@", results);
+        //iso_string = [NSString stringWithFormat:@"%@T%@", results[0], results[1]];
+        
+        //[isoStringFormatter setDateFormat:@"yyyy-MM-ddTHH:mm:ss"];
+        //NSLog(@"converedDate as String: %@", [isoStringFormatter stringFromDate:convertedDate]);
+        //iso_string = [isoStringFormatter stringFromDate:convertedDate];
+        
+        //NSLog(@"ConvertedDate: %@", convertedDate.description);
+        NSString *convert = [[NSString alloc] initWithString:convertedDate.description];
+        NSArray *results =[convert componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        NSLog(@"results[0]: %@", results[0]);
+        NSLog(@"results[1]: %@", results[1]);
+        
+        NSLog(@"startingTimeWtihSeconds: %@", startingTimeWithSeconds);
         
         NSLog(@"iso_string: %@", iso_string);
         
+        iso_string = [NSString stringWithFormat:@"%@T%@", results[0], results[1]];
+        NSLog(@"new iso_string: %@", iso_string);
         
         /*
          curl -X POST \
@@ -368,6 +423,16 @@
             eventDetailsVC.eventRoomText = [self roomString];
             eventDetailsVC.eventBuildingText = [self buildingString];
             eventDetailsVC.publisherText = [self publisher];
+            
+            /*
+             This event starts at 04:07 PM 09/06/2013 and it takes 11.0 hours
+             to finish.
+             */
+            
+            NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", self.startingTime.text, self.dateField.text, self.durationField.text];
+            
+            eventDetailsVC.startTimeDescriptionText = startTimeText;
+            
             [self.navigationController pushViewController:eventDetailsVC animated:YES];
             //NSLog(@"End of AddEventTimesVC");
         }

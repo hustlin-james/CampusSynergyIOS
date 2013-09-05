@@ -142,6 +142,9 @@
              //Write the login information into a plist file
              //for persistence
             
+            //name_string is the publisher name
+            usernameStringTrimmed = name_string;
+            
             [self writeLoginInfoToPlistFile];
             
             AddEventViewController *addEventVc =

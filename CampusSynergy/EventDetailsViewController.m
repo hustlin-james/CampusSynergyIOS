@@ -31,10 +31,19 @@
     self.title = @"Event Details";
     
     //Set the view text to variables here
-    self.eventDescriptionLabel.text = [self eventDescriptionText];
+    //self.eventDescriptionLabel.text = [self eventDescriptionText];
     self.eventTitleLabel.text = [self eventTitleText];
     self.publisherLabel.text = [self publisherText];
     self.buildingLabel.text = [self eventBuildingText];
+    
+    self.eventDescriptionTextView.text = [self eventDescriptionText];
+    
+    /*
+     This event starts at 04:07 PM 09/06/2013 and it takes 11.0 hours
+     to finish.
+     */
+    
+    self.startTimeDescriptionTextView.text = [self startTimeDescriptionText];
     
     //self.navigationController.navigationBarHidden = YES;
     //self.navigationController.navigationItem.hidesBackButton = YES;
