@@ -89,6 +89,7 @@
     return oResponseData;
 }
 
+/*
 - (NSData *)uploadDataToParseWithREST: (NSString *)jsonString{
     NSString *parse_url = @"https://api.parse.com:443/1/classes/campus_synergy";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
@@ -110,6 +111,42 @@
     
     //return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
     return oResponseData;
+}
+ */
+
++(BOOL)saveEventsToParse: (NSString *)bldName andDate: (NSDate *)date andDuration: (NSNumber *)duration andLongDescription:(NSString *)longDescription andPublisher: (NSString *) publisher  andRoom: (NSNumber *)room andTitle: (NSString *)title{
+    
+    /*
+     NSNumber *number = [NSNumber numberWithInt:42];
+     NSString *string = [NSString stringWithFormat:@"the number is %i", number];
+     NSDate *date = [NSDate date];
+     NSData *data = [@"foo" dataUsingEncoding:NSUTF8StringEncoding];
+     NSArray *array = [NSArray arrayWithObjects:string, number, nil];
+     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:number, @"number",
+     string, @"string",
+     nil];
+     NSNull *null = [NSNull null];
+     
+     PFObject *bigObject = [PFObject objectWithClassName:@"BigObject"];
+     [bigObject setObject:number     forKey:@"myNumber"];
+     [bigObject setObject:string     forKey:@"myString"];
+     [bigObject setObject:date       forKey:@"myDate"];
+     [bigObject setObject:data       forKey:@"myData"];
+     [bigObject setObject:array      forKey:@"myArray"];
+     [bigObject setObject:dictionary forKey:@"myDictionary"];
+     [bigObject setObject:null       forKey:@"myNull"];
+     [bigObject saveInBackground];
+     */
+    
+    PFObject *events = [PFObject objectWithClassName:@"campus_synergy"];
+    [events setObject:bldName forKey:@"bldName"];
+    [events setObject:date forKey:@"date"];
+    [events setObject:duration forKey:@"duration"];
+    [events setObject:longDescription forKey:@"longDescription"];
+    [events setObject:publisher forKey:@"publisher"];
+    [events setObject:room forKey:@"room"]; 
+    [events setObject:title forKey:@"title"];
+    return [events save];
 }
 
 - (void)printMyIDs{

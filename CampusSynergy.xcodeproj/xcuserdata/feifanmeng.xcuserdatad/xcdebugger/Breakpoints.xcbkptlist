@@ -19,11 +19,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "400052741.673232"
+         timestampString = "400188118.778203"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
          landmarkName = "-addEventPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -32,11 +32,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "399951987.41682"
+         timestampString = "400188118.778203"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
          landmarkName = "-startGetEventsAndPolygonConstruction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -58,11 +58,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "400052741.673232"
+         timestampString = "400188118.778203"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "354"
-         endingLineNumber = "354"
+         startingLineNumber = "386"
+         endingLineNumber = "386"
          landmarkName = "-touchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -84,13 +84,26 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CampusSynergy/ViewController.m"
-         timestampString = "400052657.674373"
+         timestampString = "400188118.778203"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "20"
-         endingLineNumber = "20"
-         landmarkName = "@implementation ViewController"
-         landmarkType = "3">
+         startingLineNumber = "25"
+         endingLineNumber = "25"
+         landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "EventsData.m"
+         timestampString = "400132434.67714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
+         landmarkName = "+saveEventsToParse:andDate:andDuration:andLongDescription:andPublisher:andRoom:andTitle:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

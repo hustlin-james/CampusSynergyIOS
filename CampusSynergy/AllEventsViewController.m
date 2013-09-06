@@ -76,7 +76,8 @@
     
     NSLog(@"Generating %d Table cells", (int)[self.eventsArray count]);
     
-    return [self.eventsArray count];
+    //return [self.eventsArray count];
+    return [self.parseEventObjects count];
 }
 
 //Setings for a cell
@@ -87,14 +88,25 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
+    /*
     NSString *eventString =
     [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"title"];
     
     NSString *subLabel =
     [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"bldName"];
+    */
     
-    [cell.textLabel setText:eventString];
-    [cell.detailTextLabel setText: subLabel];
+    //new parse event API
+    NSLog(@"parse event api.");
+    NSString *myEventString =
+    [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
+    NSString *mySubLabel =
+    [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"bldName"];
+    
+    
+    [cell.textLabel setText:myEventString];
+    [cell.detailTextLabel setText: mySubLabel];
     
     return cell;
 }
@@ -104,7 +116,9 @@
     EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
     
     eventDetailsVC.navigationItem.hidesBackButton = NO;
+    
     //Set the fields for the eventdetails object
+    /*
     NSString *eventsTitle = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"title"];
     eventDetailsVC.eventTitleText = eventsTitle;
     NSString *eventDescript = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
@@ -136,6 +150,42 @@
     NSString *duration = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"duration"];
     NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", myTime, myDate, duration];
     eventDetailsVC.startTimeDescriptionText = startTimeText;
+    */
+    
+    //new parse API
+    NSString *myEventsTitle
+    = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"title"];
+    eventDetailsVC.eventTitleText = myEventsTitle;
+    
+    NSString *myEventDescription = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
+    eventDetailsVC.eventDescriptionText = myEventDescription;
+    
+    NSString *myRoomString = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"room"];
+    eventDetailsVC.eventRoomText = myRoomString;
+    
+    NSString *myBuildingString = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"bldName"];
+    eventDetailsVC.eventBuildingText = myBuildingString;
+    
+    eventDetailsVC.publisherText = [self username];
+
+    NSString *myDuration = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"duration"];
+    
+    NSDate *parseDate = [[self.parseEventObjects objectAtIndex:indexPath.row]
+                          objectForKey:@"date"];
+    
+    NSLog(@"parseDate: %@", parseDate);
+    NSLog(@"parseDate description: %@", parseDate.description);
+    
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setDateFormat:@"MM/dd/yyyy"];
+    
+    NSString *myParseTime = [timeFormatter stringFromDate:parseDate];
+    
+    [timeFormatter setDateFormat:@"hh:mm a"];
+    NSString *myParseDate = [timeFormatter stringFromDate:parseDate];
+    
+    NSString *myStartTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", myParseTime, myParseDate, myDuration];
+    eventDetailsVC.startTimeDescriptionText = myStartTimeText;
     
     [self.navigationController pushViewController:eventDetailsVC animated:YES];
 }

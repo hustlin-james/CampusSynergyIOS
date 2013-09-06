@@ -39,12 +39,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        /*
-        // Initialize self.
-        self.view.backgroundColor = [UIColor whiteColor];
-        //self.navigationController.navigationItem.title = @"Add Event";
-        self.title = @"Add Event";
-        */
     }
     return self;
 }
@@ -223,13 +217,34 @@
         self.roomNumberTextField.text = [roomPickerValues objectAtIndex:row];
     }
 }
-
-
 - (IBAction)inputTimeNextButton:(id)sender {
     
-    BOOL inputValid = YES;
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     
-    if (inputValid) {
+    if([[[self eventDescriptionTextField] text] isEqualToString:@""]){
+        
+        [errorAlert setTitle:@"Event Description Error."];
+        [errorAlert setMessage:@"Invalid Input for event description."];
+        [errorAlert show];
+    }
+    else if([[[self eventTitleTextField] text] isEqualToString:@""]){
+        
+        [errorAlert setTitle:@"Event Title Error."];
+        [errorAlert setMessage:@"Invalid Input for event title."];
+        [errorAlert show];
+    }
+    else if([[[self buildingTextField]text] isEqualToString:@"Choose a building..." ]){
+        
+        [errorAlert setTitle:@"Building name Error."];
+        [errorAlert setMessage:@"Invalid Input for building."];
+        [errorAlert show];
+    }
+    else if([[[self roomNumberTextField] text] isEqualToString:@"Choose a room..."]){
+        [errorAlert setTitle:@"Room input error."];
+        [errorAlert setMessage:@"Invalid Input for room."];
+        [errorAlert show];
+    }
+    else {
         AddEventTimesViewController *addEventTimesVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventTimesVC"];
         
@@ -242,11 +257,7 @@
         addEventTimesVC.roomString = [[self roomNumberTextField] text];
         addEventTimesVC.publisher = [self publisher];
         
-       
         [self.navigationController pushViewController:addEventTimesVC animated:YES];
-    }
-    else{
-        //Alert Invalid input
     }
 }
 @end

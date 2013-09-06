@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface EventsData : NSObject
 
@@ -15,5 +16,5 @@
 - (NSData *) getEventsAndReturnJSON;
 - (NSData *) getEventsForBuilding: (NSString *)myBuilding;
 - (NSData *)uploadDataToParseWithREST: (NSString *)jsonString;
-
++ (BOOL)saveEventsToParse: (NSString *)bldName andDate: (NSDate *)date andDuration: (NSNumber *)duration andLongDescription:(NSString *)longDescription andPublisher: (NSString *) publisher  andRoom: (NSNumber *)room andTitle: (NSString *)title;
 @end

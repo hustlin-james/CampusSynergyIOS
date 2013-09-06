@@ -15,13 +15,14 @@
 #import "AllEventsViewController.h"
 #import "AllEventsForBuildingViewController.h"
 #import "AllEventsSegue.h"
+#import <objc/runtime.h>
 
 @interface ViewController : UIViewController <MKMapViewDelegate, NSXMLParserDelegate>
 
 //Events Methods
 - (IBAction)allEventsPressed:(id)sender;
 - (IBAction)addEventPressed:(id)sender;
-
+- (IBAction)refreshButton:(id)sender;
 
 //Object Variables
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -33,7 +34,14 @@
 @property(nonatomic, strong) XMLElement *rootElement;
 @property(nonatomic, strong) XMLElement *currentElementPointer;
 
-@property(nonatomic, strong) NSData *allJSONEvents;
 
+//allJSONEvents is the old version for parse
+//propaly gona remove these later
+@property(nonatomic, strong) NSData *allJSONEvents;
+@property(nonatomic, strong) NSArray *eventObjects;
+//end
+
+//this is using the objective c parse API
+//@property(nonatomic, strong) NSArray *parseEventObjects;
 
 @end

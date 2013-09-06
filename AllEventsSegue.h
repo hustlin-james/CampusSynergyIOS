@@ -17,4 +17,6 @@
 @property(nonatomic, strong) NSData *allJSONEvents;
 @property(nonatomic, strong) NSString *username;
 
+@property(nonatomic, copy) NSArray *parseEventObjects;
+
 @end

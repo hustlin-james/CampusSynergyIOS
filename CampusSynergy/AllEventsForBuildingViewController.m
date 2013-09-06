@@ -54,20 +54,34 @@
     
     NSMutableArray *myEventsTitleArray = [[NSMutableArray alloc] init];
     
+    
     for (NSDictionary *result in myResults){
         //NSLog(@"Event Title: %@", [result objectForKey:@"title"]);
         if([[result objectForKey:@"bldName"] isEqualToString:[self buildingNameString]] ){
             [myEventsTitleArray addObject: result];
+            
+            //each result is an nsdictionary from an array of myResults
+            
+            NSLog(@"myEventsTitleArray: %@", result);
         }
     }
+    
     self.eventsArray = [[ NSArray alloc] initWithArray:myEventsTitleArray];
     
     if (self.eventsArray != nil && [self.eventsArray count] > 0){
         NSLog(@"Events Array Created");
     }
-    //[self retrieveAllEventsForBuildingFromParse];
     
-    //[self.buildingEventsTable reloadData];
+    //filter out all the non related buildings
+    NSMutableArray *myParseEventsArray = [[NSMutableArray alloc]init];
+    
+    for(PFObject *event in [self parseEventArray]){
+        if([[event objectForKey:@"bldName"] isEqualToString:
+           [self buildingNameString]]){
+            [myParseEventsArray addObject: event];
+        }
+    }
+    self.parseEventArray = [[NSArray alloc] initWithArray:myParseEventsArray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,9 +94,10 @@
 //This is pretty much how many tables cells should be generated
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    NSLog(@"Generating %d Table cells", (int)[self.eventsArray count]);
+   //NSLog(@"Generating %d Table cells", (int)[self.eventsArray count]);
     
-    return [self.eventsArray count];
+    //return [self.eventsArray count];
+    return [self.parseEventArray count];
 }
 
 //Setings for a cell
@@ -90,48 +105,34 @@
     
     //This is the identifier for the table cells, it is in the attributes thing
     NSString *cellIdentifier = @"EventsCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
+    /*
     NSString *eventString = [[self.eventsArray objectAtIndex:indexPath.row]
                              objectForKey:@"title"];
     
     NSString *subTitle = [[self.eventsArray objectAtIndex:indexPath.row]
                           objectForKey:@"bldName"];
+    */
+    //new parse stuff
+    NSString *parseEventString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    NSString *parseSubTitle =[[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"bldName"];
     
-    [cell.textLabel setText:eventString];
-    [cell.detailTextLabel setText: subTitle];
+    
+    [cell.textLabel setText:parseEventString];
+    [cell.detailTextLabel setText: parseSubTitle];
     
     return cell;
 }
 
-
-//Call the parse API
--(void) retrieveAllEventsForBuildingFromParse{
-    
-    NSLog(@"myAppId: %@", [self myAppId]);
-    NSLog(@"myRestId: %@", [self myRestId]);
-    
-    EventsData *buildingEvents = [[EventsData alloc] initWithAppId:[self myAppId] andRestID:[self myRestId]];
-    
-    NSData *responseData =
-    [buildingEvents getEventsForBuilding:[self buildingNameString]];
-    
-    NSLog(@"ResponseData: %@", responseData);
-    
-    NSString *dataAsString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"%@ Building Events: %@",
-          [self buildingNameString], dataAsString);
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     EventDetailsViewController *eventDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
     
-    NSLog(@"%@", [self.eventsArray objectAtIndex:indexPath.row]);
-    
-    //Set the all event properties
     eventDetailsVC.navigationItem.hidesBackButton = NO;
+    //Set the all event properties
+
+    /*
     //Set the fields for the eventdetails object
     NSString *eventsTitle = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"title"];
     eventDetailsVC.eventTitleText = eventsTitle;
@@ -165,13 +166,52 @@
     
     NSString *duration = [[self.eventsArray objectAtIndex:indexPath.row] objectForKey:@"duration"];
     
+     */
     /*
      This event starts at 04:07 PM 09/06/2013 and it takes 11.0 hours
      to finish.
      */
     
+    /*
     NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", myTime, myDate, duration];
     eventDetailsVC.startTimeDescriptionText = startTimeText;
+     */
+    
+    
+    //objective c parse library
+    NSString *myEventsTitle
+    = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    eventDetailsVC.eventTitleText = myEventsTitle;
+    
+    NSString *myEventDescription = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
+    eventDetailsVC.eventDescriptionText = myEventDescription;
+    
+    NSString *myRoomString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"room"];
+    eventDetailsVC.eventRoomText = myRoomString;
+    
+    NSString *myBuildingString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"bldName"];
+    eventDetailsVC.eventBuildingText = myBuildingString;
+    
+    eventDetailsVC.publisherText = [self username];
+    
+    NSString *myDuration = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"duration"];
+    
+    NSDate *parseDate = [[self.parseEventArray objectAtIndex:indexPath.row]
+                         objectForKey:@"date"];
+    
+    NSLog(@"parseDate: %@", parseDate);
+    NSLog(@"parseDate description: %@", parseDate.description);
+    
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setDateFormat:@"MM/dd/yyyy"];
+    
+    NSString *myParseTime = [timeFormatter stringFromDate:parseDate];
+    
+    [timeFormatter setDateFormat:@"hh:mm a"];
+    NSString *myParseDate = [timeFormatter stringFromDate:parseDate];
+    
+    NSString *myStartTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", myParseTime, myParseDate, myDuration];
+    eventDetailsVC.startTimeDescriptionText = myStartTimeText;
     
     [self.navigationController pushViewController:eventDetailsVC animated:YES];
 }

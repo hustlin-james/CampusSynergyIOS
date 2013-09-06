@@ -31,6 +31,12 @@
     
     destinationController.allEventsAsJSON = [self allJSONEvents];
     destinationController.username = [self username];
+    
+    
+    NSLog(@"IN PARSEEVENTOBJECTS: %@", [self parseEventObjects]);
+    //new Parse API
+    destinationController.parseEventObjects = [self parseEventObjects];
+    
     [sourceViewController.navigationController pushViewController:destinationController animated:NO];
 }
 @end

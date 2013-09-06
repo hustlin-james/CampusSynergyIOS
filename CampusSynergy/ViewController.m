@@ -14,18 +14,28 @@
     NSString *myAppId;
     NSString *myRestId;
     NSString *username;
+
+    NSArray *parseEventObjects; 
 }
 @end
 
 @implementation ViewController
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    //[self initializeView:NO];
+}
+
 - (void) viewWillAppear:(BOOL)animated{
     NSLog(@"Main Map View just appeared.");
+    //[self initializeView];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self initializeView:YES];
+}
+- (void)initializeView: (BOOL)willAnimate{
     //Check if the parse_user.plist file is in the Documents directory
     //And that the username,password contains values
     //userLoggedIn = YES;
@@ -60,10 +70,10 @@
     }
     
 	// Do any additional setup after loading the view, typically from a nib.
-    [self startMapConstruction];
+    [self startMapConstruction:willAnimate];
 }
 
-- (void)startMapConstruction{
+- (void)startMapConstruction: (BOOL)willAnimate{
     //AddEventViewController *addEvent = [[AddEventViewController alloc] init];
     //[self.navigationController pushViewController:addEvent animated:YES];
     
@@ -74,9 +84,8 @@
     region.span.latitudeDelta = .01f;
     region.span.longitudeDelta = .01f;
     
-    [self.mapView setRegion:region animated:YES];
+    [self.mapView setRegion:region animated:willAnimate];
     [self.mapView setDelegate:self];
-    
     
     //Start the Process to get Events Data
     myAppId = @"QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB";
@@ -95,6 +104,10 @@
 
 - (void)startGetEventsAndPolygonConstruction{
    self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
+    
+    
+    //New Parse API
+    [self parseAPIEventsRetrieve];
     
     //NSLog(@"JSON Events Retrieved: %@", self.allJSONEvents);
     
@@ -140,35 +153,19 @@
     if ([[segue identifier] isEqualToString:@"AllEventsSegueId"]) {
         NSLog(@"This is the AllEventsButton in prepareForSegue");
         ((AllEventsSegue *)segue).allJSONEvents = [self allJSONEvents];
-          ((AllEventsSegue *)segue).username = username;
+        ((AllEventsSegue *)segue).username = username;
+        
+        
+        NSLog(@"BEFORE ALLEVENTSSEGUE: %@",  parseEventObjects);
+        ((AllEventsSegue *)segue).parseEventObjects=parseEventObjects
+        ;
     }
 }
-
-/*
-- (IBAction)allEventsPressed:(id)sender {
-    
-    if([self allJSONEvents] == nil){
-        //Create Error Alert view that there are no events
-        //TODO
-        
-    }
-    else{
-        AllEventsViewController *allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AllEventsVC"];
-        //allEventsVC.allEventsAsJSON = [NSString stringWithString:[self allJSONEvents]];
-        
-        allEventsVC.allEventsAsJSON = [self allJSONEvents];
-        allEventsVC.username = username;
-        [self.navigationController pushViewController:allEventsVC animated:YES];
-    }
-     
-}
- */
 
 //The is the Add Event Button in the Main View Navigation Bar
 - (IBAction)addEventPressed:(id)sender {
     
     //Check for a plist file for the user
-    
     NSLog(@"AddEvent Button was pressed, checking to see if user loggedin");
     //BOOL userLoggedIn = NO;
     
@@ -189,6 +186,54 @@
         loginVC.rest_id = myRestId;
         [self.navigationController pushViewController:loginVC animated:YES];
     }
+}
+
+- (void)parseAPIEventsRetrieve{
+    //Call the parse server
+    [[self activityIndicator] startAnimating];
+    PFQuery *query = [PFQuery queryWithClassName:@"campus_synergy"];
+    [query setLimit: 1000];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Events: %@", objects);
+            //self.eventObjects = objects;
+            //Add all the parse api objects to the parse array
+            parseEventObjects = objects;
+            
+            NSLog(@"Self parseEventObjects: %@",parseEventObjects);
+            /*
+            PFObject *myObject = [parseEventObjects objectAtIndex:0];
+            NSLog(@"myObject: %@", myObject);
+            NSLog(@"bldName: %@", [myObject objectForKey:@"bldName"]);
+            NSLog(@"longDescrption: %@", [myObject objectForKey:@"longDescription"]);
+            NSLog(@"publisher: %@", [myObject objectForKey:@"publisher"]);
+             */
+            
+            //Check that the events are still going on
+            //date + duration > current time
+            
+            NSMutableArray *validEvents = [[NSMutableArray alloc] init];
+            
+            NSDate *current_time = [NSDate date];
+            
+            for (PFObject *event in objects){
+                NSDate *eventDate = [event objectForKey:@"date"];
+            }
+            
+            
+            
+            [[self activityIndicator] stopAnimating];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+- (IBAction)refreshButton:(id)sender {
+    NSLog(@"Refresh button has been hit");
+    [self parseAPIEventsRetrieve];
 }
 
 //filePath is the xml file where the coordinates to draw the polygons are located
@@ -309,8 +354,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
-    CGPoint pt = [[touches anyObject] locationInView:self.mapView];
-    CLLocationCoordinate2D latLong = [self.mapView convertPoint:pt toCoordinateFromView:self.mapView];
+    //CGPoint pt = [[touches anyObject] locationInView:self.mapView];
+    //CLLocationCoordinate2D latLong = [self.mapView convertPoint:pt toCoordinateFromView:self.mapView];
     //NSLog(@"%@", latLong);
     
    // NSLog(@"Latitude: %f", latLong.latitude);
@@ -353,6 +398,9 @@
                 allEventsForBuildingVC.myAppId = myAppId;
                 allEventsForBuildingVC.myRestId = myRestId;
                 allEventsForBuildingVC.allEvents = [self allJSONEvents];
+                
+                //Using the objective c api
+                allEventsForBuildingVC.parseEventArray =  parseEventObjects;
                 
                 [self.navigationController pushViewController:allEventsForBuildingVC animated:YES];
             

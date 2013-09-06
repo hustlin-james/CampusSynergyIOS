@@ -20,4 +20,7 @@
 
 @property(strong, nonatomic) NSString *username;
 
+//parse events API array
+@property(copy, nonatomic) NSArray *parseEventObjects;
+
 @end

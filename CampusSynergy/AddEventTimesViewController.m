@@ -115,6 +115,26 @@
 - (void)startTimeDoneButtonClicked{
     NSLog(@"Start Time picker done button was clicked.");
     
+    //Get what is currently in the text field
+    NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
+    [df2 setDateFormat:@"hh:mm a"];
+    
+    //Current Date
+    NSDate *current_date = [NSDate date];
+    NSString *dateString = [df2 stringFromDate:current_date];
+    self.starttimeAsString = dateString;
+    
+    //Start Time with dot, for the timeStart field
+    NSDateFormatter *startTimeWithDotFormmater = [[NSDateFormatter alloc] init];
+    [startTimeWithDotFormmater setDateFormat:@"h.mm"];
+    startingTimeWithDot = [startTimeWithDotFormmater stringFromDate:current_date];
+    
+    //another form of starting time fro the iso date to send in the json
+    NSDateFormatter *df3 = [[NSDateFormatter alloc]init];
+    //HH is 24 hour time
+    [df3 setDateFormat:@"HH:mm:ss"];
+    startingTimeWithSeconds = [df3 stringFromDate:current_date];
+    
     [self.startingTime resignFirstResponder];
 }
 
@@ -295,55 +315,43 @@
     //then redirect to the events details page
     BOOL validateInput = YES;
     
+    UIAlertView *inputError =
+    [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    
+    if([[self.startingTime text] isEqualToString:@"Choose a starting time..."]){
+        validateInput = NO;
+        [inputError setTitle:@"Starting Time Error"];
+        [inputError setMessage:@"Starting Time input error."];
+    }
+    else if([[self.dateField text] isEqualToString:@"Choose a date..."])
+    {
+        validateInput = NO;
+        [inputError setTitle:@"Date Error"];
+        [inputError setMessage:@"Date input error."];
+    }
+    else if([[self.durationField text] isEqualToString:@"Choose duration..."]){
+        validateInput = NO;
+        [inputError setTitle:@"Duration Error"];
+        [inputError setMessage:@"Duration input error."];
+        
+        //Check duration is a number...
+    }
+    else{
+        validateInput = YES;
+    }
+    
     if (validateInput){
-        //Send data to parse
-        NSLog(@"Input is valid");
         
         //Create the jsonString
-        
-        
         //yyyy-MM-ddTHH:mm:ss
         
+        /*
         NSString *iso_string = [[NSString alloc] initWithFormat:@"%@T%@",[[self dateField] text], startingTimeWithSeconds];
         
         NSDateFormatter *isoStringFormatter = [[NSDateFormatter alloc] init];
         [isoStringFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
         NSDate *convertedDate = [isoStringFormatter dateFromString: iso_string];
         
-        /*
-        NSString *myFirstString = [isoStringFormatter stringFromDate:convertedDate];
-        NSLog(@"myFirstString: %@", myFirstString);
-         */
-        //NSString *aDate = [NSString :(NSString *)convertedDate];
-        //NSLog(@"aDate: %@", aDate);
-        
-        /*
-        NSDateFormatter *aFormat = [[NSDateFormatter alloc]init];
-        [aFormat setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-        NSString *myString = [aFormat stringFromDate:convertedDate];
-        NSLog(@"myString: %@", myString);
-        */
-        /*
-        
-        NSDate *
-        dateFromString = [isoStringFormatter dateFromString:(NSString *)convertedDate];
-        
-        isoStringFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        NSString *newDateString = [isoStringFormatter stringFromDate:dateFromString];
-        NSLog(@"newDateString: %@", newDateString);
-        */
-        
-        //NSString *result = [aDate substringToIndex:20];
-        //NSLog(@"%@", result);
-        //NSArray *results = [aDate componentsSeparatedByCharactersInSet:"@+"];
-       // NSLog(@"%@", results);
-        //iso_string = [NSString stringWithFormat:@"%@T%@", results[0], results[1]];
-        
-        //[isoStringFormatter setDateFormat:@"yyyy-MM-ddTHH:mm:ss"];
-        //NSLog(@"converedDate as String: %@", [isoStringFormatter stringFromDate:convertedDate]);
-        //iso_string = [isoStringFormatter stringFromDate:convertedDate];
-        
-        //NSLog(@"ConvertedDate: %@", convertedDate.description);
         NSString *convert = [[NSString alloc] initWithString:convertedDate.description];
         NSArray *results =[convert componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
@@ -356,15 +364,6 @@
         
         iso_string = [NSString stringWithFormat:@"%@T%@", results[0], results[1]];
         NSLog(@"new iso_string: %@", iso_string);
-        
-        /*
-         curl -X POST \
-         -H "X-Parse-Application-Id: QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB" \
-         -H "X-Parse-REST-API-Key: inV9LL0B01842cQsvjSr06fVAbse9T2CBRHa0yde" \
-         -H "Content-Type: application/json" \
-         -d '{"bldName":"AL", "date":{"__type": "Date","iso": "2013-09-03T09:38:30"}, "duration":2, "longDescription":"this is an event","publisher":"James Fielder", "room":2, "timeStart":09.38,"title":"test event"}' \
-         https://api.parse.com/1/classes/campus_synergy
-         */
         
         //{"__type": "Date","iso": "2011-08-21T18:02:52"}
         NSString *date_json = [[NSString alloc] initWithFormat:@"{\"__type\": \"Date\",\"iso\": \"%@\"}",iso_string];
@@ -389,60 +388,139 @@
         
         EventsData *myPOSTEvent =[[EventsData alloc] initWithAppId:[self app_id] andRestID:[self rest_id]];
         
+         */
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
+        NSString *dateString = [[NSString alloc] initWithFormat:@"%@ %@",[[self dateField] text], [[self startingTime] text]];
+        
+        NSString *myBuildingName = [self buildingString];
+        NSDate *myDate = [dateFormat dateFromString:dateString];
+        NSNumber *myDuration =  [NSNumber numberWithInt:[[[self durationField] text] intValue]];
+        NSString *myLogDescription = [self eventDescription];
+        NSString *myPublisher =  [self publisher];
+        NSNumber *myRoom =  [NSNumber  numberWithInt:[[self roomString] intValue]];
+        NSString *myTitle = [self eventTitle];
+        
+        
+        BOOL validDate = [self checkValidDate];
+        
+        if(validDate){
+            
+            BOOL addToDBSuccessful=YES;
+            
+            addToDBSuccessful = [EventsData saveEventsToParse:myBuildingName andDate:myDate andDuration:myDuration andLongDescription:myLogDescription andPublisher:myPublisher andRoom:myRoom andTitle:myTitle];
+             
+            
+            [self EventDetailsTransitionPrep:addToDBSuccessful andAlerty:inputError];
+            
+        }
+        else{
+            [inputError setTitle:@"Invalid Date."];
+            [inputError setMessage:@"Sorry, too early of a time."];
+            [inputError show];
+        }
         //These couple lines below adds stuff to the parse database comment out for testing purposes
         //uncomment after testing
         /*
         NSData *response = [myPOSTEvent uploadDataToParseWithREST:myJsonString];
-         */
+         
         
         //Check the response was successfull
         //{"createdAt":"2013-09-03T02:49:38.520Z","objectId":"pr0qXj16gf"}
         
         //uncomment after testing
-        /*
+        
         NSError *json_error;
         id jsonObject = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&json_error];
         
         NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
         NSString *createdAt = (NSString *)[deserializedDictionary objectForKey:@"createdAt"];
          */
-        
-        BOOL addToDBSuccessful = YES;
-        
+
         //implement this after testing
         //Check for whether or not data was added to parse successfully
         //if (createdAt == nil || [createdAt isEqualToString:@""])
         
-        if (addToDBSuccessful) {
-            EventDetailsViewController *eventDetailsVC
-            = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
-            eventDetailsVC.navigationItem.hidesBackButton = YES;
-            //Set the fields for the eventdetails object
-            eventDetailsVC.eventTitleText = [self eventTitle];
-            eventDetailsVC.eventDescriptionText = [self eventDescription];
-            eventDetailsVC.eventRoomText = [self roomString];
-            eventDetailsVC.eventBuildingText = [self buildingString];
-            eventDetailsVC.publisherText = [self publisher];
-            
-            /*
-             This event starts at 04:07 PM 09/06/2013 and it takes 11.0 hours
-             to finish.
-             */
-            
-            NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", self.startingTime.text, self.dateField.text, self.durationField.text];
-            
-            eventDetailsVC.startTimeDescriptionText = startTimeText;
-            
-            [self.navigationController pushViewController:eventDetailsVC animated:YES];
-            //NSLog(@"End of AddEventTimesVC");
-        }
-        else{
-            
-            //UIAlertView
-        }
     }
     else{
         //UIAlertview for invalid input
+        [inputError show];
     }
+}
+
+- (void)EventDetailsTransitionPrep:(BOOL)addToDBSuccessful andAlerty: (UIAlertView *)inputError{
+    
+    
+    if (addToDBSuccessful) {
+        EventDetailsViewController *eventDetailsVC
+        = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
+        eventDetailsVC.navigationItem.hidesBackButton = YES;
+        //Set the fields for the eventdetails object
+        eventDetailsVC.eventTitleText = [self eventTitle];
+        eventDetailsVC.eventDescriptionText = [self eventDescription];
+        eventDetailsVC.eventRoomText = [self roomString];
+        eventDetailsVC.eventBuildingText = [self buildingString];
+        eventDetailsVC.publisherText = [self publisher];
+        
+        /*
+         This event starts at 04:07 PM 09/06/2013 and it takes 11.0 hours
+         to finish.
+         */
+        
+        NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", self.startingTime.text, self.dateField.text, self.durationField.text];
+        
+        eventDetailsVC.startTimeDescriptionText = startTimeText;
+        
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Event has been added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [success show];
+        [self.navigationController pushViewController:eventDetailsVC animated:YES];
+        //NSLog(@"End of AddEventTimesVC");
+    }
+    else{
+        //UIAlertView
+        [inputError setTitle:@"Unable to Add."];
+        [inputError setMessage:@"Sorry, unable to add the event."];
+        [inputError show];
+        
+        //Popback to home
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+    
+}
+//Check that the startingtime + date
+//is a valid date that is greater or equal to the current time
+- (BOOL)checkValidDate{
+    
+    BOOL result = YES;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
+    NSString *dateString = [[NSString alloc] initWithFormat:@"%@ %@",[[self dateField] text], [[self startingTime] text]];
+    NSDate *inputDateAndTime = [dateFormat dateFromString:dateString];
+    
+    NSDate *currentDateTime = [NSDate date];
+    
+    //[timeNow timeIntervalSinceDate:anEarlierTime] < 30.0f
+    
+    NSLog(@"Time Difference: %@", [self stringFromTimeInterval:[inputDateAndTime timeIntervalSinceDate:currentDateTime] ]);
+    
+    if ([inputDateAndTime timeIntervalSinceDate:currentDateTime] < 2.0*60.0f) {
+        result = NO;
+    }
+    else{
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+    NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    return [NSString stringWithFormat:@"%02i:%02i:%02i", hours, minutes, seconds];
 }
 @end

@@ -25,6 +25,14 @@
 //Will need to filter this for the specific building
 @property (strong, nonatomic) NSData *allEvents;
 
+
+//Old One using rest api
 @property(strong, nonatomic) NSArray *eventsArray;
+
+
+/*These are parse event objects*/
+//New one using objective c parse api
+//Types are PFObjects
+@property(strong, nonatomic) NSArray *parseEventArray;
 
 @end
