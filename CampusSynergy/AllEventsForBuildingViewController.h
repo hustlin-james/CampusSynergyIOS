@@ -23,12 +23,10 @@
 
 //This is all the vents that have been posted
 //Will need to filter this for the specific building
-@property (strong, nonatomic) NSData *allEvents;
-
+//@property (strong, nonatomic) NSData *allEvents;
 
 //Old One using rest api
-@property(strong, nonatomic) NSArray *eventsArray;
-
+//@property(strong, nonatomic) NSArray *eventsArray;
 
 /*These are parse event objects*/
 //New one using objective c parse api

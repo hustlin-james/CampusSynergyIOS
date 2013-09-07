@@ -468,7 +468,7 @@
          to finish.
          */
         
-        NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@ and it takes %@ hours to finish", self.startingTime.text, self.dateField.text, self.durationField.text];
+        NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", self.startingTime.text, self.dateField.text, self.durationField.text,[self roomString]];
         
         eventDetailsVC.startTimeDescriptionText = startTimeText;
         
@@ -492,7 +492,6 @@
 //Check that the startingtime + date
 //is a valid date that is greater or equal to the current time
 - (BOOL)checkValidDate{
-    
     BOOL result = YES;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

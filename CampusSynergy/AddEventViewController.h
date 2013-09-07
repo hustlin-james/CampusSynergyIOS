@@ -26,5 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *roomNumberTextField;
 
 
+@property (copy, nonatomic) NSArray *allBuildings;
+
 
 @end

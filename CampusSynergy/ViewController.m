@@ -15,12 +15,13 @@
     NSString *myRestId;
     NSString *username;
 
-    NSArray *parseEventObjects; 
+    NSArray *parseEventObjects;
+    
+    NSArray *allBuildings;
 }
 @end
 
 @implementation ViewController
-
 
 -(void)viewDidAppear:(BOOL)animated{
     //[self initializeView:NO];
@@ -28,6 +29,7 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     NSLog(@"Main Map View just appeared.");
+    [self parseAPIEventsRetrieve];
     //[self initializeView];
 }
 - (void)viewDidLoad
@@ -175,6 +177,7 @@
         AddEventViewController *addEventVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
         addEventVC.publisher = username;
+        addEventVC.allBuildings = allBuildings;
         [self.navigationController pushViewController:addEventVC animated:YES];
     }
     else{
@@ -196,34 +199,56 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Events: %@", objects);
-            //self.eventObjects = objects;
-            //Add all the parse api objects to the parse array
-            parseEventObjects = objects;
             
-            NSLog(@"Self parseEventObjects: %@",parseEventObjects);
-            /*
-            PFObject *myObject = [parseEventObjects objectAtIndex:0];
-            NSLog(@"myObject: %@", myObject);
-            NSLog(@"bldName: %@", [myObject objectForKey:@"bldName"]);
-            NSLog(@"longDescrption: %@", [myObject objectForKey:@"longDescription"]);
-            NSLog(@"publisher: %@", [myObject objectForKey:@"publisher"]);
-             */
-            
-            //Check that the events are still going on
-            //date + duration > current time
-            
+            //Current the current time
             NSMutableArray *validEvents = [[NSMutableArray alloc] init];
+            //NSDate *current_time = [NSDate date];
+            //NSLog(@"current_time: %@", current_time);
             
-            NSDate *current_time = [NSDate date];
+            NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+            //NSLog(@"dateString: %@", dateString);
+            NSDate *current_time = [dateFormatter dateFromString:dateString];
+            //NSLog(@"date: %@", current_time);
+            
             
             for (PFObject *event in objects){
                 NSDate *eventDate = [event objectForKey:@"date"];
+                NSString *myDurationString = [event objectForKey:@"duration"];
+                
+                //durationInt is in hours
+                int durationInt = [myDurationString intValue];
+                int durationIntToSeconds = 60*60*durationInt;
+                NSDate *eventDatePlusDuration =
+                [eventDate dateByAddingTimeInterval:durationIntToSeconds];
+                
+                NSString *tempString = [dateFormatter stringFromDate:eventDatePlusDuration];
+                
+                NSDate *eventDatePlusDurationFormatted =
+                [dateFormatter dateFromString:tempString];
+                
+                if([eventDatePlusDurationFormatted  timeIntervalSinceDate:current_time] < 0.0f){
+                    NSLog(@"Event is in the past.");
+                    NSLog(@"title: %@", [event objectForKey:@"title"]);
+                    NSLog(@"current_time: %@", current_time);
+                    NSLog(@"eventDatePlusDurationFormatted: %@", eventDatePlusDurationFormatted);
+                    
+                    //timeinterval is a double
+                    NSLog(@"timeIntervalSinceDate: %f", [current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]);
+                    
+                    NSLog(@"abs timeIntervalSinceDate: %f", fabs([current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]));
+                }
+                else{
+                  
+                    [validEvents addObject:event];
+                }
+                
             }
             
-            
-            
+            parseEventObjects = [[NSArray alloc] initWithArray:validEvents];
             [[self activityIndicator] stopAnimating];
+            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -257,27 +282,17 @@
         NSLog(@"XML Parse failed.");
     }
     
-    /*
-     CLLocationCoordinate2D points[4];
-     
-     points[0] = CLLocationCoordinate2DMake(32.72624963038879, -97.11853066639901);
-     points[1] = CLLocationCoordinate2DMake(32.72607725216783, -97.11852939502279);
-     points[2] = CLLocationCoordinate2DMake(32.72607130545389, -97.11832532690336);
-     points[3] = CLLocationCoordinate2DMake(32.72624865539677, -97.11832026353882);
-     
-     MKPolygon* coordinates = [MKPolygon polygonWithCoordinates:points count:4];
-     */
-    
-    // NSLog(@"%@", self.rootElement.subElements);
-    
     NSMutableArray *mutableOverlaysArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *allBuildingsName = [[NSMutableArray alloc] init];
     
     //each building
     for(XMLElement *aBuilding in self.rootElement.subElements){
         //NSLog(@"Building: %@", [aBuilding.attributes objectForKey:@"name"]);
         
+        [allBuildingsName addObject:[aBuilding.attributes objectForKey:@"name"]];
+        
         int numberOfPoints = [aBuilding.subElements count]/2;
-        //NSLog(@"Building: %@, %i",[aBuilding.attributes objectForKey:@"name"], numberOfPoints );
         CLLocationCoordinate2D points[numberOfPoints];
         
         BOOL alternator = YES;
@@ -291,9 +306,6 @@
             else{
                 XMLElement *lat = aBuilding.subElements[i - 1];
                 XMLElement *longVal = aBuilding.subElements[i];
-                //NSLog(@"Lat: %@", lat.text);
-                //NSLog(@"Long: %@", longVal.text);
-                //NSLog(@"%i", pointsIndex);
                 points[pointsIndex] = CLLocationCoordinate2DMake([lat.text doubleValue], [longVal.text doubleValue]);
                 pointsIndex++;
                 alternator = YES;
@@ -304,6 +316,8 @@
         [coordinates setTitle:[aBuilding.attributes objectForKey:@"name"]];
         [mutableOverlaysArray addObject:coordinates];
     }
+    
+    allBuildings = [[NSArray alloc] initWithArray:allBuildingsName];
     
     NSArray *myArray = [[NSArray alloc] initWithArray:mutableOverlaysArray];
     return myArray;
@@ -354,14 +368,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
-    //CGPoint pt = [[touches anyObject] locationInView:self.mapView];
-    //CLLocationCoordinate2D latLong = [self.mapView convertPoint:pt toCoordinateFromView:self.mapView];
-    //NSLog(@"%@", latLong);
-    
-   // NSLog(@"Latitude: %f", latLong.latitude);
-    //NSLog(@"Longitude: %f", latLong.longitude);
-    //NSLog(@"%@", self.mapView.overlays);
-    
     MKMapView *mapView = (MKMapView *)self.mapView;
     
     MKPolygonView *tappedOverlay = nil;
@@ -397,7 +403,6 @@
                 allEventsForBuildingVC.buildingNameString = myString;
                 allEventsForBuildingVC.myAppId = myAppId;
                 allEventsForBuildingVC.myRestId = myRestId;
-                allEventsForBuildingVC.allEvents = [self allJSONEvents];
                 
                 //Using the objective c api
                 allEventsForBuildingVC.parseEventArray =  parseEventObjects;

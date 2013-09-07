@@ -75,10 +75,9 @@
     self.eventDescriptionTextField.delegate = self;
     self.buildingTextField.delegate = self;
     self.roomNumberTextField.delegate = self;
-    
-    
+
     //Creating the building picker
-    buildingPickerValues = [[NSArray alloc] initWithObjects:@"ERB", @"AL", @"NH", nil];
+    buildingPickerValues = [[NSArray alloc] initWithArray:[self allBuildings]];
     
     buildingPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 300)];
     buildingPickerView.delegate = self;

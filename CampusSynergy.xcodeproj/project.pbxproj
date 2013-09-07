@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */ = {isa = PBXBuildFile; fileRef = D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */; };
-		D355F60017D6D71C00C0FA94 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355F5FF17D6D71B00C0FA94 /* MainStoryboard.storyboard */; };
 		D355F63B17D7CCF000C0FA94 /* AllEventsSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */; };
 		D3629ECD17D0FCA700DBF27A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECC17D0FCA700DBF27A /* UIKit.framework */; };
 		D3629ECF17D0FCA700DBF27A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECE17D0FCA700DBF27A /* Foundation.framework */; };
@@ -21,8 +20,10 @@
 		D3629EE317D0FCA700DBF27A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */; };
 		D3629EE917D0FCA700DBF27A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EE817D0FCA700DBF27A /* ViewController.m */; };
 		D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */; };
-		D393BE2B17DA5811005AE759 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D393BE2A17DA5811005AE759 /* FeedbackViewController.m */; };
 		D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */; };
+		D398FA9217DAF187009A8AE3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D398FA9117DAF187009A8AE3 /* MessageUI.framework */; };
+		D398FA9C17DB87F7009A8AE3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D398FA9B17DB87F7009A8AE3 /* MainStoryboard.storyboard */; };
+		D398FA9F17DB88B1009A8AE3 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */; };
 		D39A091817D0FF700015DA8F /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091717D0FF700015DA8F /* AddEventViewController.m */; };
 		D39A091B17D0FF7F0015DA8F /* AllEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091A17D0FF7F0015DA8F /* AllEventsViewController.m */; };
 		D39A091E17D10E210015DA8F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A091D17D10E210015DA8F /* LogInViewController.m */; };
@@ -46,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app_doc_dir.txt; path = ../app_doc_dir.txt; sourceTree = "<group>"; };
-		D355F5FF17D6D71B00C0FA94 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllEventsSegue.h; path = ../AllEventsSegue.h; sourceTree = "<group>"; };
 		D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllEventsSegue.m; path = ../AllEventsSegue.m; sourceTree = "<group>"; };
 		D3629EC917D0FCA700DBF27A /* CampusSynergy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusSynergy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,10 +66,12 @@
 		D3629EE817D0FCA700DBF27A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D38B29C117D468BF00A17168 /* AddEventTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventTimesViewController.h; sourceTree = "<group>"; };
 		D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventTimesViewController.m; sourceTree = "<group>"; };
-		D393BE2917DA5811005AE759 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedbackViewController.h; path = ../FeedbackViewController.h; sourceTree = "<group>"; };
-		D393BE2A17DA5811005AE759 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedbackViewController.m; path = ../FeedbackViewController.m; sourceTree = "<group>"; };
 		D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEventsForBuildingViewController.h; sourceTree = "<group>"; };
 		D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllEventsForBuildingViewController.m; sourceTree = "<group>"; };
+		D398FA9117DAF187009A8AE3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D398FA9B17DB87F7009A8AE3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailViewController.h; path = ../EmailViewController.h; sourceTree = "<group>"; };
+		D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailViewController.m; path = ../EmailViewController.m; sourceTree = "<group>"; };
 		D39A091617D0FF700015DA8F /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
 		D39A091717D0FF700015DA8F /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
 		D39A091917D0FF7F0015DA8F /* AllEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEventsViewController.h; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D398FA9217DAF187009A8AE3 /* MessageUI.framework in Frameworks */,
 				D39A093A17D178D90015DA8F /* SystemConfiguration.framework in Frameworks */,
 				D39A093817D178D20015DA8F /* StoreKit.framework in Frameworks */,
 				D39A093617D16A700015DA8F /* Security.framework in Frameworks */,
@@ -142,6 +145,7 @@
 		D3629ECB17D0FCA700DBF27A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D398FA9117DAF187009A8AE3 /* MessageUI.framework */,
 				D39A093917D178D90015DA8F /* SystemConfiguration.framework */,
 				D39A093717D178D20015DA8F /* StoreKit.framework */,
 				D39A093317D16A370015DA8F /* QuartzCore.framework */,
@@ -163,11 +167,11 @@
 		D3629ED217D0FCA700DBF27A /* CampusSynergy */ = {
 			isa = PBXGroup;
 			children = (
-				D393BE2917DA5811005AE759 /* FeedbackViewController.h */,
-				D393BE2A17DA5811005AE759 /* FeedbackViewController.m */,
+				D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */,
+				D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */,
+				D398FA9B17DB87F7009A8AE3 /* MainStoryboard.storyboard */,
 				D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */,
 				D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */,
-				D355F5FF17D6D71B00C0FA94 /* MainStoryboard.storyboard */,
 				D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */,
 				D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */,
 				D3D1A89017D43423005D6A2E /* EventsData.h */,
@@ -268,7 +272,7 @@
 				D39A093C17D193990015DA8F /* api_key.config in Resources */,
 				D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */,
 				D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */,
-				D355F60017D6D71C00C0FA94 /* MainStoryboard.storyboard in Resources */,
+				D398FA9C17DB87F7009A8AE3 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +295,7 @@
 				D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */,
 				D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */,
 				D355F63B17D7CCF000C0FA94 /* AllEventsSegue.m in Sources */,
-				D393BE2B17DA5811005AE759 /* FeedbackViewController.m in Sources */,
+				D398FA9F17DB88B1009A8AE3 /* EmailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
