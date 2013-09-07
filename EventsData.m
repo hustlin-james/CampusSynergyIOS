@@ -33,6 +33,7 @@
         return nil;
 }
 
+/*
 - (NSData *) getEventsAndReturnJSON{
     if ([app_id isEqualToString:@""]|| [rest_id isEqualToString:@""]){
         return nil;
@@ -41,6 +42,9 @@
         return [self useParseRESTAPI];
     }
 }
+*/
+
+/*
 - (NSData *) getEventsForBuilding: (NSString *)myBuilding{
     
     NSString *parse_url = @"https://api.parse.com:443/1/classes/campus_synergy";
@@ -71,7 +75,9 @@
     return oResponseData;
     
 }
+ */
 
+/*
 - (NSData *) useParseRESTAPI{
     NSString *parse_url = @"https://api.parse.com:443/1/classes/campus_synergy";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
@@ -88,7 +94,7 @@
     //return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
     return oResponseData;
 }
-
+*/
 /*
 - (NSData *)uploadDataToParseWithREST: (NSString *)jsonString{
     NSString *parse_url = @"https://api.parse.com:443/1/classes/campus_synergy";
@@ -114,7 +120,7 @@
 }
  */
 
-+(BOOL)saveEventsToParse: (NSString *)bldName andDate: (NSDate *)date andDuration: (NSNumber *)duration andLongDescription:(NSString *)longDescription andPublisher: (NSString *) publisher  andRoom: (NSNumber *)room andTitle: (NSString *)title{
++(BOOL)saveEventsToParse: (NSString *)bldName andDate: (NSDate *)date andDuration: (NSNumber *)duration andLongDescription:(NSString *)longDescription andPublisher: (NSString *) publisher andTitle: (NSString *)title andRoomString: (NSString *)newRoomString{
     
     /*
      NSNumber *number = [NSNumber numberWithInt:42];
@@ -144,8 +150,9 @@
     [events setObject:duration forKey:@"duration"];
     [events setObject:longDescription forKey:@"longDescription"];
     [events setObject:publisher forKey:@"publisher"];
-    [events setObject:room forKey:@"room"]; 
+    //[events setObject:room forKey:@"room"];
     [events setObject:title forKey:@"title"];
+    [events setObject:newRoomString forKey:@"roomString"];
     return [events save];
 }
 

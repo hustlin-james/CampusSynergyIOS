@@ -63,9 +63,7 @@
     self.usernameField.delegate = self;
     self.passwordField.delegate = self;
     
-    NSLog(@"LoginVC APP ID: %@", self.app_id);
-    NSLog(@"LoginVC Rest ID: %@", self.rest_id);
-
+    self.passwordField.secureTextEntry = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,8 +78,7 @@
     
     //Check the user username and password input
     //and that they are valid
-    
-    
+
     //Then go to the parse API and retrieve the
     //information and make sure the user exists
     //If the everything is good then write the information to
@@ -98,43 +95,16 @@
     else{
         //Connect to API and check
         //Send a parse login request
-        
-        NSString *parse_url = @"https://api.parse.com/1/login";
-        
         NSString *usernameStringTrimmed =[self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
         NSString *passwordStringTrimmed =
         [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
-        parse_url = [parse_url stringByAppendingFormat:@"?username=%@",usernameStringTrimmed];
-        parse_url = [parse_url stringByAppendingFormat:@"&password=%@",passwordStringTrimmed];
-        
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:parse_url]];
-        
-        [request setHTTPMethod:@"GET"];
-        [request setValue:[self app_id] forHTTPHeaderField:@"X-Parse-Application-Id"];
-        [request setValue:[self rest_id] forHTTPHeaderField:@"X-Parse-REST-API-Key"];
-        
-        NSError *error = [[NSError alloc] init];
-        NSHTTPURLResponse *responseCode = nil;
-        
-        NSData *loginResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-        
-        NSString *dataAsString = [[NSString alloc] initWithData: loginResponseData encoding:NSUTF8StringEncoding];
-        NSLog(@"Login Data Retrieved UTF8: %@", dataAsString);
-        
-        //Parse the data that was retrieved
-        NSError *json_error;
-        id jsonObject = [NSJSONSerialization JSONObjectWithData:loginResponseData options:NSJSONReadingAllowFragments error:&json_error];
-        
-        NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
-        NSString *name_string = (NSString *)[deserializedDictionary objectForKey:@"name"];
+        NSString *name_string = [self loginUsingParseAPI:usernameStringTrimmed andPassword:passwordStringTrimmed];
         
         if(name_string == nil){
             NSLog(@"Invalid Login");
-            
             UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Couldn't find Username and Password" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil, nil];
-            
             [error show];
         }
         else{
@@ -143,16 +113,16 @@
              //for persistence
             
             //name_string is the publisher name
-            usernameStringTrimmed = name_string;
+            //usernameStringTrimmed = name_string;
             
-            [self writeLoginInfoToPlistFile];
+            [self writeLoginInfoToPlistFile:name_string];
             
             AddEventViewController *addEventVc =
             [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
             
             addEventVc.publisher = name_string;
-            addEventVc.app_id = [self app_id];
-            addEventVc.rest_id = [self rest_id];
+            //addEventVc.app_id = [self app_id];
+            //addEventVc.rest_id = [self rest_id];
             
             [self.navigationController pushViewController:addEventVc animated:YES];
             
@@ -161,12 +131,23 @@
     
 }
 
-- (void)writeLoginInfoToPlistFile{
+
+- (NSString *)loginUsingParseAPI: (NSString *)username andPassword: (NSString *)myPassword{
     
-    NSString *usernameStringTrimmed =[self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    NSString *passwordStringTrimmed =
-    [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    PFUser *myUser = [PFUser logInWithUsername:username password:myPassword];
+    if(myUser == nil){
+        //log in failed
+        return nil;
+    }
+    else{
+        //log in successful
+        NSString *publisher = [myUser objectForKey:@"name"];
+        NSLog(@"publisher: %@", publisher);
+        return publisher;
+    }
+}
+
+- (void)writeLoginInfoToPlistFile:(NSString *)publisher_name_string{
     
     NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,NSUserDomainMask, YES);
     NSString *documentsDirectory = [sysPaths objectAtIndex:0];
@@ -176,17 +157,15 @@
     
     NSMutableDictionary *plistDict = plistDict = [[NSMutableDictionary alloc] init]; // needs to be mutable
     
-    /*
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-    } else {
-        // Doesn't exist, start with an empty dictionary
-        plistDict = [[NSMutableDictionary alloc] init];
-    }
-     */
+    NSDateFormatter *currentTime = [[NSDateFormatter alloc] init];
+    [currentTime setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString =
+    [currentTime stringFromDate:[NSDate date]];
     
-    [plistDict setValue:usernameStringTrimmed forKey:@"username"];
-    [plistDict setValue:passwordStringTrimmed forKey:@"password"];
+    NSLog(@"timestamp logged as: %@", dateString);
+    
+    [plistDict setValue:publisher_name_string forKey:@"username"];
+    [plistDict setValue:dateString forKey:@"logged_in_timestamp"];
     
     BOOL didWriteToFile = [plistDict writeToFile:filePath atomically:YES];
 

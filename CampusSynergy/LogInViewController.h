@@ -15,8 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
-@property (copy, nonatomic) NSString *app_id;
-@property (copy, nonatomic) NSString *rest_id;
+//@property (copy, nonatomic) NSString *app_id;
+//@property (copy, nonatomic) NSString *rest_id;
 
 - (IBAction)loginSubmitButton:(id)sender;
 

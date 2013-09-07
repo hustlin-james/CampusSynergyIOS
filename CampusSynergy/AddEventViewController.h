@@ -11,8 +11,8 @@
 
 @interface AddEventViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property (copy, nonatomic) NSString *app_id;
-@property (copy, nonatomic) NSString *rest_id;
+//@property (copy, nonatomic) NSString *app_id;
+//@property (copy, nonatomic) NSString *rest_id;
 
 @property(copy, nonatomic) NSString *publisher;
 
@@ -23,10 +23,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventDescriptionTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *buildingTextField;
-@property (weak, nonatomic) IBOutlet UITextField *roomNumberTextField;
-
+//@property (weak, nonatomic) IBOutlet UITextField *roomNumberTextField;
 
 @property (copy, nonatomic) NSArray *allBuildings;
 
+//String version of the room
+@property (weak, nonatomic) IBOutlet UITextField *roomStringInput;
 
 @end

@@ -50,11 +50,45 @@
     
     NSMutableDictionary *plistDict; // needs to be mutable
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSLog(@"Initiating username: ...");
-        plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-        NSLog(@"plist exists. Value: %@", [plistDict description]);
-        username = [plistDict objectForKey:@"username"];
-        NSLog(@"Username is: %@", username);
+    
+        if ([plistDict objectForKey:@"username"] == nil || [plistDict objectForKey:@"logged_in_timestamp"]){
+            
+            NSLog(@"Initiating username: ...");
+            plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+            NSLog(@"plist exists. Value: %@", [plistDict description]);
+            
+            //Check that the logged_in_timestamp is less than the current timestamp
+            NSString *timestampOnPlist = [plistDict objectForKey:@"logged_in_timestamp"];
+            
+            NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate *timestampDate = [formatter dateFromString:timestampOnPlist];
+            NSLog(@"timestampDate on plist: %@", timestampDate);
+            
+            NSString *temp = [formatter stringFromDate:timestampDate];
+            NSLog(@"as string: %@", temp);
+            
+            int month = 60*60*24*30;
+            NSDate *eventDatePlusDuration =
+            [timestampDate dateByAddingTimeInterval:month];
+            NSLog(@"timestampDate added 30 days: %@",eventDatePlusDuration);
+            
+            NSString *currentTimestampStr = [formatter stringFromDate: [NSDate date]];
+            NSDate *currentTimestamp = [formatter dateFromString:currentTimestampStr];
+            
+            
+            if ([eventDatePlusDuration timeIntervalSinceDate:currentTimestamp] < 0){
+                NSLog(@"timestamp has expired, user needs to login.");
+            }
+            else{
+                username = [plistDict objectForKey:@"username"];
+                NSLog(@"Username is: %@", username);
+            }
+            
+        }
+        else{
+            username = nil;
+        }
         
     } else {
         NSLog(@"parse_user.plist does not exist");
@@ -62,8 +96,6 @@
         plistDict = [[NSMutableDictionary alloc] init];
     }
     //Add the username to the username property
-    
-    
     if(username != nil){
         NSLog(@"user logged in");
     }
@@ -105,7 +137,8 @@
 }
 
 - (void)startGetEventsAndPolygonConstruction{
-   self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
+   
+     //self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
     
     
     //New Parse API
@@ -154,7 +187,7 @@
     //Custom Segue for All Events button
     if ([[segue identifier] isEqualToString:@"AllEventsSegueId"]) {
         NSLog(@"This is the AllEventsButton in prepareForSegue");
-        ((AllEventsSegue *)segue).allJSONEvents = [self allJSONEvents];
+        //((AllEventsSegue *)segue).allJSONEvents = [self allJSONEvents];
         ((AllEventsSegue *)segue).username = username;
         
         
@@ -185,8 +218,8 @@
         //LogInViewController *loginVC = [[LogInViewController alloc] init];
         LogInViewController *loginVC = 
         [self.storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-        loginVC.app_id = myAppId;
-        loginVC.rest_id = myRestId;
+        //loginVC.app_id = myAppId;
+        //loginVC.rest_id = myRestId;
         [self.navigationController pushViewController:loginVC animated:YES];
     }
 }

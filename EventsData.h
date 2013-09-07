@@ -13,8 +13,8 @@
 
 - (id) initWithAppId: (NSString *)myAppId andRestID: (NSString *)restID;
 - (void)printMyIDs;
-- (NSData *) getEventsAndReturnJSON;
-- (NSData *) getEventsForBuilding: (NSString *)myBuilding;
-- (NSData *)uploadDataToParseWithREST: (NSString *)jsonString;
-+ (BOOL)saveEventsToParse: (NSString *)bldName andDate: (NSDate *)date andDuration: (NSNumber *)duration andLongDescription:(NSString *)longDescription andPublisher: (NSString *) publisher  andRoom: (NSNumber *)room andTitle: (NSString *)title;
+//- (NSData *) getEventsAndReturnJSON;
+//- (NSData *) getEventsForBuilding: (NSString *)myBuilding;
+//- (NSData *)uploadDataToParseWithREST: (NSString *)jsonString;
++ (BOOL)saveEventsToParse: (NSString *)bldName andDate: (NSDate *)date andDuration: (NSNumber *)duration andLongDescription:(NSString *)longDescription andPublisher: (NSString *) publisher andTitle: (NSString *)title andRoomString: (NSString *)newRoomString; 
 @end

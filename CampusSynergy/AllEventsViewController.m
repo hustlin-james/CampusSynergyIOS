@@ -37,32 +37,33 @@
     
    // NSLog(@"All Events JSON in AllEventsViewController: %@", [self allEventsAsJSON]);
     //Create an NSArray with each event name
-    NSError *error = nil;
+    //NSError *error = nil;
     
     //NSJONReadingAllowFragments: Allows the deserialization of JSON data whose root top-level object is not an array or a dictionary
     
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:[self allEventsAsJSON] options:NSJSONReadingAllowFragments error:&error];
+    //id jsonObject = [NSJSONSerialization JSONObjectWithData:[self allEventsAsJSON] options:NSJSONReadingAllowFragments error:&error];
     
-    NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
+    //NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
     //NSLog(@"JSON DICT: %@", [deserializedDictionary objectForKey:@"results"]);
     
-    NSArray *myResults = [[NSArray alloc] initWithArray:[deserializedDictionary objectForKey:@"results"]];
+    //NSArray *myResults = [[NSArray alloc] initWithArray:[deserializedDictionary objectForKey:@"results"]];
     
-    NSLog(@"Array: %@", myResults);
+    //NSLog(@"Array: %@", myResults);
     
-    NSMutableArray *myEventsTitleArray = [[NSMutableArray alloc] init];
+    //NSMutableArray *myEventsTitleArray = [[NSMutableArray alloc] init];
     
-    for (NSDictionary *result in myResults){
+    //for (NSDictionary *result in myResults){
         //NSLog(@"Event Title: %@", [result objectForKey:@"title"]);
         //[myEventsTitleArray addObject: [result objectForKey:@"title"]];
-        [myEventsTitleArray addObject: result];
-    }
+        //[myEventsTitleArray addObject: result];
+  //  }
         
-    self.eventsArray = [[NSArray alloc] initWithArray:myEventsTitleArray];
-    
+    //self.eventsArray = [[NSArray alloc] initWithArray:myEventsTitleArray];
+    /*
     if (self.eventsArray != nil && [self.eventsArray count] > 0){
         NSLog(@"Events Array Created");
     }
+     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,8 +126,10 @@
     NSString *myEventDescription = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
     eventDetailsVC.eventDescriptionText = myEventDescription;
     
+    /*
     NSString *myRoomString = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"room"];
     eventDetailsVC.eventRoomText = myRoomString;
+     */
     
     NSString *myBuildingString = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"bldName"];
     eventDetailsVC.eventBuildingText = myBuildingString;
@@ -149,7 +152,9 @@
     [timeFormatter setDateFormat:@"hh:mm a"];
     NSString *myParseDate = [timeFormatter stringFromDate:parseDate];
     
-    NSString *myStartTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", myParseTime, myParseDate, myDuration, myRoomString];
+    NSString *newRoomString = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey: @"roomString"];
+    
+    NSString *myStartTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", myParseTime, myParseDate, myDuration, newRoomString];
     eventDetailsVC.startTimeDescriptionText = myStartTimeText;
     
     [self.navigationController pushViewController:eventDetailsVC animated:YES];

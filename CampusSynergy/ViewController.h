@@ -37,8 +37,8 @@
 
 //allJSONEvents is the old version for parse
 //propaly gona remove these later
-@property(nonatomic, strong) NSData *allJSONEvents;
-@property(nonatomic, strong) NSArray *eventObjects;
+//@property(nonatomic, strong) NSData *allJSONEvents;
+//@property(nonatomic, strong) NSArray *eventObjects;
 //end
 
 //this is using the objective c parse API

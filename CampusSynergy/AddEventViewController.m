@@ -17,9 +17,11 @@
     UIPickerView *buildingPickerView;
     UIToolbar *buildingToolbar;
     
+    /*
     NSArray *roomPickerValues;
     UIPickerView *roomPickerView;
     UIToolbar *roomToolbar;
+    */
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -29,6 +31,10 @@
     }
     else if( [textField tag] == [[self eventDescriptionTextField] tag]){
         [[self eventDescriptionTextField] resignFirstResponder];
+        return YES;
+    }
+    else if ([textField tag] == [[self roomStringInput] tag]){
+        [[self roomStringInput] resignFirstResponder];
         return YES;
     }
     else{
@@ -56,10 +62,12 @@
         self.buildingTextField.textColor = [UIColor blackColor];
         self.buildingTextField.text = buildingPickerValues[0];
     }
+    /*
     else if(textField.tag == self.roomNumberTextField.tag){
         self.roomNumberTextField.textColor = [UIColor blackColor];
         self.roomNumberTextField.text = roomPickerValues[0];
     }
+     */
     else{
     }
 }
@@ -74,7 +82,8 @@
     self.eventTitleTextField.delegate= self;
     self.eventDescriptionTextField.delegate = self;
     self.buildingTextField.delegate = self;
-    self.roomNumberTextField.delegate = self;
+    //self.roomNumberTextField.delegate = self;
+    self.roomStringInput.delegate=self;
 
     //Creating the building picker
     buildingPickerValues = [[NSArray alloc] initWithArray:[self allBuildings]];
@@ -117,6 +126,7 @@
     
     
     //creating room picker
+    /*
     roomPickerValues = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
 
     roomPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 400)];
@@ -127,7 +137,8 @@
     
     roomPickerView.tag = 1;
     
-    self.roomNumberTextField.inputView = roomPickerView;
+    //self.roomNumberTextField.inputView = roomPickerView;
+    
     
     roomToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
     
@@ -153,7 +164,7 @@
     [roomToolbar setItems:roomBarItems animated:YES];
     
     self.roomNumberTextField.inputAccessoryView = roomToolbar;
-
+     */
    
 }
 
@@ -164,57 +175,39 @@
 }
 
 //Room picker
+/*
 - (void)roomPickerDoneClicked{
     [self.roomNumberTextField resignFirstResponder];
 }
+*/
 
 //building picker
 - (void)pickerDoneClicked{
     
     NSLog(@"Building picker Done clicked");
     [self.buildingTextField resignFirstResponder];
-    
    // buildingToolbar.hidden = YES;
    // buildingPickerView.hidden = YES;
     
 }
 
+//This is the number of columns the picker should display
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    if([pickerView tag] == 0){
-        return 1;
-    }
-    else{
-        return 1;
-    }
+    return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    if( [pickerView tag] == 0){
-        return [buildingPickerValues count];
-    }
-    else{
-        return [roomPickerValues count];
-    }
+    return [buildingPickerValues count];
 }
 
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    if([pickerView tag] == 0){
+        NSLog(@"row: %i", row);
         return [buildingPickerValues objectAtIndex:row];
-    }
-    else{
-        return [roomPickerValues objectAtIndex:row];
-    }
 }
 
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if ([pickerView tag] == 0){
-        self.buildingTextField.text = [buildingPickerValues objectAtIndex:row];
-    }
-    else{
-        self.roomNumberTextField.text = [roomPickerValues objectAtIndex:row];
-    }
+    self.buildingTextField.text = [buildingPickerValues objectAtIndex:row];
 }
 - (IBAction)inputTimeNextButton:(id)sender {
     
@@ -238,22 +231,30 @@
         [errorAlert setMessage:@"Invalid Input for building."];
         [errorAlert show];
     }
+    /*
     else if([[[self roomNumberTextField] text] isEqualToString:@"Choose a room..."]){
         [errorAlert setTitle:@"Room input error."];
         [errorAlert setMessage:@"Invalid Input for room."];
+        [errorAlert show];
+    }
+     */
+    else if ([[[self roomStringInput] text] isEqualToString:@""]){
+        [errorAlert setTitle:@"Enter a room."];
+        [errorAlert setMessage:@"Please enter a room."];
         [errorAlert show];
     }
     else {
         AddEventTimesViewController *addEventTimesVC =
         [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventTimesVC"];
         
-        addEventTimesVC.app_id = [self app_id];
-        addEventTimesVC.rest_id = [self rest_id];
+        //addEventTimesVC.app_id = [self app_id];
+        //addEventTimesVC.rest_id = [self rest_id];
         
         addEventTimesVC.eventTitle = [[self eventTitleTextField] text];
         addEventTimesVC.eventDescription = [[self eventDescriptionTextField] text];
         addEventTimesVC.buildingString = [[self buildingTextField] text];
-        addEventTimesVC.roomString = [[self roomNumberTextField] text];
+        //addEventTimesVC.roomString = [[self roomNumberTextField] text];
+        addEventTimesVC.fieldRoomString = [[self roomStringInput] text];
         addEventTimesVC.publisher = [self publisher];
         
         [self.navigationController pushViewController:addEventTimesVC animated:YES];

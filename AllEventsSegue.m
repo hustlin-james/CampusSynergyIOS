@@ -25,11 +25,11 @@
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromLeft;
  
-    destinationController.allEventsAsJSON = [sourceViewController allJSONEvents];
     [sourceViewController.navigationController.view.layer addAnimation:transition
                                                                 forKey:kCATransition];
     
-    destinationController.allEventsAsJSON = [self allJSONEvents];
+    //destinationController.allEventsAsJSON = [sourceViewController allJSONEvents];
+   //destinationController.allEventsAsJSON = [self allJSONEvents];
     destinationController.username = [self username];
     
     

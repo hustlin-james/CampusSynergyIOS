@@ -16,7 +16,7 @@
 //Store the information of all events in here
 @property(strong, nonatomic) NSArray *eventsArray;
 
-@property(strong, nonatomic) NSData *allEventsAsJSON;
+//@property(strong, nonatomic) NSData *allEventsAsJSON;
 
 @property(strong, nonatomic) NSString *username;
 

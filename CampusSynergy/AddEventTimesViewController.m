@@ -231,7 +231,15 @@
 }
 
 - (void)createPickerForDuration{
-    durationPickerValues = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
+    
+    NSMutableArray *durationValues = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i<=24; i++){
+        NSString *myNumber = [NSString stringWithFormat:@"%i", i];
+        [durationValues addObject:myNumber];
+    }
+    
+    durationPickerValues = [[NSArray alloc] initWithArray:durationValues];
     
     durationPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 480)];
     durationPickerView.delegate = self;
@@ -342,54 +350,6 @@
     
     if (validateInput){
         
-        //Create the jsonString
-        //yyyy-MM-ddTHH:mm:ss
-        
-        /*
-        NSString *iso_string = [[NSString alloc] initWithFormat:@"%@T%@",[[self dateField] text], startingTimeWithSeconds];
-        
-        NSDateFormatter *isoStringFormatter = [[NSDateFormatter alloc] init];
-        [isoStringFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-        NSDate *convertedDate = [isoStringFormatter dateFromString: iso_string];
-        
-        NSString *convert = [[NSString alloc] initWithString:convertedDate.description];
-        NSArray *results =[convert componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        
-        NSLog(@"results[0]: %@", results[0]);
-        NSLog(@"results[1]: %@", results[1]);
-        
-        NSLog(@"startingTimeWtihSeconds: %@", startingTimeWithSeconds);
-        
-        NSLog(@"iso_string: %@", iso_string);
-        
-        iso_string = [NSString stringWithFormat:@"%@T%@", results[0], results[1]];
-        NSLog(@"new iso_string: %@", iso_string);
-        
-        //{"__type": "Date","iso": "2011-08-21T18:02:52"}
-        NSString *date_json = [[NSString alloc] initWithFormat:@"{\"__type\": \"Date\",\"iso\": \"%@\"}",iso_string];
-        
-        NSString * myJsonString = [[NSString alloc]
-        initWithFormat:
-        @"{\"bldName\":\"%@\", \"date\":%@, \"duration\":%@, \"longDescription\":\"%@\",",
-                                   [self buildingString], date_json,
-                                   [[self durationField] text],
-                                   [self eventDescription]];
-        
-        myJsonString = [myJsonString stringByAppendingString:
-        [NSString stringWithFormat:@"\"publisher\":\"%@\", \"room\":%@, \"timeStart\":%@,",
-                         [self publisher], [self roomString], startingTimeWithDot]];
-        
-        myJsonString = [myJsonString stringByAppendingString:
-        [NSString stringWithFormat:@"\"title\":\"%@\"", [self eventTitle]]];
-                        
-        myJsonString = [myJsonString stringByAppendingString:@"}"];
-        
-        NSLog(@"POST JSON: %@", myJsonString);
-        
-        EventsData *myPOSTEvent =[[EventsData alloc] initWithAppId:[self app_id] andRestID:[self rest_id]];
-        
-         */
-        
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
         NSString *dateString = [[NSString alloc] initWithFormat:@"%@ %@",[[self dateField] text], [[self startingTime] text]];
@@ -399,8 +359,9 @@
         NSNumber *myDuration =  [NSNumber numberWithInt:[[[self durationField] text] intValue]];
         NSString *myLogDescription = [self eventDescription];
         NSString *myPublisher =  [self publisher];
-        NSNumber *myRoom =  [NSNumber  numberWithInt:[[self roomString] intValue]];
+       // NSNumber *myRoom =  [NSNumber  numberWithInt:[[self roomString] intValue]];
         NSString *myTitle = [self eventTitle];
+        NSString *myRoomString = [self fieldRoomString];
         
         
         BOOL validDate = [self checkValidDate];
@@ -409,8 +370,7 @@
             
             BOOL addToDBSuccessful=YES;
             
-            addToDBSuccessful = [EventsData saveEventsToParse:myBuildingName andDate:myDate andDuration:myDuration andLongDescription:myLogDescription andPublisher:myPublisher andRoom:myRoom andTitle:myTitle];
-             
+            addToDBSuccessful = [EventsData saveEventsToParse:myBuildingName andDate:myDate andDuration:myDuration andLongDescription:myLogDescription andPublisher:myPublisher andTitle:myTitle andRoomString:myRoomString];
             
             [self EventDetailsTransitionPrep:addToDBSuccessful andAlerty:inputError];
             
@@ -420,28 +380,6 @@
             [inputError setMessage:@"Sorry, too early of a time."];
             [inputError show];
         }
-        //These couple lines below adds stuff to the parse database comment out for testing purposes
-        //uncomment after testing
-        /*
-        NSData *response = [myPOSTEvent uploadDataToParseWithREST:myJsonString];
-         
-        
-        //Check the response was successfull
-        //{"createdAt":"2013-09-03T02:49:38.520Z","objectId":"pr0qXj16gf"}
-        
-        //uncomment after testing
-        
-        NSError *json_error;
-        id jsonObject = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&json_error];
-        
-        NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
-        NSString *createdAt = (NSString *)[deserializedDictionary objectForKey:@"createdAt"];
-         */
-
-        //implement this after testing
-        //Check for whether or not data was added to parse successfully
-        //if (createdAt == nil || [createdAt isEqualToString:@""])
-        
     }
     else{
         //UIAlertview for invalid input
@@ -459,7 +397,7 @@
         //Set the fields for the eventdetails object
         eventDetailsVC.eventTitleText = [self eventTitle];
         eventDetailsVC.eventDescriptionText = [self eventDescription];
-        eventDetailsVC.eventRoomText = [self roomString];
+        //eventDetailsVC.eventRoomText = [self roomString];
         eventDetailsVC.eventBuildingText = [self buildingString];
         eventDetailsVC.publisherText = [self publisher];
         
@@ -468,7 +406,7 @@
          to finish.
          */
         
-        NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", self.startingTime.text, self.dateField.text, self.durationField.text,[self roomString]];
+        NSString *startTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", self.startingTime.text, self.dateField.text, self.durationField.text, [self fieldRoomString]];
         
         eventDetailsVC.startTimeDescriptionText = startTimeText;
         

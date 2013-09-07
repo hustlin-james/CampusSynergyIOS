@@ -99,8 +99,10 @@
     NSString *myEventDescription = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
     eventDetailsVC.eventDescriptionText = myEventDescription;
     
+    /*
     NSString *myRoomString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"room"];
     eventDetailsVC.eventRoomText = myRoomString;
+     */
     
     NSString *myBuildingString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"bldName"];
     eventDetailsVC.eventBuildingText = myBuildingString;
@@ -123,7 +125,11 @@
     [timeFormatter setDateFormat:@"hh:mm a"];
     NSString *myParseDate = [timeFormatter stringFromDate:parseDate];
     
-    NSString *myStartTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", myParseTime, myParseDate, myDuration, myRoomString];
+    
+    NSString *newRoomString = [[self.parseEventArray objectAtIndex:indexPath.row]
+                               objectForKey:@"roomString"];
+    
+    NSString *myStartTimeText = [[NSString alloc] initWithFormat:@"This event starts at %@ %@, it takes %@ hours to finish and is in room %@.", myParseTime, myParseDate, myDuration, newRoomString];
     eventDetailsVC.startTimeDescriptionText = myStartTimeText;
     
     [self.navigationController pushViewController:eventDetailsVC animated:YES];
