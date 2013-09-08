@@ -18,6 +18,9 @@
     NSArray *parseEventObjects;
     
     NSArray *allBuildings;
+    
+    NSDate *refreshPreviousTime;
+    NSDate *refreshCurrentTime;
 }
 @end
 
@@ -30,8 +33,11 @@
 - (void) viewWillAppear:(BOOL)animated{
     NSLog(@"Main Map View just appeared.");
     [self parseAPIEventsRetrieve];
+    
     //[self initializeView];
 }
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -139,8 +145,6 @@
 - (void)startGetEventsAndPolygonConstruction{
    
      //self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
-    
-    
     //New Parse API
     [self parseAPIEventsRetrieve];
     
@@ -262,15 +266,15 @@
                 [dateFormatter dateFromString:tempString];
                 
                 if([eventDatePlusDurationFormatted  timeIntervalSinceDate:current_time] < 0.0f){
-                    NSLog(@"Event is in the past.");
-                    NSLog(@"title: %@", [event objectForKey:@"title"]);
-                    NSLog(@"current_time: %@", current_time);
-                    NSLog(@"eventDatePlusDurationFormatted: %@", eventDatePlusDurationFormatted);
+                    //NSLog(@"Event is in the past.");
+                    //NSLog(@"title: %@", [event objectForKey:@"title"]);
+                    //NSLog(@"current_time: %@", current_time);
+                    //NSLog(@"eventDatePlusDurationFormatted: %@", eventDatePlusDurationFormatted);
                     
                     //timeinterval is a double
-                    NSLog(@"timeIntervalSinceDate: %f", [current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]);
+                    //NSLog(@"timeIntervalSinceDate: %f", [current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]);
                     
-                    NSLog(@"abs timeIntervalSinceDate: %f", fabs([current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]));
+                    //NSLog(@"abs timeIntervalSinceDate: %f", fabs([current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]));
                 }
                 else{
                   
@@ -290,8 +294,43 @@
 }
 
 - (IBAction)refreshButton:(id)sender {
-    NSLog(@"Refresh button has been hit");
-    [self parseAPIEventsRetrieve];
+    
+    
+    /*
+     NSDate *refreshPreviousTime;
+     NSDate *refreshCurrentTime;
+     */
+    //NSLog(@"Refresh button has been hit");
+    
+    if([self refreshHitPreventer] == YES){
+        NSLog(@"Firing off Refresh hit.");
+        [self parseAPIEventsRetrieve];
+    }
+    else{
+        NSLog(@"Preventing Refresh hit.");
+    }
+}
+
+- (BOOL)refreshHitPreventer{
+    
+    if(refreshPreviousTime == nil){
+        refreshPreviousTime = [NSDate date];
+    }
+
+    if(refreshPreviousTime != nil){
+        
+        refreshCurrentTime = [NSDate date];
+        if([refreshCurrentTime timeIntervalSinceDate:refreshPreviousTime]
+           > 5){
+            //fire of request
+            refreshPreviousTime = [NSDate date];
+            return YES;
+        }
+        else{
+            return NO;
+        }
+    }
+
 }
 
 //filePath is the xml file where the coordinates to draw the polygons are located

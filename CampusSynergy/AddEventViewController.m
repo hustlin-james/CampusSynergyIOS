@@ -201,7 +201,7 @@
 }
 
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-        NSLog(@"row: %i", row);
+        //NSLog(@"row: %i", row);
         return [buildingPickerValues objectAtIndex:row];
 }
 

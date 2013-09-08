@@ -667,21 +667,32 @@
                                     <action selector="submitButton:" destination="MVH-cf-x8K" eventType="touchUpInside" id="wqD-Fa-z3o"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(must be at least 5 minutes ahead current time)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r79-dL-hvC">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="4St-Dy-9v0"/>
+                                    <constraint firstAttribute="width" constant="278" id="IgL-sN-jR8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pgd-lD-H5U" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="221" id="46E-hE-ymZ"/>
+                            <constraint firstAttribute="trailing" secondItem="r79-dL-hvC" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="13T-HX-TT0"/>
+                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="top" secondItem="fe6-6R-xgB" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="48I-pG-Do9"/>
                             <constraint firstAttribute="trailing" secondItem="pgd-lD-H5U" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="4Si-bD-8og"/>
                             <constraint firstItem="fe6-6R-xgB" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="67d-hu-sBg"/>
                             <constraint firstItem="Wfh-v8-rUs" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="99H-xR-mdN"/>
-                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="189" id="Tby-LW-edR"/>
+                            <constraint firstItem="msp-qp-AWq" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="30" id="KN8-6s-Gqy"/>
                             <constraint firstAttribute="trailing" secondItem="fe6-6R-xgB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YUQ-VU-7YV"/>
-                            <constraint firstItem="msp-qp-AWq" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="36" id="ZDt-Ox-llc"/>
+                            <constraint firstItem="pgd-lD-H5U" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="206" id="bEM-ol-TPo"/>
+                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="centerX" secondItem="msp-qp-AWq" secondAttribute="centerX" type="default" id="bdw-zP-Laf"/>
                             <constraint firstAttribute="trailing" secondItem="Wfh-v8-rUs" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dJi-Yl-med"/>
                             <constraint firstItem="z0a-l6-Tzg" firstAttribute="centerX" secondItem="fe6-6R-xgB" secondAttribute="centerX" type="default" id="dxA-D5-d5h"/>
-                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="centerX" secondItem="msp-qp-AWq" secondAttribute="centerX" type="default" id="e3l-bb-pLS"/>
+                            <constraint firstItem="HPj-D7-5Ac" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="178" id="hHu-H0-pwe"/>
+                            <constraint firstItem="r79-dL-hvC" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="49" id="hMO-pl-oVu"/>
                             <constraint firstItem="msp-qp-AWq" firstAttribute="leading" secondItem="caa-Xt-NNV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="kDw-eM-xM2"/>
-                            <constraint firstItem="fe6-6R-xgB" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="140" id="kHY-KS-fQN"/>
                             <constraint firstItem="Wfh-v8-rUs" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="70" id="oNj-n9-eZF"/>
                             <constraint firstAttribute="bottom" secondItem="z0a-l6-Tzg" secondAttribute="bottom" constant="9" id="qf3-IW-zC5"/>
                             <constraint firstItem="6jX-og-DeX" firstAttribute="top" secondItem="caa-Xt-NNV" secondAttribute="top" constant="110" id="vZQ-9a-QN1"/>
@@ -697,7 +708,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALn-5W-m8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1017" y="505"/>
+            <point key="canvasLocation" x="916" y="517"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rwy-kv-6rZ">
@@ -722,6 +733,80 @@
             <point key="canvasLocation" x="-420" y="-66"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddEventTimesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventTimesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="submitButton:"/>
+                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="durationField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="startingTime" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AddEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="inputTimeNextButton:"/>
+                <relationship kind="outlet" name="buildingTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="eventDescriptionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="eventTitleTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="roomStringInput" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AllEventsForBuildingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllEventsForBuildingViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buildingEventsTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="buildingName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AllEventsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllEventsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="EmailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendEmailToMobi:"/>
+                <relationship kind="outlet" name="inputTextView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="EventDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EventDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mainMapButton:"/>
+                <relationship kind="outlet" name="buildingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventDescriptionTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="publisherLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="startTimeDescriptionTextView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="LogInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LogInViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginSubmitButton:"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addEventPressed:"/>
+                <relationship kind="action" name="allEventsPressed:"/>
+                <relationship kind="action" name="refreshButton:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

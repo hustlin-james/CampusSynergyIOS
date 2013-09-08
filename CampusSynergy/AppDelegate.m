@@ -14,10 +14,8 @@
 {
     
     //Parse API
-    //Load the api_key.config file and Set the applicationID and clientKeys
-    
+    //Load the api_key.config file and Set the applicationID and clientKey
     //Add parse setup code here
-    
     // Override point for customization after application launch.
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"api_key" ofType:@"config"];
@@ -25,17 +23,19 @@
     //Check that the file exists, which stores the application_id and client_key
     //for parsed
     if (filePath) {
-        
-            //NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-        
-            /*
+            NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+            /*
+             {"parse_application_id":"QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB", "client_key":"DsDAvLDiDSLQ9VFOLRte3Ck7Yk1MmJONfeUWjZ5V"}
              */
         
            // NSLog(@"ApplicationID: %@", json[@"parse_application_id"]);
            // NSLog(@"Client_Key: %@", json[@"client_key"]);
+            /*
             [Parse setApplicationId:@"QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB"
                       clientKey:@"DsDAvLDiDSLQ9VFOLRte3Ck7Yk1MmJONfeUWjZ5V"];
+             */
+            [Parse setApplicationId:json[@"parse_application_id"] clientKey:json[@"client_key"]];
     }
     else{
         NSLog(@"Error Unable to retrieve api_key.config file");
