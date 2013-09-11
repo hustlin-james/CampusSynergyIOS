@@ -21,6 +21,8 @@
     
     NSDate *refreshPreviousTime;
     NSDate *refreshCurrentTime;
+    
+    BOOL shownParseConnectError;
 }
 @end
 
@@ -32,8 +34,8 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     NSLog(@"Main Map View just appeared.");
+    shownParseConnectError=NO;
     [self parseAPIEventsRetrieve];
-    
     //[self initializeView];
 }
 
@@ -201,6 +203,37 @@
     }
 }
 
+//Check Internet Connection
+- (BOOL)checkForNetwork
+{
+    
+    BOOL connection = YES;
+    // check if we've got network connectivity
+    Reachability *myNetwork = [Reachability reachabilityWithHostname:@"google.com"];
+    NetworkStatus myStatus = [myNetwork currentReachabilityStatus];
+    
+    switch (myStatus) {
+        case NotReachable:
+            NSLog(@"There's no internet connection at all. Display error message now.");
+            connection=NO;
+            break;
+        case ReachableViaWWAN:
+            NSLog(@"We have a 3G connection");
+            connection=YES;
+            break;
+        case ReachableViaWiFi:
+            NSLog(@"We have WiFi.");
+            connection=YES;
+            break;
+        default:
+            connection=YES;
+            break;
+    }
+    
+    return connection;
+}
+
+
 //The is the Add Event Button in the Main View Navigation Bar
 - (IBAction)addEventPressed:(id)sender {
     
@@ -209,13 +242,22 @@
     //BOOL userLoggedIn = NO;
     
     if (username != nil){
-        NSLog(@"User is logged in, creating the addeventVC");
-        //AddEventViewController *addEventVC = [[AddEventViewController alloc] init];
-        AddEventViewController *addEventVC =
-        [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
-        addEventVC.publisher = username;
-        addEventVC.allBuildings = allBuildings;
-        [self.navigationController pushViewController:addEventVC animated:YES];
+        //Check that there is an internet connection
+        if ([self checkForNetwork]){
+            NSLog(@"User is logged in, creating the addeventVC");
+            //AddEventViewController *addEventVC = [[AddEventViewController alloc] init];
+            AddEventViewController *addEventVC =
+            [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
+            addEventVC.publisher = username;
+            addEventVC.allBuildings = allBuildings;
+            [self.navigationController pushViewController:addEventVC animated:YES];
+        }
+        else{
+            NSLog(@"No Connection");
+            UIAlertView *noConnection =
+            [[UIAlertView alloc] initWithTitle:@"No Connection" message:@"Unable to detect internet connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [noConnection show];
+        }
     }
     else{
         NSLog(@"User is not logged in, creating the loginVC");
@@ -229,6 +271,7 @@
 }
 
 - (void)parseAPIEventsRetrieve{
+    
     //Call the parse server
     [[self activityIndicator] startAnimating];
     PFQuery *query = [PFQuery queryWithClassName:@"campus_synergy"];
@@ -266,15 +309,7 @@
                 [dateFormatter dateFromString:tempString];
                 
                 if([eventDatePlusDurationFormatted  timeIntervalSinceDate:current_time] < 0.0f){
-                    //NSLog(@"Event is in the past.");
-                    //NSLog(@"title: %@", [event objectForKey:@"title"]);
-                    //NSLog(@"current_time: %@", current_time);
-                    //NSLog(@"eventDatePlusDurationFormatted: %@", eventDatePlusDurationFormatted);
-                    
-                    //timeinterval is a double
-                    //NSLog(@"timeIntervalSinceDate: %f", [current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]);
-                    
-                    //NSLog(@"abs timeIntervalSinceDate: %f", fabs([current_time timeIntervalSinceDate:eventDatePlusDurationFormatted]));
+                    NSLog(@"Event is in the past: %@", [event objectForKey:@"title"]);
                 }
                 else{
                   
@@ -288,20 +323,24 @@
             
         } else {
             // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            NSLog(@"Parse Event Retrieval Error: %@ %@", error, [error userInfo]);
+            [[self activityIndicator] stopAnimating];
+            
+            UIAlertView *parseError
+            = [[UIAlertView alloc] initWithTitle:@"Event Retrievel Error" message:@"Unable to retrieve the events please check your internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            
+            if(shownParseConnectError == NO){
+                [parseError show];
+                shownParseConnectError = YES;
+            }
+           
+                
+        
         }
     }];
 }
 
 - (IBAction)refreshButton:(id)sender {
-    
-    
-    /*
-     NSDate *refreshPreviousTime;
-     NSDate *refreshCurrentTime;
-     */
-    //NSLog(@"Refresh button has been hit");
-    
     if([self refreshHitPreventer] == YES){
         NSLog(@"Firing off Refresh hit.");
         [self parseAPIEventsRetrieve];
@@ -312,13 +351,10 @@
 }
 
 - (BOOL)refreshHitPreventer{
-    
     if(refreshPreviousTime == nil){
         refreshPreviousTime = [NSDate date];
     }
-
     if(refreshPreviousTime != nil){
-        
         refreshCurrentTime = [NSDate date];
         if([refreshCurrentTime timeIntervalSinceDate:refreshPreviousTime]
            > 5){
@@ -330,7 +366,6 @@
             return NO;
         }
     }
-
 }
 
 //filePath is the xml file where the coordinates to draw the polygons are located

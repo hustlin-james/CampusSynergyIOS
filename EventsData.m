@@ -153,6 +153,7 @@
     //[events setObject:room forKey:@"room"];
     [events setObject:title forKey:@"title"];
     [events setObject:newRoomString forKey:@"roomString"];
+    
     return [events save];
 }
 

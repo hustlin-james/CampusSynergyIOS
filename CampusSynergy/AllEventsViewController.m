@@ -34,36 +34,6 @@
     NSLog(@"Creating the dataSource and the delegate for the view cells.");
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-   // NSLog(@"All Events JSON in AllEventsViewController: %@", [self allEventsAsJSON]);
-    //Create an NSArray with each event name
-    //NSError *error = nil;
-    
-    //NSJONReadingAllowFragments: Allows the deserialization of JSON data whose root top-level object is not an array or a dictionary
-    
-    //id jsonObject = [NSJSONSerialization JSONObjectWithData:[self allEventsAsJSON] options:NSJSONReadingAllowFragments error:&error];
-    
-    //NSDictionary *deserializedDictionary = (NSDictionary *)jsonObject;
-    //NSLog(@"JSON DICT: %@", [deserializedDictionary objectForKey:@"results"]);
-    
-    //NSArray *myResults = [[NSArray alloc] initWithArray:[deserializedDictionary objectForKey:@"results"]];
-    
-    //NSLog(@"Array: %@", myResults);
-    
-    //NSMutableArray *myEventsTitleArray = [[NSMutableArray alloc] init];
-    
-    //for (NSDictionary *result in myResults){
-        //NSLog(@"Event Title: %@", [result objectForKey:@"title"]);
-        //[myEventsTitleArray addObject: [result objectForKey:@"title"]];
-        //[myEventsTitleArray addObject: result];
-  //  }
-        
-    //self.eventsArray = [[NSArray alloc] initWithArray:myEventsTitleArray];
-    /*
-    if (self.eventsArray != nil && [self.eventsArray count] > 0){
-        NSLog(@"Events Array Created");
-    }
-     */
 }
 
 - (void)didReceiveMemoryWarning

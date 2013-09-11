@@ -15,9 +15,6 @@
 		D3629ED717D0FCA700DBF27A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3629ED517D0FCA700DBF27A /* InfoPlist.strings */; };
 		D3629ED917D0FCA700DBF27A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629ED817D0FCA700DBF27A /* main.m */; };
 		D3629EDD17D0FCA700DBF27A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EDC17D0FCA700DBF27A /* AppDelegate.m */; };
-		D3629EDF17D0FCA700DBF27A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EDE17D0FCA700DBF27A /* Default.png */; };
-		D3629EE117D0FCA700DBF27A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE017D0FCA700DBF27A /* Default@2x.png */; };
-		D3629EE317D0FCA700DBF27A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */; };
 		D3629EE917D0FCA700DBF27A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EE817D0FCA700DBF27A /* ViewController.m */; };
 		D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */; };
 		D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */; };
@@ -43,6 +40,12 @@
 		D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3BC1CAD17D2923F0063FE35 /* buildings.xml */; };
 		D3D1A88F17D419BB005D6A2E /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D1A88E17D419BB005D6A2E /* XMLElement.m */; };
 		D3D1A89217D43423005D6A2E /* EventsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D1A89117D43423005D6A2E /* EventsData.m */; };
+		D3DE8CAC17E0CA17001165F1 /* SynergyIconiOS.png in Resources */ = {isa = PBXBuildFile; fileRef = D3DE8CAB17E0CA17001165F1 /* SynergyIconiOS.png */; };
+		D3DE8CAE17E0CA1B001165F1 /* SynergyIconiOS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3DE8CAD17E0CA1B001165F1 /* SynergyIconiOS@2x.png */; };
+		D3DE8CB017E0CB72001165F1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3DE8CAF17E0CB71001165F1 /* Default.png */; };
+		D3DE8CB217E0CB75001165F1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3DE8CB117E0CB75001165F1 /* Default@2x.png */; };
+		D3DE8CB417E0CB77001165F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3DE8CB317E0CB77001165F1 /* Default-568h@2x.png */; };
+		D3DE8CBA17E118C4001165F1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DE8CB917E118C4001165F1 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,9 +62,6 @@
 		D3629EDA17D0FCA700DBF27A /* CampusSynergy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CampusSynergy-Prefix.pch"; sourceTree = "<group>"; };
 		D3629EDB17D0FCA700DBF27A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D3629EDC17D0FCA700DBF27A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D3629EDE17D0FCA700DBF27A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D3629EE017D0FCA700DBF27A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D3629EE717D0FCA700DBF27A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D3629EE817D0FCA700DBF27A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D38B29C117D468BF00A17168 /* AddEventTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventTimesViewController.h; sourceTree = "<group>"; };
@@ -97,6 +97,13 @@
 		D3D1A88E17D419BB005D6A2E /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
 		D3D1A89017D43423005D6A2E /* EventsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsData.h; path = ../EventsData.h; sourceTree = "<group>"; };
 		D3D1A89117D43423005D6A2E /* EventsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsData.m; path = ../EventsData.m; sourceTree = "<group>"; };
+		D3DE8CAB17E0CA17001165F1 /* SynergyIconiOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SynergyIconiOS.png; path = ../SynergyIconiOS.png; sourceTree = "<group>"; };
+		D3DE8CAD17E0CA1B001165F1 /* SynergyIconiOS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SynergyIconiOS@2x.png"; path = "../SynergyIconiOS@2x.png"; sourceTree = "<group>"; };
+		D3DE8CAF17E0CB71001165F1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		D3DE8CB117E0CB75001165F1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		D3DE8CB317E0CB77001165F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		D3DE8CB817E118C4001165F1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D3DE8CB917E118C4001165F1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */,
+				D3DE8CB817E118C4001165F1 /* Reachability.h */,
+				D3DE8CB917E118C4001165F1 /* Reachability.m */,
 				D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */,
 				D398FA9B17DB87F7009A8AE3 /* MainStoryboard.storyboard */,
 				D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */,
@@ -200,6 +209,11 @@
 		D3629ED317D0FCA700DBF27A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D3DE8CB317E0CB77001165F1 /* Default-568h@2x.png */,
+				D3DE8CB117E0CB75001165F1 /* Default@2x.png */,
+				D3DE8CAF17E0CB71001165F1 /* Default.png */,
+				D3DE8CAB17E0CA17001165F1 /* SynergyIconiOS.png */,
+				D3DE8CAD17E0CA1B001165F1 /* SynergyIconiOS@2x.png */,
 				D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */,
 				D3BC1CAD17D2923F0063FE35 /* buildings.xml */,
 				D39A093B17D193990015DA8F /* api_key.config */,
@@ -207,9 +221,6 @@
 				D3629ED517D0FCA700DBF27A /* InfoPlist.strings */,
 				D3629ED817D0FCA700DBF27A /* main.m */,
 				D3629EDA17D0FCA700DBF27A /* CampusSynergy-Prefix.pch */,
-				D3629EDE17D0FCA700DBF27A /* Default.png */,
-				D3629EE017D0FCA700DBF27A /* Default@2x.png */,
-				D3629EE217D0FCA700DBF27A /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -266,13 +277,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3629ED717D0FCA700DBF27A /* InfoPlist.strings in Resources */,
-				D3629EDF17D0FCA700DBF27A /* Default.png in Resources */,
-				D3629EE117D0FCA700DBF27A /* Default@2x.png in Resources */,
-				D3629EE317D0FCA700DBF27A /* Default-568h@2x.png in Resources */,
 				D39A093C17D193990015DA8F /* api_key.config in Resources */,
 				D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */,
 				D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */,
 				D398FA9C17DB87F7009A8AE3 /* MainStoryboard.storyboard in Resources */,
+				D3DE8CAC17E0CA17001165F1 /* SynergyIconiOS.png in Resources */,
+				D3DE8CAE17E0CA1B001165F1 /* SynergyIconiOS@2x.png in Resources */,
+				D3DE8CB017E0CB72001165F1 /* Default.png in Resources */,
+				D3DE8CB217E0CB75001165F1 /* Default@2x.png in Resources */,
+				D3DE8CB417E0CB77001165F1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +309,7 @@
 				D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */,
 				D355F63B17D7CCF000C0FA94 /* AllEventsSegue.m in Sources */,
 				D398FA9F17DB88B1009A8AE3 /* EmailViewController.m in Sources */,
+				D3DE8CBA17E118C4001165F1 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +386,8 @@
 		D3629EED17D0FCA700DBF27A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: SAAMD Madison jr (HPPSLZMTTY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: SAAMD Madison jr (HPPSLZMTTY)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -381,6 +397,8 @@
 				INFOPLIST_FILE = "CampusSynergy/CampusSynergy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3293FB90-1E0C-46D9-BEE3-6B227A2B0B35";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3293FB90-1E0C-46D9-BEE3-6B227A2B0B35";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -389,6 +407,7 @@
 		D3629EEE17D0FCA700DBF27A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -398,6 +417,7 @@
 				INFOPLIST_FILE = "CampusSynergy/CampusSynergy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

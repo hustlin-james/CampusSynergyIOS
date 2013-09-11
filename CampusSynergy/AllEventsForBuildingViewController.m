@@ -99,11 +99,6 @@
     NSString *myEventDescription = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"longDescription"];
     eventDetailsVC.eventDescriptionText = myEventDescription;
     
-    /*
-    NSString *myRoomString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"room"];
-    eventDetailsVC.eventRoomText = myRoomString;
-     */
-    
     NSString *myBuildingString = [[self.parseEventArray objectAtIndex:indexPath.row] objectForKey:@"bldName"];
     eventDetailsVC.eventBuildingText = myBuildingString;
     

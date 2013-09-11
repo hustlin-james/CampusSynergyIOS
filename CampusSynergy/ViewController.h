@@ -16,6 +16,7 @@
 #import "AllEventsForBuildingViewController.h"
 #import "AllEventsSegue.h"
 #import <objc/runtime.h>
+#import "Reachability.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate, NSXMLParserDelegate>
 

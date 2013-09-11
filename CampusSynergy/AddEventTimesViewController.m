@@ -367,13 +367,11 @@
         BOOL validDate = [self checkValidDate];
         
         if(validDate){
-            
-            BOOL addToDBSuccessful=YES;
-            
-            addToDBSuccessful = [EventsData saveEventsToParse:myBuildingName andDate:myDate andDuration:myDuration andLongDescription:myLogDescription andPublisher:myPublisher andTitle:myTitle andRoomString:myRoomString];
-            
-            [self EventDetailsTransitionPrep:addToDBSuccessful andAlerty:inputError];
-            
+                BOOL addToDBSuccessful=YES;
+                
+                addToDBSuccessful = [EventsData saveEventsToParse:myBuildingName andDate:myDate andDuration:myDuration andLongDescription:myLogDescription andPublisher:myPublisher andTitle:myTitle andRoomString:myRoomString];
+                
+                [self EventDetailsTransitionPrep:addToDBSuccessful andAlerty:inputError];
         }
         else{
             [inputError setTitle:@"Invalid Date."];
@@ -389,8 +387,8 @@
 
 - (void)EventDetailsTransitionPrep:(BOOL)addToDBSuccessful andAlerty: (UIAlertView *)inputError{
     
-    
     if (addToDBSuccessful) {
+        
         EventDetailsViewController *eventDetailsVC
         = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailVC"];
         eventDetailsVC.navigationItem.hidesBackButton = YES;

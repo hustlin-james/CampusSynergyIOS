@@ -123,48 +123,6 @@
     [buildingToolbar setItems:barItems animated:YES];
     
     self.buildingTextField.inputAccessoryView = buildingToolbar;
-    
-    
-    //creating room picker
-    /*
-    roomPickerValues = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
-
-    roomPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,43, 320, 400)];
-    roomPickerView.delegate = self;
-    roomPickerView.dataSource = self;
-    
-    [roomPickerView setShowsSelectionIndicator:YES];
-    
-    roomPickerView.tag = 1;
-    
-    //self.roomNumberTextField.inputView = roomPickerView;
-    
-    
-    roomToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
-    
-    roomToolbar.barStyle = UIBarStyleBlackOpaque;
-    [roomToolbar sizeToFit];
-    
-    NSMutableArray *roomBarItems = [[NSMutableArray alloc] init];
-    
-    UIBarButtonItem *roomBarTitle = [[UIBarButtonItem alloc] initWithTitle:@"Room"
-                                       style:UIBarButtonItemStylePlain
-                                        target:nil action:nil];
-    
-    [roomBarItems addObject:roomBarTitle];
-    
-    UIBarButtonItem *roomFlexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    
-    [roomBarItems addObject:roomFlexSpace];
-    
-    UIBarButtonItem *roomDoneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(roomPickerDoneClicked)];
-    
-    [roomBarItems addObject:roomDoneBtn];
-    
-    [roomToolbar setItems:roomBarItems animated:YES];
-    
-    self.roomNumberTextField.inputAccessoryView = roomToolbar;
-     */
    
 }
 
