@@ -11,9 +11,6 @@
 
 @interface AddEventViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
-//@property (copy, nonatomic) NSString *app_id;
-//@property (copy, nonatomic) NSString *rest_id;
-
 @property(copy, nonatomic) NSString *publisher;
 
 - (IBAction)inputTimeNextButton:(id)sender;

@@ -57,11 +57,6 @@
 
 - (IBAction)mainMapButton:(id)sender {
         NSLog(@"Home button pressed");
-        /*
-        ViewController *mmVC
-        = [self.storyboard instantiateViewControllerWithIdentifier:@"MainMapView"];
-         [self.navigationController pushViewController:mmVC animated:YES];
-         */
         
         //Goes back to the main map view controller
         self.navigationController.navigationBarHidden = NO;

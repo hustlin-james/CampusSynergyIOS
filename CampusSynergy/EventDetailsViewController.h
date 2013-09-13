@@ -14,7 +14,6 @@
 @property(copy, nonatomic) NSString* eventTitleText;
 @property(copy, nonatomic) NSString* eventDescriptionText;
 @property(copy, nonatomic) NSString* eventBuildingText;
-//@property(copy, nonatomic) NSString* eventRoomText;
 @property(copy, nonatomic) NSString* publisherText;
 @property(copy, nonatomic) NSString* startTimeDescriptionText;
 

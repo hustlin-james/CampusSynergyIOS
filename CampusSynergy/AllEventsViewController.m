@@ -104,7 +104,10 @@
     NSString *myBuildingString = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"bldName"];
     eventDetailsVC.eventBuildingText = myBuildingString;
     
-    eventDetailsVC.publisherText = [self username];
+    
+    NSString *publisherName = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"publisher"];
+    //eventDetailsVC.publisherText = [self username];
+    eventDetailsVC.publisherText = publisherName;
 
     NSString *myDuration = [[self.parseEventObjects objectAtIndex:indexPath.row] objectForKey:@"duration"];
     

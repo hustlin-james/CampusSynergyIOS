@@ -62,12 +62,6 @@
         self.buildingTextField.textColor = [UIColor blackColor];
         self.buildingTextField.text = buildingPickerValues[0];
     }
-    /*
-    else if(textField.tag == self.roomNumberTextField.tag){
-        self.roomNumberTextField.textColor = [UIColor blackColor];
-        self.roomNumberTextField.text = roomPickerValues[0];
-    }
-     */
     else{
     }
 }
@@ -189,13 +183,6 @@
         [errorAlert setMessage:@"Invalid Input for building."];
         [errorAlert show];
     }
-    /*
-    else if([[[self roomNumberTextField] text] isEqualToString:@"Choose a room..."]){
-        [errorAlert setTitle:@"Room input error."];
-        [errorAlert setMessage:@"Invalid Input for room."];
-        [errorAlert show];
-    }
-     */
     else if ([[[self roomStringInput] text] isEqualToString:@""]){
         [errorAlert setTitle:@"Enter a room."];
         [errorAlert setMessage:@"Please enter a room."];
