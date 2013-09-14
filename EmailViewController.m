@@ -50,15 +50,19 @@
     
     NSString *body = self.inputTextView.text;
     
+    NSString *appendedBody = @"CAMPUS SYNERGY FEEDBACK.\n";
+    
+    appendedBody = [appendedBody stringByAppendingString:body];
+    
     NSLog(@"body message: %@", body);
     
     if(![body isEqualToString:@""]){
         NSLog(@"Send Button Pressed.");
 
-        NSString *emailTitle = @"Test Email";
-        NSString *messageBody = body;
+        NSString *emailTitle = @"FEEDBACK (DON'T CHANGE) CSA";
+        NSString *messageBody = appendedBody;
 
-        NSArray *toRecipents = [NSArray arrayWithObject:@"feifan.meng@yahoo.com" ];
+        NSArray *toRecipents = [NSArray arrayWithObject:@"uta.mobi@gmail.com" ];
 
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
         mc.mailComposeDelegate = self;
@@ -96,7 +100,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void)mailFailMessage: (NSError *)error{
-    NSLog(@"main sent failure: %@", [error localizedDescription]);
+    NSLog(@"mail sent failure: %@", [error localizedDescription]);
     UIAlertView *mailSent = [[UIAlertView alloc] initWithTitle:@"Failed." message:@"Failed to send message." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [mailSent show];
 }

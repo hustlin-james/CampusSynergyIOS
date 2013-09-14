@@ -262,7 +262,7 @@
             </objects>
             <point key="canvasLocation" x="-390" y="605"/>
         </scene>
-        <!--View Controller - Home-->
+        <!--View Controller - Beta-->
         <scene sceneID="5">
             <objects>
                 <viewController storyboardIdentifier="MainMapView" id="2" customClass="ViewController" sceneMemberID="viewController">
@@ -323,7 +323,7 @@
                             <constraint firstItem="Brj-bz-Gnu" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="t3x-Ft-tCZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="s05-c1-iI3">
+                    <navigationItem key="navigationItem" title="Beta" id="s05-c1-iI3">
                         <barButtonItem key="leftBarButtonItem" title="All Events" id="vHk-y9-iQ5" userLabel="allEventNavButton">
                             <connections>
                                 <action selector="allEventsPressed:" destination="2" id="FNI-l8-T2x"/>

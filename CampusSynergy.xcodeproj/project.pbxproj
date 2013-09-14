@@ -174,9 +174,9 @@
 		D3629ED217D0FCA700DBF27A /* CampusSynergy */ = {
 			isa = PBXGroup;
 			children = (
-				D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */,
 				D3DE8CB817E118C4001165F1 /* Reachability.h */,
 				D3DE8CB917E118C4001165F1 /* Reachability.m */,
+				D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */,
 				D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */,
 				D398FA9B17DB87F7009A8AE3 /* MainStoryboard.storyboard */,
 				D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */,
