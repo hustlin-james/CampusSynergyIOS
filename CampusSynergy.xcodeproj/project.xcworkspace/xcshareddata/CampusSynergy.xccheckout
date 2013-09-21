@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4678D557-97BA-4959-AD7B-D32D56F3A014</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CampusSynergy</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F220A6CE-2682-4733-806E-406DD47B92AF</key>
+		<string>https://github.com/UTA-Mobi/CampusSynergyIOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CampusSynergy.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F220A6CE-2682-4733-806E-406DD47B92AF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/UTA-Mobi/CampusSynergyIOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F220A6CE-2682-4733-806E-406DD47B92AF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F220A6CE-2682-4733-806E-406DD47B92AF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CampusSynergy</string>
+		</dict>
+	</array>
+</dict>
+</plist>

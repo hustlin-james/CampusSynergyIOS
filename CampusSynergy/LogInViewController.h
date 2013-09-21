@@ -15,6 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
+@property (strong, nonatomic) NSArray *allBuildings;
+
 //@property (copy, nonatomic) NSString *app_id;
 //@property (copy, nonatomic) NSString *rest_id;
 

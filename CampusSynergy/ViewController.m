@@ -22,11 +22,15 @@
     NSDate *refreshPreviousTime;
     NSDate *refreshCurrentTime;
     
+    
+    NSMutableDictionary *buildingAndPoints;
     BOOL shownParseConnectError;
 }
 @end
 
 @implementation ViewController
+
+static BOOL overlaysGenerated = NO;
 
 -(void)viewDidAppear:(BOOL)animated{
     //[self initializeView:NO];
@@ -35,11 +39,9 @@
 - (void) viewWillAppear:(BOOL)animated{
     NSLog(@"Main Map View just appeared.");
     shownParseConnectError=NO;
+    
     [self parseAPIEventsRetrieve];
-    //[self initializeView];
 }
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -130,9 +132,8 @@
     [self.mapView setDelegate:self];
     
     //Start the Process to get Events Data
-    myAppId = @"QuoI3WPv5g9LyP4awzhZEH8FvRKIgWgFEdFJSTmB";
-    myRestId = @"inV9LL0B01842cQsvjSr06fVAbse9T2CBRHa0yde";
     
+    //Remove this later?
     [self.activityIndicator startAnimating];
     myEventsData = [[EventsData alloc] initWithAppId:myAppId andRestID:myRestId];
     
@@ -148,11 +149,13 @@
    
      //self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
     //New Parse API
+    
     [self parseAPIEventsRetrieve];
     
     //NSLog(@"JSON Events Retrieved: %@", self.allJSONEvents);
     
     //Construct the Polygons/Events objects
+    /*
     NSArray *myArray = [self createPolygonCoordinateList:@"buildings"];
     
     if(myArray != nil){
@@ -166,6 +169,7 @@
     }
     
     [self.activityIndicator stopAnimating];
+     */
 }
 
 
@@ -195,7 +199,6 @@
         NSLog(@"This is the AllEventsButton in prepareForSegue");
         //((AllEventsSegue *)segue).allJSONEvents = [self allJSONEvents];
         ((AllEventsSegue *)segue).username = username;
-        
         
         NSLog(@"BEFORE ALLEVENTSSEGUE: %@",  parseEventObjects);
         ((AllEventsSegue *)segue).parseEventObjects=parseEventObjects
@@ -250,6 +253,7 @@
             [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
             addEventVC.publisher = username;
             addEventVC.allBuildings = allBuildings;
+            NSLog(@"total builds: %i", [allBuildings count]);
             [self.navigationController pushViewController:addEventVC animated:YES];
         }
         else{
@@ -264,6 +268,7 @@
         //LogInViewController *loginVC = [[LogInViewController alloc] init];
         LogInViewController *loginVC = 
         [self.storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
+        loginVC.allBuildings = allBuildings;
         //loginVC.app_id = myAppId;
         //loginVC.rest_id = myRestId;
         [self.navigationController pushViewController:loginVC animated:YES];
@@ -319,6 +324,29 @@
             }
             
             parseEventObjects = [[NSArray alloc] initWithArray:validEvents];
+            
+            NSLog(@"parseEventObjects: %@", parseEventObjects);
+            
+            if(overlaysGenerated == NO){
+                //Map Construction
+                NSArray *myArray = [self createPolygonCoordinateList:@"buildings"];
+                
+                if(myArray != nil){
+                    [self.mapView addOverlays:myArray];
+                    
+                     
+                }
+                else{
+                    UIAlertView *error =
+                    [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable To Load Map" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    
+                    [error show];
+                }
+                overlaysGenerated = YES;
+            }
+            
+            //[self.activityIndicator stopAnimating];
+            
             [[self activityIndicator] stopAnimating];
             
         } else {
@@ -351,6 +379,8 @@
 }
 
 - (BOOL)refreshHitPreventer{
+    
+    BOOL myVal = YES;
     if(refreshPreviousTime == nil){
         refreshPreviousTime = [NSDate date];
     }
@@ -360,12 +390,14 @@
            > 5){
             //fire of request
             refreshPreviousTime = [NSDate date];
-            return YES;
+            //return YES;
         }
         else{
-            return NO;
+            //return NO;
+            myVal = NO;
         }
     }
+    return myVal;
 }
 
 //filePath is the xml file where the coordinates to draw the polygons are located
@@ -373,6 +405,7 @@
 //Returns in array of MKPolygon coordinates
 - (NSArray *)createPolygonCoordinateList: (NSString *)filePath{
     
+    NSLog(@"In createPolygonCoordinateList");
     //Load the file and parse the xml
     NSString *xmlFilePath = [[NSBundle mainBundle] pathForResource:filePath ofType:@"xml"];
     
@@ -404,9 +437,14 @@
         
         BOOL alternator = YES;
         int pointsIndex = 0;
+    
+        if(buildingAndPoints == nil){
+            buildingAndPoints = [[NSMutableDictionary alloc] init];
+        }
+        
+        NSMutableArray *pointsArray = [[NSMutableArray alloc] init];
         //if YES then lat else long
         for(int i = 0; i < [aBuilding.subElements count]; i++){
-            
             if (alternator){
                 alternator = NO;
             }
@@ -414,18 +452,29 @@
                 XMLElement *lat = aBuilding.subElements[i - 1];
                 XMLElement *longVal = aBuilding.subElements[i];
                 points[pointsIndex] = CLLocationCoordinate2DMake([lat.text doubleValue], [longVal.text doubleValue]);
+                
+                CustomPoint *cp = [[CustomPoint alloc] initWithLat:[lat.text doubleValue] andLong:[longVal.text doubleValue]];
+                
+                [pointsArray addObject:cp];
+                
                 pointsIndex++;
                 alternator = YES;
             }
         }
-    
+        
         MKPolygon* coordinates = [MKPolygon polygonWithCoordinates:points count:numberOfPoints];
-        [coordinates setTitle:[aBuilding.attributes objectForKey:@"name"]];
+        
+        NSString *buildingTitle = [aBuilding.attributes objectForKey:@"name"];
+        [coordinates setTitle:buildingTitle];
+        
         [mutableOverlaysArray addObject:coordinates];
+        
+        NSArray *regularArray = [[NSArray alloc] initWithArray:pointsArray];
+         
+        [buildingAndPoints setValue:regularArray forKey:buildingTitle];
     }
     
     allBuildings = [[NSArray alloc] initWithArray:allBuildingsName];
-    
     NSArray *myArray = [[NSArray alloc] initWithArray:mutableOverlaysArray];
     return myArray;
 }
@@ -462,7 +511,6 @@
 }
 
 - (void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-    
     self.currentElementPointer = self.currentElementPointer.parent;
 }
 
@@ -470,46 +518,226 @@
     self.currentElementPointer = nil;
 }
 
+
+//This will return the building string if the touch is in the polygon or nil if it is not
+- (NSString *)calculatePointInPolygon: (CGPoint) polygonViewPoint andRenderer: (MKOverlayRenderer *)myView{
+    
+    NSString *myBuildingName = nil;
+    
+    //Just testing out the AL building and its points
+    NSArray *buildings = [buildingAndPoints allKeys];
+
+    for(NSString *buildingName in buildings){
+        
+        NSArray *myArray = [buildingAndPoints objectForKey:buildingName];
+        
+        //First do a preliminary check
+        float xMin = 0;
+        float xMax = 0;
+        float yMin = 0;
+        float yMax = 0;
+
+        CLLocationCoordinate2D temp = CLLocationCoordinate2DMake([[myArray objectAtIndex:0] myLat], [[myArray objectAtIndex:0] myLong]);
+        CGPoint firstMapViewPoint = [myView pointForMapPoint:MKMapPointForCoordinate(temp)];
+        
+        xMin = firstMapViewPoint.x;
+        xMax = firstMapViewPoint.x;
+        yMin = firstMapViewPoint.y;
+        yMax = firstMapViewPoint.y;
+        
+        for(CustomPoint *pointInArray in myArray){
+            CLLocationCoordinate2D temp = CLLocationCoordinate2DMake([pointInArray myLat], [pointInArray myLong]);
+            MKMapPoint mapPoint = MKMapPointForCoordinate(temp);
+            CGPoint mapViewPoint = [myView pointForMapPoint:mapPoint];
+            
+            if(xMin > mapViewPoint.x){
+                xMin = mapViewPoint.x;
+            }
+            
+            if (xMax < mapViewPoint.x){
+                xMax = mapViewPoint.x;
+            }
+            
+            if(yMin > mapViewPoint.y){
+                yMin = mapViewPoint.y;
+            }
+            
+            if(yMax < mapViewPoint.y){
+                yMax = mapViewPoint.y;
+            }
+            
+        }
+        
+        /*
+        NSLog(@"xMin: %f", xMin);
+        NSLog(@"yMin: %f", yMin);
+        NSLog(@"xMax: %f", xMax);
+        NSLog(@"yMax: %f", yMax);
+         */
+        
+        //First check the touch lies within a rectangular boudary
+        //Quick Check
+        /*
+        if(polygonViewPoint.x < xMin || polygonViewPoint.x > xMax || polygonViewPoint.y < yMin
+            || polygonViewPoint.y > yMax)
+        {
+            //NSLog(@"Touch for %@ is outside", buildingName);
+            //myBuildingName = nil;
+            //NSLog(@"Outside Polygon breaking loop");
+           // break;
+        }
+         */
+        
+        /*
+        for(CustomPoint *pointInArray in myArray){
+            CLLocationCoordinate2D temp = CLLocationCoordinate2DMake([pointInArray myLat], [pointInArray myLong]);
+            MKMapPoint mapPoint = MKMapPointForCoordinate(temp);
+            CGPoint mapViewPoint = [myView pointForMapPoint:mapPoint];
+        }
+        */
+        //Implement the ray casting algorithm
+        
+        BOOL inside = NO;
+        
+        for(int i = 0; i < [myArray count] + 1; i++){
+            
+            int modded_num = i % [myArray count];
+            CLLocationCoordinate2D temp = CLLocationCoordinate2DMake(
+                                                                     [[myArray objectAtIndex:modded_num] myLat], [[myArray objectAtIndex:modded_num] myLong]);
+            CGPoint otherPoint = [myView pointForMapPoint:MKMapPointForCoordinate(temp)];
+        
+            if (polygonViewPoint.y > fminf(firstMapViewPoint.y, otherPoint.y) ) {
+                
+                if ( polygonViewPoint.y <= fmaxf(firstMapViewPoint.y, otherPoint.y)){
+                    
+                    if (polygonViewPoint.x <= fmaxf(firstMapViewPoint.x, otherPoint.x)){
+                        
+                        float xints = 0;
+                        if (firstMapViewPoint.y != otherPoint.y){
+                            //(y-p1y)*(p2x-p1x)/(p2y-p1y)+p1x
+                             xints = (polygonViewPoint.y - firstMapViewPoint.y)*(otherPoint.x - firstMapViewPoint.x)/(otherPoint.y - firstMapViewPoint.y) + firstMapViewPoint.x;
+                        }
+                        
+                        if(firstMapViewPoint.x == otherPoint.x || polygonViewPoint.x <= xints){
+                            inside = !inside;
+                        }
+                    }
+                }
+                
+            }
+            
+            firstMapViewPoint.x = otherPoint.x;
+            firstMapViewPoint.y = otherPoint.y;
+        }//End of for
+        
+        if(inside){
+            NSLog(@"inside a building %@, breaking loop", buildingName);
+            myBuildingName = buildingName;
+            break;
+        }
+        
+    }
+    
+    //Will return nil if touch in no polygon
+    return myBuildingName;
+}
+
 //Algorithm from: http://stackoverflow.com/questions/14524718/is-cgpoint-in-mkpolygonview
 //With appropiate modifications
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    NSLog(@"Touch event began");
     
     MKMapView *mapView = (MKMapView *)self.mapView;
     
     MKPolygonView *tappedOverlay = nil;
+
     int i = 0;
     for (id<MKOverlay> overlay in mapView.overlays)
     {
         MKPolygonView *view = (MKPolygonView *)[self.mapView viewForOverlay:overlay];
+       
         
-        if (view){
+        //MKPolygonView *view = (MKPolygonView *)[self.mapView rendererForOverlay:overlay];
+    
+        //MKOverlayRenderer *myView = [self.mapView rendererForOverlay:overlay];
+        //self.mapView viewFor
+        
+        MKOverlayRenderer *myView = [[MKOverlayRenderer alloc] initWithOverlay:overlay];
+        
+       
+        
+        //MKMapRect myMapRect = [myView.overlay boundingMapRect];
+        
+        //if(view)
+        if (myView){
+            
             CGPoint touchPoint = [[touches anyObject] locationInView:self.mapView];
+            
+            //CGPoint newTouchPoint = [myView pointForMapPoint:<#(MKMapPoint)#>]
+            
             CLLocationCoordinate2D touchMapCoordinate =
             [mapView convertPoint:touchPoint toCoordinateFromView:mapView];
             
+            
+            //NSLog(@"lat: %f, long: %f", touchMapCoordinate.latitude, touchMapCoordinate.longitude);
+            
             MKMapPoint mapPoint = MKMapPointForCoordinate(touchMapCoordinate);
             
-            CGPoint polygonViewPoint = [view pointForMapPoint:mapPoint];
+            //CGPoint polygonViewPoint = [view pointForMapPoint:mapPoint];
+            CGPoint polygonViewPoint = [myView pointForMapPoint:mapPoint];
             
-            if(CGPathContainsPoint(view.path, NULL, polygonViewPoint, NO)){
+            //NSLog(@"CGPoint polygonViewPoint: %@", polygonViewPoint.x);
+            //[myView poin]
+            
+            
+            
+            //NSLog(@"polygonViewPoint: %@", polygonViewPoint);
+            //NSLog(@"view.path: %@", view.path);
+            
+            //CGMutablePathRef path = CGPathCreateMutable();
+            //CGPathCreateM
+            //NSLog(@"path: %@", path);
+            
+            //MKOverlayPathRenderer *tempPath = [[MKOverlayPathRenderer alloc] initWithOverlay:overlay];
+            //MKOverlayPathRenderer *tempPath = [[MKOverlayPathRenderer alloc] initWithOverlay:myView.overlay];
+            
+            /*
+            NSLog(@"tempPath: %@", tempPath);
+            NSLog(@"tempPath path: %@", tempPath.path);
+            NSLog(@"mapPoint: %f %f", mapPoint.x, mapPoint.y);
+            NSLog(@"touchMapCoordinate: %f %f", touchMapCoordinate.latitude, touchMapCoordinate.longitude);
+            NSLog(@"touchMapCoordinate as coords: %f %f", polygonViewPoint.x, polygonViewPoint.y);
+            NSLog(@"polygonViewPoint x:%f y:%f", polygonViewPoint.x, polygonViewPoint.y);
+            NSLog(@"view.path: %@", view.path);
+            */
+            //CGPathContainsPoint(view.path, NULL, polygonViewPoint, NO)
+            
+            NSString *buildingName =
+            [self calculatePointInPolygon: polygonViewPoint andRenderer:myView];
+        
+            //if(CGPathContainsPoint(tempPath.path, NULL, polygonViewPoint, NO)){
+            if (buildingName != nil){
+                
                 tappedOverlay = view;
                 tappedOverlay.tag = i;
                 
                 //If it hits this part then it is in one of the overlays in the map
-                NSLog(@"In an Overlay");
-                NSLog(@"Overlay Info: %@", [overlay title]);
+                //NSLog(@"In an Overlay");
+                //NSLog(@"Overlay Info: %@", [overlay title]);
                 
                 AllEventsForBuildingViewController *allEventsForBuildingVC
                 = [self.storyboard instantiateViewControllerWithIdentifier:@"EventsForBuildingVC"];
                 
+                /*
                 NSString *myString
                 = [[NSString alloc] initWithFormat:@"%@",[overlay title] ];
+                 */
                 
                 allEventsForBuildingVC.username = username;
-                allEventsForBuildingVC.buildingNameString = myString;
-                allEventsForBuildingVC.myAppId = myAppId;
-                allEventsForBuildingVC.myRestId = myRestId;
+                allEventsForBuildingVC.buildingNameString = buildingName;
+                //allEventsForBuildingVC.myAppId = myAppId;
+                //allEventsForBuildingVC.myRestId = myRestId;
                 
                 //Using the objective c api
                 allEventsForBuildingVC.parseEventArray =  parseEventObjects;
@@ -517,6 +745,9 @@
                 [self.navigationController pushViewController:allEventsForBuildingVC animated:YES];
             
                 break;
+            }
+            else{
+                //NSLog(@"Touch is not in the overlay");
             }
         }
         i++;

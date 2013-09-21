@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D328C5CA17EAA4960029BBE6 /* CustomPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D328C5C917EAA4960029BBE6 /* CustomPoint.m */; };
 		D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */ = {isa = PBXBuildFile; fileRef = D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */; };
 		D355F63B17D7CCF000C0FA94 /* AllEventsSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */; };
 		D3629ECD17D0FCA700DBF27A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3629ECC17D0FCA700DBF27A /* UIKit.framework */; };
@@ -49,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D328C5C817EAA4960029BBE6 /* CustomPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPoint.h; sourceTree = "<group>"; };
+		D328C5C917EAA4960029BBE6 /* CustomPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPoint.m; sourceTree = "<group>"; };
 		D355F5FD17D696D700C0FA94 /* app_doc_dir.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app_doc_dir.txt; path = ../app_doc_dir.txt; sourceTree = "<group>"; };
 		D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllEventsSegue.h; path = ../AllEventsSegue.h; sourceTree = "<group>"; };
 		D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllEventsSegue.m; path = ../AllEventsSegue.m; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				D3DE8CB817E118C4001165F1 /* Reachability.h */,
+				D328C5C817EAA4960029BBE6 /* CustomPoint.h */,
+				D328C5C917EAA4960029BBE6 /* CustomPoint.m */,
 				D3DE8CB917E118C4001165F1 /* Reachability.m */,
 				D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */,
 				D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */,
@@ -298,6 +303,7 @@
 			files = (
 				D3629ED917D0FCA700DBF27A /* main.m in Sources */,
 				D3629EDD17D0FCA700DBF27A /* AppDelegate.m in Sources */,
+				D328C5CA17EAA4960029BBE6 /* CustomPoint.m in Sources */,
 				D3629EE917D0FCA700DBF27A /* ViewController.m in Sources */,
 				D39A091817D0FF700015DA8F /* AddEventViewController.m in Sources */,
 				D39A091B17D0FF7F0015DA8F /* AllEventsViewController.m in Sources */,

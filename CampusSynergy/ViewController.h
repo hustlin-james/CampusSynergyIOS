@@ -17,6 +17,7 @@
 #import "AllEventsSegue.h"
 #import <objc/runtime.h>
 #import "Reachability.h"
+#import "CustomPoint.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate, NSXMLParserDelegate>
 

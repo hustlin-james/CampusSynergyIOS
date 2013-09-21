@@ -121,6 +121,7 @@
             [self.storyboard instantiateViewControllerWithIdentifier:@"AddEventVC"];
             
             addEventVc.publisher = name_string;
+            addEventVc.allBuildings = [self allBuildings];
             //addEventVc.app_id = [self app_id];
             //addEventVc.rest_id = [self rest_id];
             
