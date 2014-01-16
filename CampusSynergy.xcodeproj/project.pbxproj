@@ -17,6 +17,9 @@
 		D3629ED917D0FCA700DBF27A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629ED817D0FCA700DBF27A /* main.m */; };
 		D3629EDD17D0FCA700DBF27A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EDC17D0FCA700DBF27A /* AppDelegate.m */; };
 		D3629EE917D0FCA700DBF27A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3629EE817D0FCA700DBF27A /* ViewController.m */; };
+		D3804C521802740900A3C68F /* Rendered2_58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = D3804C4F1802740900A3C68F /* Rendered2_58x58.png */; };
+		D3804C531802740900A3C68F /* Rendered2_120x120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3804C501802740900A3C68F /* Rendered2_120x120@2x.png */; };
+		D3804C541802740900A3C68F /* Rendered2_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = D3804C511802740900A3C68F /* Rendered2_80x80.png */; };
 		D38B29C317D468BF00A17168 /* AddEventTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */; };
 		D39858AF17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */; };
 		D398FA9217DAF187009A8AE3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D398FA9117DAF187009A8AE3 /* MessageUI.framework */; };
@@ -35,7 +38,6 @@
 		D39A093217D16A2C0015DA8F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A093117D16A2C0015DA8F /* MobileCoreServices.framework */; };
 		D39A093417D16A370015DA8F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A093317D16A370015DA8F /* QuartzCore.framework */; };
 		D39A093617D16A700015DA8F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A093517D16A700015DA8F /* Security.framework */; };
-		D39A093817D178D20015DA8F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A093717D178D20015DA8F /* StoreKit.framework */; };
 		D39A093A17D178D90015DA8F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A093917D178D90015DA8F /* SystemConfiguration.framework */; };
 		D39A093C17D193990015DA8F /* api_key.config in Resources */ = {isa = PBXBuildFile; fileRef = D39A093B17D193990015DA8F /* api_key.config */; };
 		D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3BC1CAD17D2923F0063FE35 /* buildings.xml */; };
@@ -67,6 +69,9 @@
 		D3629EDC17D0FCA700DBF27A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D3629EE717D0FCA700DBF27A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D3629EE817D0FCA700DBF27A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D3804C4F1802740900A3C68F /* Rendered2_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rendered2_58x58.png; sourceTree = "<group>"; };
+		D3804C501802740900A3C68F /* Rendered2_120x120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rendered2_120x120@2x.png"; sourceTree = "<group>"; };
+		D3804C511802740900A3C68F /* Rendered2_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rendered2_80x80.png; sourceTree = "<group>"; };
 		D38B29C117D468BF00A17168 /* AddEventTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventTimesViewController.h; sourceTree = "<group>"; };
 		D38B29C217D468BF00A17168 /* AddEventTimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventTimesViewController.m; sourceTree = "<group>"; };
 		D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEventsForBuildingViewController.h; sourceTree = "<group>"; };
@@ -92,7 +97,6 @@
 		D39A093117D16A2C0015DA8F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D39A093317D16A370015DA8F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D39A093517D16A700015DA8F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		D39A093717D178D20015DA8F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D39A093917D178D90015DA8F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D39A093B17D193990015DA8F /* api_key.config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = api_key.config; path = ../api_key.config; sourceTree = "<group>"; };
 		D3BC1CAD17D2923F0063FE35 /* buildings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = buildings.xml; sourceTree = "<group>"; };
@@ -116,7 +120,6 @@
 			files = (
 				D398FA9217DAF187009A8AE3 /* MessageUI.framework in Frameworks */,
 				D39A093A17D178D90015DA8F /* SystemConfiguration.framework in Frameworks */,
-				D39A093817D178D20015DA8F /* StoreKit.framework in Frameworks */,
 				D39A093617D16A700015DA8F /* Security.framework in Frameworks */,
 				D39A093417D16A370015DA8F /* QuartzCore.framework in Frameworks */,
 				D39A093217D16A2C0015DA8F /* MobileCoreServices.framework in Frameworks */,
@@ -157,7 +160,6 @@
 			children = (
 				D398FA9117DAF187009A8AE3 /* MessageUI.framework */,
 				D39A093917D178D90015DA8F /* SystemConfiguration.framework */,
-				D39A093717D178D20015DA8F /* StoreKit.framework */,
 				D39A093317D16A370015DA8F /* QuartzCore.framework */,
 				D39A093117D16A2C0015DA8F /* MobileCoreServices.framework */,
 				D39A092F17D16A000015DA8F /* libz.1.1.3.dylib */,
@@ -178,16 +180,16 @@
 			isa = PBXGroup;
 			children = (
 				D3DE8CB817E118C4001165F1 /* Reachability.h */,
+				D3DE8CB917E118C4001165F1 /* Reachability.m */,
 				D328C5C817EAA4960029BBE6 /* CustomPoint.h */,
 				D328C5C917EAA4960029BBE6 /* CustomPoint.m */,
-				D3DE8CB917E118C4001165F1 /* Reachability.m */,
 				D398FA9D17DB88B1009A8AE3 /* EmailViewController.h */,
 				D398FA9E17DB88B1009A8AE3 /* EmailViewController.m */,
 				D398FA9B17DB87F7009A8AE3 /* MainStoryboard.storyboard */,
 				D355F63917D7CCF000C0FA94 /* AllEventsSegue.h */,
 				D355F63A17D7CCF000C0FA94 /* AllEventsSegue.m */,
-				D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */,
 				D39858AE17D4CE1400CF7D21 /* AllEventsForBuildingViewController.m */,
+				D39858AD17D4CE1400CF7D21 /* AllEventsForBuildingViewController.h */,
 				D3D1A89017D43423005D6A2E /* EventsData.h */,
 				D3D1A89117D43423005D6A2E /* EventsData.m */,
 				D3629EDB17D0FCA700DBF27A /* AppDelegate.h */,
@@ -214,6 +216,9 @@
 		D3629ED317D0FCA700DBF27A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D3804C4F1802740900A3C68F /* Rendered2_58x58.png */,
+				D3804C501802740900A3C68F /* Rendered2_120x120@2x.png */,
+				D3804C511802740900A3C68F /* Rendered2_80x80.png */,
 				D3DE8CB317E0CB77001165F1 /* Default-568h@2x.png */,
 				D3DE8CB117E0CB75001165F1 /* Default@2x.png */,
 				D3DE8CAF17E0CB71001165F1 /* Default.png */,
@@ -258,6 +263,16 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = mobi;
+				TargetAttributes = {
+					D3629EC817D0FCA700DBF27A = {
+						DevelopmentTeam = D782EMYT99;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = D3629EC417D0FCA700DBF27A /* Build configuration list for PBXProject "CampusSynergy" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -285,9 +300,12 @@
 				D39A093C17D193990015DA8F /* api_key.config in Resources */,
 				D3BC1CAE17D2923F0063FE35 /* buildings.xml in Resources */,
 				D355F5FE17D696D700C0FA94 /* app_doc_dir.txt in Resources */,
+				D3804C541802740900A3C68F /* Rendered2_80x80.png in Resources */,
+				D3804C521802740900A3C68F /* Rendered2_58x58.png in Resources */,
 				D398FA9C17DB87F7009A8AE3 /* MainStoryboard.storyboard in Resources */,
 				D3DE8CAC17E0CA17001165F1 /* SynergyIconiOS.png in Resources */,
 				D3DE8CAE17E0CA1B001165F1 /* SynergyIconiOS@2x.png in Resources */,
+				D3804C531802740900A3C68F /* Rendered2_120x120@2x.png in Resources */,
 				D3DE8CB017E0CB72001165F1 /* Default.png in Resources */,
 				D3DE8CB217E0CB75001165F1 /* Default@2x.png in Resources */,
 				D3DE8CB417E0CB77001165F1 /* Default-568h@2x.png in Resources */,
@@ -392,8 +410,8 @@
 		D3629EED17D0FCA700DBF27A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: SAAMD Madison jr (HPPSLZMTTY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: SAAMD Madison jr (HPPSLZMTTY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -401,9 +419,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CampusSynergy/CampusSynergy-Prefix.pch";
 				INFOPLIST_FILE = "CampusSynergy/CampusSynergy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3293FB90-1E0C-46D9-BEE3-6B227A2B0B35";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3293FB90-1E0C-46D9-BEE3-6B227A2B0B35";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -413,7 +431,8 @@
 		D3629EEE17D0FCA700DBF27A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -421,7 +440,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CampusSynergy/CampusSynergy-Prefix.pch";
 				INFOPLIST_FILE = "CampusSynergy/CampusSynergy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

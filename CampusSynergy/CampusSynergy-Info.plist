@@ -14,6 +14,11 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>Rendered2_58x58</string>
+				<string>Rendered2_80x80</string>
+				<string>Rendered2_120x120@2x</string>
+				<string>Rendered2_58x58</string>
+				<string>SynergyIconiOS</string>
 				<string>SynergyIconiOS.png</string>
 				<string>SynergyIconiOS@2x.png</string>
 			</array>

@@ -106,6 +106,14 @@
             NSLog(@"Invalid Login");
             UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Couldn't find Username and Password" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil, nil];
             [error show];
+        }else if([name_string  isEqual: @"EMAILNOTVERIFIED"]){
+            NSLog(@"Invalid Login Unverified Email");
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Email Verification"
+                                                            message:@"Please verify your email you registered with"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Try different account"
+                                                  otherButtonTitles:nil, nil];
+            [error show];
         }
         else{
             NSLog(@"Name: %@", name_string);
@@ -136,15 +144,24 @@
 - (NSString *)loginUsingParseAPI: (NSString *)username andPassword: (NSString *)myPassword{
     
     PFUser *myUser = [PFUser logInWithUsername:username password:myPassword];
+    NSLog(@"username: %@", username);
+    NSLog(@"myPassword: %@", myPassword);
+    NSLog(@"myUser: %@", myUser);
+
     if(myUser == nil){
         //log in failed
         return nil;
     }
     else{
-        //log in successful
-        NSString *publisher = [myUser objectForKey:@"name"];
-        NSLog(@"publisher: %@", publisher);
-        return publisher;
+        //Check that the user has a verified email
+        if([myUser objectForKey:@"emailVerified"] == nil){
+            return @"EMAILNOTVERIFIED";
+        }else{
+            //log in successful
+            NSString *publisher = [myUser objectForKey:@"username"];
+            NSLog(@"publisher: %@", publisher);
+            return publisher;
+        }
     }
 }
 

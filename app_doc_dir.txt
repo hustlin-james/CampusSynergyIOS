@@ -1,1 +1,1 @@
-cd '/Users/feifanmeng/Library/Application Support/iPhone Simulator/7.0-64/Applications/CBC6A028-D321-449A-A167-884F533877AA/Documents'
+cd '/Users/feifanmeng/Library/Application Support/iPhone Simulator/7.0/Applications/601C8EE0-4E4F-49B3-9645-8BAE65F7E39D/Documents/'

@@ -22,15 +22,16 @@
     NSDate *refreshPreviousTime;
     NSDate *refreshCurrentTime;
     
-    
     NSMutableDictionary *buildingAndPoints;
     BOOL shownParseConnectError;
+    
+    NSDictionary *buildingWithEvent;
 }
 @end
 
 @implementation ViewController
 
-static BOOL overlaysGenerated = NO;
+//static BOOL overlaysGenerated = NO;
 
 -(void)viewDidAppear:(BOOL)animated{
     //[self initializeView:NO];
@@ -38,9 +39,10 @@ static BOOL overlaysGenerated = NO;
 
 - (void) viewWillAppear:(BOOL)animated{
     NSLog(@"Main Map View just appeared.");
-    shownParseConnectError=NO;
     
+    shownParseConnectError=NO;
     [self parseAPIEventsRetrieve];
+    
 }
 - (void)viewDidLoad
 {
@@ -146,30 +148,9 @@ static BOOL overlaysGenerated = NO;
 }
 
 - (void)startGetEventsAndPolygonConstruction{
-   
-     //self.allJSONEvents = [myEventsData getEventsAndReturnJSON];
-    //New Parse API
     
     [self parseAPIEventsRetrieve];
     
-    //NSLog(@"JSON Events Retrieved: %@", self.allJSONEvents);
-    
-    //Construct the Polygons/Events objects
-    /*
-    NSArray *myArray = [self createPolygonCoordinateList:@"buildings"];
-    
-    if(myArray != nil){
-        [self.mapView addOverlays:myArray];
-    }
-    else{
-        UIAlertView *error =
-        [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable To Load Map" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
-        [error show];
-    }
-    
-    [self.activityIndicator stopAnimating];
-     */
 }
 
 
@@ -314,7 +295,7 @@ static BOOL overlaysGenerated = NO;
                 [dateFormatter dateFromString:tempString];
                 
                 if([eventDatePlusDurationFormatted  timeIntervalSinceDate:current_time] < 0.0f){
-                    NSLog(@"Event is in the past: %@", [event objectForKey:@"title"]);
+                    //NSLog(@"Event is in the past: %@", [event objectForKey:@"title"]);
                 }
                 else{
                   
@@ -325,9 +306,28 @@ static BOOL overlaysGenerated = NO;
             
             parseEventObjects = [[NSArray alloc] initWithArray:validEvents];
             
-            NSLog(@"parseEventObjects: %@", parseEventObjects);
+            //NSLog(@"parseEventObjects: %@", parseEventObjects);
             
-            if(overlaysGenerated == NO){
+            
+            NSMutableDictionary *buildEventsMutable =
+            
+            [[NSMutableDictionary alloc] init];
+            
+            for(PFObject *myObject in parseEventObjects){
+                //NSLog(@"building: %@", [myObject objectForKey:@"bldName"]);
+                
+                [buildEventsMutable setValue:@"Here" forKey:[myObject objectForKey:@"bldName"]];
+            }
+        
+            buildingWithEvent =
+            [[NSDictionary alloc] initWithDictionary:buildEventsMutable];
+            
+            //return null
+            //NSLog(@"buildingWithEvent: %@", [buildingWithEvent objectForKey:@"DFDF"]);
+            //NSLog(@"buildingWithEvent: %@", [buildingWithEvent objectForKey:@"ARB"]);
+        
+            //if(overlaysGenerated == NO){
+            
                 //Map Construction
                 NSArray *myArray = [self createPolygonCoordinateList:@"buildings"];
                 
@@ -342,8 +342,9 @@ static BOOL overlaysGenerated = NO;
                     
                     [error show];
                 }
-                overlaysGenerated = YES;
-            }
+            
+                //overlaysGenerated = YES;
+            //}
             
             //[self.activityIndicator stopAnimating];
             
@@ -374,7 +375,7 @@ static BOOL overlaysGenerated = NO;
         [self parseAPIEventsRetrieve];
     }
     else{
-        NSLog(@"Preventing Refresh hit.");
+        //NSLog(@"Preventing Refresh hit.");
     }
 }
 
@@ -428,50 +429,72 @@ static BOOL overlaysGenerated = NO;
     
     //each building
     for(XMLElement *aBuilding in self.rootElement.subElements){
-        //NSLog(@"Building: %@", [aBuilding.attributes objectForKey:@"name"]);
         
+        //This represents whether or not a building has an event
+        NSString *buildingHere =[buildingWithEvent objectForKey:[aBuilding.attributes objectForKey:@"name"]];
+        
+        //NSLog(@"buildingHere: %@", buildingHere);
+    
         [allBuildingsName addObject:[aBuilding.attributes objectForKey:@"name"]];
         
-        int numberOfPoints = [aBuilding.subElements count]/2;
-        CLLocationCoordinate2D points[numberOfPoints];
+        //Check if the overlay for the building is already there if not then add it
+        BOOL overlayExists = NO;
         
-        BOOL alternator = YES;
-        int pointsIndex = 0;
-    
-        if(buildingAndPoints == nil){
-            buildingAndPoints = [[NSMutableDictionary alloc] init];
+        for(int i =0; i < [self.mapView.overlays count]; i++){
+            
+            NSString *overlayTitle =
+            [[self.mapView.overlays objectAtIndex:i] title];
+            
+            if([overlayTitle isEqualToString:[aBuilding.attributes objectForKey:@"name"]]){
+                overlayExists = YES;
+            }
+            
         }
         
-        NSMutableArray *pointsArray = [[NSMutableArray alloc] init];
-        //if YES then lat else long
-        for(int i = 0; i < [aBuilding.subElements count]; i++){
-            if (alternator){
-                alternator = NO;
+        //building must have events and the overlay must not already exist
+        if(buildingHere != nil && overlayExists == NO){
+            
+            int numberOfPoints = [aBuilding.subElements count]/2;
+            CLLocationCoordinate2D points[numberOfPoints];
+            
+            BOOL alternator = YES;
+            int pointsIndex = 0;
+        
+            if(buildingAndPoints == nil){
+                buildingAndPoints = [[NSMutableDictionary alloc] init];
             }
-            else{
-                XMLElement *lat = aBuilding.subElements[i - 1];
-                XMLElement *longVal = aBuilding.subElements[i];
-                points[pointsIndex] = CLLocationCoordinate2DMake([lat.text doubleValue], [longVal.text doubleValue]);
-                
-                CustomPoint *cp = [[CustomPoint alloc] initWithLat:[lat.text doubleValue] andLong:[longVal.text doubleValue]];
-                
-                [pointsArray addObject:cp];
-                
-                pointsIndex++;
-                alternator = YES;
+            
+            NSMutableArray *pointsArray = [[NSMutableArray alloc] init];
+            //if YES then lat else long
+            for(int i = 0; i < [aBuilding.subElements count]; i++){
+                if (alternator){
+                    alternator = NO;
+                }
+                else{
+                    XMLElement *lat = aBuilding.subElements[i - 1];
+                    XMLElement *longVal = aBuilding.subElements[i];
+                    points[pointsIndex] = CLLocationCoordinate2DMake([lat.text doubleValue], [longVal.text doubleValue]);
+                    
+                    CustomPoint *cp = [[CustomPoint alloc] initWithLat:[lat.text doubleValue] andLong:[longVal.text doubleValue]];
+                    
+                    [pointsArray addObject:cp];
+                    
+                    pointsIndex++;
+                    alternator = YES;
+                }
             }
+            
+            MKPolygon* coordinates = [MKPolygon polygonWithCoordinates:points count:numberOfPoints];
+            
+            NSString *buildingTitle = [aBuilding.attributes objectForKey:@"name"];
+            [coordinates setTitle:buildingTitle];
+            
+            [mutableOverlaysArray addObject:coordinates];
+            
+            NSArray *regularArray = [[NSArray alloc] initWithArray:pointsArray];
+             
+            [buildingAndPoints setValue:regularArray forKey:buildingTitle];
         }
-        
-        MKPolygon* coordinates = [MKPolygon polygonWithCoordinates:points count:numberOfPoints];
-        
-        NSString *buildingTitle = [aBuilding.attributes objectForKey:@"name"];
-        [coordinates setTitle:buildingTitle];
-        
-        [mutableOverlaysArray addObject:coordinates];
-        
-        NSArray *regularArray = [[NSArray alloc] initWithArray:pointsArray];
-         
-        [buildingAndPoints setValue:regularArray forKey:buildingTitle];
     }
     
     allBuildings = [[NSArray alloc] initWithArray:allBuildingsName];
@@ -575,26 +598,6 @@ static BOOL overlaysGenerated = NO;
         NSLog(@"yMax: %f", yMax);
          */
         
-        //First check the touch lies within a rectangular boudary
-        //Quick Check
-        /*
-        if(polygonViewPoint.x < xMin || polygonViewPoint.x > xMax || polygonViewPoint.y < yMin
-            || polygonViewPoint.y > yMax)
-        {
-            //NSLog(@"Touch for %@ is outside", buildingName);
-            //myBuildingName = nil;
-            //NSLog(@"Outside Polygon breaking loop");
-           // break;
-        }
-         */
-        
-        /*
-        for(CustomPoint *pointInArray in myArray){
-            CLLocationCoordinate2D temp = CLLocationCoordinate2DMake([pointInArray myLat], [pointInArray myLong]);
-            MKMapPoint mapPoint = MKMapPointForCoordinate(temp);
-            CGPoint mapViewPoint = [myView pointForMapPoint:mapPoint];
-        }
-        */
         //Implement the ray casting algorithm
         
         BOOL inside = NO;
@@ -665,8 +668,6 @@ static BOOL overlaysGenerated = NO;
         
         MKOverlayRenderer *myView = [[MKOverlayRenderer alloc] initWithOverlay:overlay];
         
-       
-        
         //MKMapRect myMapRect = [myView.overlay boundingMapRect];
         
         //if(view)
@@ -686,32 +687,6 @@ static BOOL overlaysGenerated = NO;
             
             //CGPoint polygonViewPoint = [view pointForMapPoint:mapPoint];
             CGPoint polygonViewPoint = [myView pointForMapPoint:mapPoint];
-            
-            //NSLog(@"CGPoint polygonViewPoint: %@", polygonViewPoint.x);
-            //[myView poin]
-            
-            
-            
-            //NSLog(@"polygonViewPoint: %@", polygonViewPoint);
-            //NSLog(@"view.path: %@", view.path);
-            
-            //CGMutablePathRef path = CGPathCreateMutable();
-            //CGPathCreateM
-            //NSLog(@"path: %@", path);
-            
-            //MKOverlayPathRenderer *tempPath = [[MKOverlayPathRenderer alloc] initWithOverlay:overlay];
-            //MKOverlayPathRenderer *tempPath = [[MKOverlayPathRenderer alloc] initWithOverlay:myView.overlay];
-            
-            /*
-            NSLog(@"tempPath: %@", tempPath);
-            NSLog(@"tempPath path: %@", tempPath.path);
-            NSLog(@"mapPoint: %f %f", mapPoint.x, mapPoint.y);
-            NSLog(@"touchMapCoordinate: %f %f", touchMapCoordinate.latitude, touchMapCoordinate.longitude);
-            NSLog(@"touchMapCoordinate as coords: %f %f", polygonViewPoint.x, polygonViewPoint.y);
-            NSLog(@"polygonViewPoint x:%f y:%f", polygonViewPoint.x, polygonViewPoint.y);
-            NSLog(@"view.path: %@", view.path);
-            */
-            //CGPathContainsPoint(view.path, NULL, polygonViewPoint, NO)
             
             NSString *buildingName =
             [self calculatePointInPolygon: polygonViewPoint andRenderer:myView];

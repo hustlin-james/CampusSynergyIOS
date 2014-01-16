@@ -35,7 +35,7 @@
     NSString *buildNameText = [[NSString alloc]
                                initWithFormat:@"All Events for building: %@", [self buildingNameString]];
     
-    self.buildingName.text = buildNameText;
+    //self.buildingName.text = buildNameText;
     self.title = [self buildingNameString];
     
     //parse objective C API
